@@ -32,6 +32,7 @@ import { readPreference, writePreference } from './preferences';
 import { brand } from './brand';
 import { BrandIdentity } from './BrandIdentity';
 import { useSystemTheme } from '../shared/lib/use-system-theme';
+import { applyAppearance, setDisplayMode, useAppearance } from './appearance-store';
 import Home from './Home';
 import Projects, { CreateProject } from './Projects';
 import Settings from './Settings';
@@ -75,7 +76,8 @@ function Shell() {
     };
   }, []);
   const [activeId, setActiveId] = useState(() => readPreference('project'));
-  const [theme, setTheme] = useState(() => readPreference('theme', 'system'));
+  const appearance = useAppearance();
+  const theme = appearance.mode;
   const systemDark = useSystemTheme();
   const resolvedTheme = theme === 'system' ? (systemDark ? 'dark' : 'light') : theme;
   const [mobile, setMobile] = useState(false),
@@ -94,9 +96,16 @@ function Shell() {
     writePreference('project', id);
   }
   useEffect(() => {
-    document.documentElement.dataset.theme = resolvedTheme;
-    writePreference('theme', theme);
-  }, [theme, resolvedTheme]);
+    applyAppearance(appearance);
+    const media = [
+      '(prefers-color-scheme: dark)',
+      '(prefers-contrast: more)',
+      '(prefers-reduced-motion: reduce)',
+    ].map((query) => matchMedia(query));
+    const refresh = () => applyAppearance(appearance);
+    media.forEach((query) => query.addEventListener('change', refresh));
+    return () => media.forEach((query) => query.removeEventListener('change', refresh));
+  }, [appearance]);
   useEffect(() => {
     const media = window.matchMedia('(min-width: 761px)');
     const resize = () => {
@@ -193,12 +202,7 @@ function Shell() {
             />
           }
         />
-        <Route
-          path="/settings"
-          element={
-            <Settings projects={projects} theme={theme} onTheme={setTheme} onSelect={select} />
-          }
-        />
+        <Route path="/settings" element={<Settings projects={projects} onSelect={select} />} />
         {[
           ['decisions', <Decisions key={project?.id} />],
           ['scope', <Scope key={project?.id} />],
@@ -377,7 +381,7 @@ function Shell() {
                 resolvedTheme === 'dark' ? t('Switch to light theme') : t('Switch to dark theme')
               }
               onClick={() =>
-                setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark')
+                setDisplayMode(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark')
               }
             >
               {resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}

@@ -26,6 +26,23 @@ for (const name of ['README.md', 'README.fr.md']) {
     if (target.startsWith('#') || /^[a-z]+:/i.test(target)) continue;
     await access(path.resolve(path.dirname(name), decodeURI(target.split('#')[0])));
   }
+  const language = name === 'README.md' ? 'en' : 'fr';
+  const responsive = text.split('### Responsive')[1]?.split('<details>')[0] ?? '';
+  for (const size of [
+    '1920x1080',
+    '3440x1440',
+    '1440x900',
+    '1366x768',
+    '1024x768',
+    '768x1024',
+    '390x844',
+    '360x800',
+    '430x932',
+  ])
+    assert(
+      responsive.includes(`overview-${language}-${size}.png`),
+      `${name} must display every viewport.`,
+    );
 }
 const manifest = JSON.parse(await readFile('docs/assets/screenshots/manifest.json', 'utf8'));
 assert.equal(manifest.deviceScaleFactor, 1);
@@ -49,6 +66,18 @@ for (const item of office.results) {
   assert.equal(item.overflow.length, 0);
   assert.equal(item.outOfSlide.length, 0);
 }
+const current = JSON.parse(await readFile('docs/evidence/personalization-acceptance.json', 'utf8'));
+assert.equal(current.buildHash, manifest.buildHash);
+assert.equal(
+  current.captures.manifestSha256,
+  digest(await readFile('docs/assets/screenshots/manifest.json')),
+);
+assert.equal(current.captures.count, manifest.captures.length);
+assert.equal(current.browserStats.unexpected, 0);
+assert.equal(current.browserStats.skipped, 0);
+assert.equal(current.browserStats.flaky, 0);
+for (const [file, sha256] of Object.entries(current.sourceHashes))
+  assert.equal(digest(await readFile(file)), sha256, `Source changed after acceptance: ${file}`);
 console.log(
   `Official hero, bilingual README links, attribution and ${manifest.captures.length} viewport image dimensions/hashes verified.`,
 );

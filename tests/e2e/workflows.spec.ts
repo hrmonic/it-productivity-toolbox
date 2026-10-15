@@ -199,7 +199,9 @@ test('backup and restoration preserve the complete demo in separate copies', asy
   await page.getByLabel('Restore from JSON', { exact: true }).setInputFiles(path);
   await expect(page.getByRole('dialog', { name: 'Review your backup' })).toBeVisible();
   await page.getByRole('button', { name: 'Restore as new copies' }).click();
-  await expect(page.getByRole('status')).toContainText('Restored 1 project copies');
+  await expect(
+    page.getByRole('status').filter({ hasText: 'Restored 1 project copies' }),
+  ).toContainText('Existing projects were preserved.');
   await expect(page.getByLabel('Active project')).toContainText('Atlas customer portal (restored)');
   await page.reload();
   await page.getByRole('link', { name: 'Traceability', exact: true }).click();

@@ -16,6 +16,8 @@ pnpm audit --prod
 
 ## Evidence and scope
 
+Personalization adds tests for custom-theme contrast and safe colors, validated settings imports, persistence and cross-tab synchronization, generated raster assets, device theme/motion preferences, and text at 200% across settings and representative module routes. The latest [validation checkpoint](VALIDATION.md) identifies the current counts and build; earlier receipts remain historical.
+
 The initial implementation was validated locally on Windows with Node.js 24.14.0. The current source of truth for exact test counts and results is the latest completed CI run or a fresh local run; see [handoff](HANDOFF.md) for the recorded delivery checkpoint. No coverage percentage, Lighthouse score, browser-matrix certification, or external security audit is claimed.
 
 | Layer                    | What is exercised                                                                                                                                                                                                     |

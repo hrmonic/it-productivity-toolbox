@@ -34,6 +34,18 @@ Brand Studio conserve plusieurs chartes par projet : logo PNG/JPEG/WebP contrôl
 
 [Guide utilisateur](docs/USER_GUIDE.md) · [Rapports et chartes](docs/REPORTING.md) · [Audit produit](docs/PRODUCT_AUDIT.md) · [Système de design](docs/DESIGN_SYSTEM.md) · [Internationalisation](docs/I18N.md) · [Validation actuelle](docs/VALIDATION.md)
 
+## Votre espace, vos préférences
+
+<img src="public/brand/toolbox-mark-128.webp" width="80" height="80" alt="Logo Toolbox : trois rubans reliés, en indigo et menthe" />
+
+Les réglages proposent cinq palettes et un éditeur de thème pour l’accent, le fond de page, les cartes et le texte. Enregistrez jusqu’à 12 thèmes, vérifiez leur contraste et exportez/importez vos préférences. Choisissez le mode clair, sombre ou automatique ; les changements se synchronisent entre les onglets du même navigateur.
+
+Adaptez la taille du texte de 100 % à 200 %, la police et la densité du contenu. Les options d’accessibilité comprennent le contraste élevé, l’espacement de lecture, les commandes agrandies, les liens soulignés, le focus clavier renforcé et la réduction des animations. Le réglage de réduction des animations de l’appareil reste respecté. Les projets et chartes de documents restent indépendants des préférences d’interface.
+
+<img src="docs/assets/screenshots/settings-fr-1920x1080.png" width="1000" alt="Réglages de l’espace personnel avec nouveau logo, modes d’affichage, cinq palettes et création de thème à 1920 par 1080" />
+
+Réglages · Français · **1920 × 1080**. Consultez le [guide de personnalisation](docs/PERSONALIZATION.md) et les [sources et le prompt du logo](docs/BRANDING.md).
+
 ## Application Preview
 
 Captures authentiques du build de production, données fictives Atlas, `deviceScaleFactor: 1`, sans capture pleine page ni recadrage. Le [manifeste](docs/assets/screenshots/manifest.json) conserve dimensions, langue, route et empreintes.

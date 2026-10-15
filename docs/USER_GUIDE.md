@@ -4,6 +4,8 @@
 
 Create an empty project or load the explicitly fictional Atlas dataset. The active-project selector switches the entire workspace. Content is stored in this browser and origin; keep a full backup through Settings. No account, mandatory API key or remote analysis service is required.
 
+Settings also offers custom interface themes, saved color palettes, 100–200% text sizing, system fonts, content density and accessibility controls. Interface preferences have their own validated export/import, independent of project backups and document brand profiles. Read [Workspace personalization](PERSONALIZATION.md).
+
 ## Record and reconsider a decision
 
 In DecisionTrace, start with a title and context; advanced fields are optional. A proposed decision is never automatically accepted. Add a responsible owner, selected solution and rationale as the agreement becomes explicit. Expand alternatives and follow-up fields for assumptions, constraints, stakeholders and review date. Check assumption verification only when reviewed.

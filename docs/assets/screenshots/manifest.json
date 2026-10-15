@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-15T15:19:59.258Z",
-  "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33",
+  "capturedAt": "2026-10-15T16:18:10.702Z",
+  "buildHash": "530a981e151139d14d3b727735e64d7dc7cb411363408919d55d1858526b7299",
   "deviceScaleFactor": 1,
   "fullPage": false,
   "fictional": true,
@@ -13,7 +13,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "6d7b9647b777cba6afe078f1635772ea12d93350b7e4d90f71a59a613e500a20"
+      "scrollY": 0,
+      "sha256": "ff7340f7753147647361326bf9dedfbdeb910490032414b6ca7b179b4fa676d9"
     },
     {
       "file": "overview-en-3440x1440.png",
@@ -22,7 +23,8 @@
       "theme": "light",
       "width": 3440,
       "height": 1440,
-      "sha256": "afe80d50fbffd7ac5ad4371b3a31ef9eeb68d2f0d6a7ab1a6c43f21615203bac"
+      "scrollY": 0,
+      "sha256": "4ad8c5ccd1c20392093d14d98df9671801de96cdc783a44e8a0006ad152b8c6a"
     },
     {
       "file": "overview-en-1440x900.png",
@@ -31,7 +33,8 @@
       "theme": "light",
       "width": 1440,
       "height": 900,
-      "sha256": "fe0a8ee104fc446f87c8e641fb92ce13b15a045c5b0c8d113f4a83a8d783a643"
+      "scrollY": 0,
+      "sha256": "f25e9a451124c5b8415f7a554e51642ff71545a6f059e1a76b8deb6dd4185edb"
     },
     {
       "file": "overview-en-1366x768.png",
@@ -40,7 +43,8 @@
       "theme": "light",
       "width": 1366,
       "height": 768,
-      "sha256": "a918bdfca0f08ae1c7a6fb8e49dc0737628cc892d37184dbe59fcdb97d874ff5"
+      "scrollY": 0,
+      "sha256": "802c58cc7dc2882347fad5c5b999eecd5cf5ca8dc60873280b001c9e30ea9d3b"
     },
     {
       "file": "overview-en-1024x768.png",
@@ -49,7 +53,8 @@
       "theme": "light",
       "width": 1024,
       "height": 768,
-      "sha256": "bbffd1cc0db1855ecfad6edc75a4dc02549e3c60be5cab6e116463646c1ee5fc"
+      "scrollY": 0,
+      "sha256": "56112f9991fc79c633213901f0ce1169118c6e5d5fd88352bc409d06c8b40c7e"
     },
     {
       "file": "overview-en-768x1024.png",
@@ -58,7 +63,8 @@
       "theme": "light",
       "width": 768,
       "height": 1024,
-      "sha256": "605609082700abe0abb5e6c1777e1b75a1ffdc6bda02748be043b72fd87c0312"
+      "scrollY": 0,
+      "sha256": "e802b48f76107bb5be357baae5f82f91cf45069c1d0fef1d600473f33f94d78a"
     },
     {
       "file": "overview-en-390x844.png",
@@ -67,7 +73,8 @@
       "theme": "light",
       "width": 390,
       "height": 844,
-      "sha256": "ce080c913e0afe8052e9ab083fb9076938e0117ed420ecb3490bf249df40970a"
+      "scrollY": 0,
+      "sha256": "4610584769da55b6e446f134f6d82f8ee10fa94a469feea33fe52133d35d81a9"
     },
     {
       "file": "overview-en-360x800.png",
@@ -76,7 +83,8 @@
       "theme": "light",
       "width": 360,
       "height": 800,
-      "sha256": "1dd209ee39896ecb705ba6440748f9024e6ab1f7d14b7fe52550d0feba7f9625"
+      "scrollY": 0,
+      "sha256": "f5eb025e7fbe4739be40b46c3d1d9a59a5fee7d44ee5fabcac4ab8330e1484ba"
     },
     {
       "file": "overview-en-430x932.png",
@@ -85,7 +93,8 @@
       "theme": "light",
       "width": 430,
       "height": 932,
-      "sha256": "12f2746d26d6b93d993bba38ba1716c32cdadbe20acacce3b66ccfa950820ae8"
+      "scrollY": 0,
+      "sha256": "d66d665923673b3911d98598e4cc7efb4a5e6e45e56c3f8ab7835557f05532a8"
     },
     {
       "file": "decisions-en-1920x1080.png",
@@ -94,7 +103,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "fd1d4c9b4b08796ad3dc2b11e321e9267fc120fa9855d4fd82ebccfbce6c4575"
+      "scrollY": 0,
+      "sha256": "1f185fb83dfa3c4785a0200b8b83360994f72af578f37f45dbb6dc5f8d130406"
     },
     {
       "file": "scope-en-1920x1080.png",
@@ -103,7 +113,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "f530c1887c962f3132d7f80a44de5e7569e95ae895aacceda3d484f763e6927b"
+      "scrollY": 0,
+      "sha256": "f55b283fe60e05ce75654fccb1c183a4fc6b9ce276929ec601296e4fd0826d2c"
     },
     {
       "file": "stories-en-1920x1080.png",
@@ -112,7 +123,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "742ca2ebfc53e05a90c634a595550fcc2747fcdefb7e1ff53e7d051bfdd07c88"
+      "scrollY": 0,
+      "sha256": "bb83d2f40a14ee3fa26f43dcc89da8709c1cb5be813edccb81c5f955d3338e9b"
     },
     {
       "file": "traceability-en-1920x1080.png",
@@ -121,7 +133,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "94f037138fd13d23ef968124a35efc11de67c7195135bb4b2f6dc05ba3bf5c13"
+      "scrollY": 0,
+      "sha256": "1a5814734b12c47b63d575b470eda14f21513a297f03de7ff805d5e1a9dd65bd"
     },
     {
       "file": "report-studio-en-1920x1080.png",
@@ -130,7 +143,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "df93df858cd9a6df54e5c5d934225155c8008424fb3a19aab26ad0bf72a373b9"
+      "scrollY": 0,
+      "sha256": "ae3f780e98ab8d6db20ba31261a090b33de623a7935f56412f9da6b56bc8f239"
     },
     {
       "file": "brand-studio-en-1920x1080.png",
@@ -139,16 +153,48 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "bc4f90aa6181b9333f7f046db039fe18c36f7daaa7060a6d8fa8587a88245467"
+      "scrollY": 0,
+      "sha256": "8c4474bdb4e434745fef60ed1bc6c747119df1f78192dae95b5b59a7bf226095"
     },
     {
-      "file": "story-analysis-en-1920x1080.png",
-      "route": "/stories?id=ea37bc71-f589-417b-a2a6-a615280674c5",
+      "file": "settings-en-1920x1080.png",
+      "route": "/settings",
       "language": "en",
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "3495d3dd401f7ffbd5128a8a88cee22ac15fd0fff8d324642b917f63f5fc7f63"
+      "scrollY": 0,
+      "sha256": "7219add8e0dc6c385899b72104ad27cbe2d8d5051e827426c0fed7adc5b75f2c"
+    },
+    {
+      "file": "theme-editor-en-1920x1080.png",
+      "route": "/settings",
+      "language": "en",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scrollY": 585,
+      "sha256": "ab728f932fd53c04f8604e71a7caf89c2953490bed05b2ae40603e9ad600b6a0"
+    },
+    {
+      "file": "settings-en-390x844.png",
+      "route": "/settings",
+      "language": "en",
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "scrollY": 0,
+      "sha256": "4d51a37a6483e7bad7d47f03d2a76473d0c75fa4cec1809dc05e41e57d8ebfe0"
+    },
+    {
+      "file": "story-analysis-en-1920x1080.png",
+      "route": "/stories?id=55e8905c-e46c-4ecd-ac64-973733456139",
+      "language": "en",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scrollY": 0,
+      "sha256": "55238862e195a6fa0209d91c04f53ca8a4b1bd1b43119be3719908cb022b9101"
     },
     {
       "file": "overview-fr-1920x1080.png",
@@ -157,7 +203,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "f84b9f45dcf793902e6936d276566c8a424f9552e20f9030bfa188819a1a9af5"
+      "scrollY": 0,
+      "sha256": "1c56c68865001cdde2b8b50044986513079351fd74425a4885884645f1d15eb0"
     },
     {
       "file": "overview-fr-3440x1440.png",
@@ -166,7 +213,8 @@
       "theme": "light",
       "width": 3440,
       "height": 1440,
-      "sha256": "b8ecfdbc92e4d66b029d73dfa7984240380e82835fe85a06dc80e17c9d87bb86"
+      "scrollY": 0,
+      "sha256": "ba8d129ec08398acaad0d2b9d2ad771dd144d86414dc9d54aeac134e6f2e35c8"
     },
     {
       "file": "overview-fr-1440x900.png",
@@ -175,7 +223,8 @@
       "theme": "light",
       "width": 1440,
       "height": 900,
-      "sha256": "af0a4a18c67296e42523228ff3515e61839f1c864ab418994ffaa26d3083c5a2"
+      "scrollY": 0,
+      "sha256": "2cf3da26ab0c1da292fe8a1d748839dac5f468e200239e21f95fbc5b850764f2"
     },
     {
       "file": "overview-fr-1366x768.png",
@@ -184,7 +233,8 @@
       "theme": "light",
       "width": 1366,
       "height": 768,
-      "sha256": "d3ab84ff4d237075a75e4cc3860de123baf0efba5caba7a73e090d9d84edb9be"
+      "scrollY": 0,
+      "sha256": "0d77e69dafe30fe14abc803d9430c112400cbf3159619aa2220ca8bc0e059341"
     },
     {
       "file": "overview-fr-1024x768.png",
@@ -193,7 +243,8 @@
       "theme": "light",
       "width": 1024,
       "height": 768,
-      "sha256": "84449f9cc3f9148bffbb34cfd1e4146fbae61a9dc4ea64fd03f284ba405ed13c"
+      "scrollY": 0,
+      "sha256": "08544beda63c403797d0a4b415b1653198807546f29d4003bc1247113dce4370"
     },
     {
       "file": "overview-fr-768x1024.png",
@@ -202,7 +253,8 @@
       "theme": "light",
       "width": 768,
       "height": 1024,
-      "sha256": "0b72f327637e468a04f102be70f5df54d353d8744e4b170c3193340015b87a9a"
+      "scrollY": 0,
+      "sha256": "269c5829cb373012cef6f86888080fff551cb5d5795cf5b0ca3a60547ef2deb5"
     },
     {
       "file": "overview-fr-390x844.png",
@@ -211,7 +263,8 @@
       "theme": "light",
       "width": 390,
       "height": 844,
-      "sha256": "5a9a163896dd8604624dabd62d8e4213304b294a1ad1fe2de094c7b73c9fc7c1"
+      "scrollY": 0,
+      "sha256": "2005a8000c52dc1164c2a31b4092d055b96ee15df601913cad89796467f925dd"
     },
     {
       "file": "overview-fr-360x800.png",
@@ -220,7 +273,8 @@
       "theme": "light",
       "width": 360,
       "height": 800,
-      "sha256": "5bd6c75a87aabbf070a507f784f5605168f5ba7583612e7d96681c924c14d256"
+      "scrollY": 0,
+      "sha256": "6d55ac18e5619ec592aac0aaf46bdef978bedb5f60e09cc6516b03ab8e467229"
     },
     {
       "file": "overview-fr-430x932.png",
@@ -229,7 +283,8 @@
       "theme": "light",
       "width": 430,
       "height": 932,
-      "sha256": "12d16c84a3295654862d44184900da9a5a6b63dec98344c758565fa2ead2d741"
+      "scrollY": 0,
+      "sha256": "9835f1e8873496128107b429fb24ff4b4eaeb0b7ed65a9dbe3b7778b4556bd3a"
     },
     {
       "file": "decisions-fr-1920x1080.png",
@@ -238,7 +293,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "1b284e16518bb3cd9a599bb225a10c5fddce0f7167a46c0e4876d9c06bef404b"
+      "scrollY": 0,
+      "sha256": "f192abd7b373de29c68ef1ba475a3657bc2b2060fab2807cf740db9a996c5979"
     },
     {
       "file": "scope-fr-1920x1080.png",
@@ -247,7 +303,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "cf2c5ac3e18f128014954dcd4e583126464fe5049367ed4fcdaae5cd53e72a1f"
+      "scrollY": 0,
+      "sha256": "3916075f0def0a96ad54f87d44ecdd1c308ac286b90b12c9d7da782cc126646d"
     },
     {
       "file": "stories-fr-1920x1080.png",
@@ -256,7 +313,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "4d638dfe997b20b8dd4ed47364da724bb21c2e211935e917916fefd6872d97d2"
+      "scrollY": 0,
+      "sha256": "7f74ca1c29197a6a689abcbb574e68f03476ed8ac621fbb213e4318bade0ca60"
     },
     {
       "file": "traceability-fr-1920x1080.png",
@@ -265,7 +323,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "80aade435aed409db9ddd8a1c6ab3f2be4ba6f426f09cce6e27ddb1ee7a6533b"
+      "scrollY": 0,
+      "sha256": "8aab62b69a87733b45fd91c048b65d739594532f6beaa9034e70c24bdd1f40a6"
     },
     {
       "file": "report-studio-fr-1920x1080.png",
@@ -274,7 +333,8 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "9e69a9f3b6bd7999ea33ccf3baa0be0e9cf24a35f7e3910c18915edf28e16934"
+      "scrollY": 0,
+      "sha256": "b983aba85ae0fa796c8df8fccc20db5d95884a26b979b8b675eb0b4d280934aa"
     },
     {
       "file": "brand-studio-fr-1920x1080.png",
@@ -283,16 +343,48 @@
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "25209c85f54d8aec701edac57d2a6f6b54a36546f43fa32a081d478ebc479ff0"
+      "scrollY": 0,
+      "sha256": "11796de16dd859a7640a355e10c95af3794e96e792e7d17c4633630e76961cd5"
     },
     {
-      "file": "story-analysis-fr-1920x1080.png",
-      "route": "/stories?id=ea37bc71-f589-417b-a2a6-a615280674c5",
+      "file": "settings-fr-1920x1080.png",
+      "route": "/settings",
       "language": "fr",
       "theme": "light",
       "width": 1920,
       "height": 1080,
-      "sha256": "5917e21807b3a4635ad50f297deba604e129d3ee48f9b1e7989a06e16af59415"
+      "scrollY": 0,
+      "sha256": "a5ae671a5d3b00ada6ef6370a948f62c727454d11781a5f693395f9c99e45c36"
+    },
+    {
+      "file": "theme-editor-fr-1920x1080.png",
+      "route": "/settings",
+      "language": "fr",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scrollY": 585,
+      "sha256": "b63e3a50107f5a5fff5cc5ca918e07a553e37ca804cbbe5361197166e8d2ba3e"
+    },
+    {
+      "file": "settings-fr-390x844.png",
+      "route": "/settings",
+      "language": "fr",
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "scrollY": 0,
+      "sha256": "567c7965d94d44c03aab78b940e9c289da1f66a8a9a5baa8f72332f4c4f773ec"
+    },
+    {
+      "file": "story-analysis-fr-1920x1080.png",
+      "route": "/stories?id=55e8905c-e46c-4ecd-ac64-973733456139",
+      "language": "fr",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scrollY": 0,
+      "sha256": "286abcef08903cf168ad3c8f2fa7f28ee5db4ff8cd381a0ffd3ecb8176591525"
     },
     {
       "file": "overview-dark-en-1920x1080.png",
@@ -301,7 +393,8 @@
       "theme": "dark",
       "width": 1920,
       "height": 1080,
-      "sha256": "b672b8ad9f0fd1948ef0ce036de4b4551f4a1cd268fcbe34e57e864aa3344b95"
+      "scrollY": 0,
+      "sha256": "74365821d49d475f35e6e583452ee25e776e6a412f7de69ccc33d16010e4f185"
     },
     {
       "file": "scope-en-390x844.png",
@@ -310,6 +403,7 @@
       "theme": "light",
       "width": 390,
       "height": 844,
+      "scrollY": 0,
       "sha256": "35edd6716593905ab74215e84035aa77276e04881e6ceb9046a2aaf51770fd6e"
     },
     {
@@ -319,7 +413,7 @@
       "theme": "light",
       "width": 390,
       "height": 844,
-      "sha256": "6a0cecf9c7bafcf733f5c3f11fa324a018f996592fcbb03e43622a8d4607eb28"
+      "sha256": "2bddccaea6c3e9e891a796dfcd7c4610263d3460661f5e5ac2c36298d6d85035"
     }
   ]
 }

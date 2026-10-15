@@ -99,10 +99,21 @@ try {
     .getByText('Atlas customer portal · demo')
     .waitFor({ state: 'attached' });
   await mkdir(directory, { recursive: true });
-  async function capture(name, route, language = 'en', theme = 'light') {
+  async function capture(name, route, language = 'en', theme = 'light', prepare) {
     await page.goto(`${base}/#${route}`);
     await page.getByRole('main').getByRole('heading', { level: 1 }).waitFor();
     await page.evaluate(() => globalThis.document.fonts.ready);
+    await page.evaluate(() => globalThis.scrollTo(0, 0));
+    if (prepare) await prepare();
+    await page
+      .locator('img')
+      .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
+    await page.evaluate(
+      () =>
+        new Promise((resolve) =>
+          globalThis.requestAnimationFrame(() => globalThis.requestAnimationFrame(resolve)),
+        ),
+    );
     assert(
       await page.evaluate(
         () => globalThis.document.documentElement.scrollWidth <= globalThis.innerWidth,
@@ -121,6 +132,7 @@ try {
       language,
       theme,
       ...viewport,
+      scrollY: await page.evaluate(() => globalThis.scrollY),
       sha256: hash(png),
     });
   }
@@ -141,8 +153,39 @@ try {
       ['traceability', '/traceability'],
       ['report-studio', '/reports'],
       ['brand-studio', '/brands'],
+      ['settings', '/settings'],
     ])
       await capture(`${name}-${language}-1920x1080`, route, language);
+    await capture(
+      `theme-editor-${language}-1920x1080`,
+      '/settings',
+      language,
+      'light',
+      async () => {
+        await page
+          .getByRole('button', {
+            name: language === 'fr' ? 'Créer un thème personnalisé' : 'Create a custom theme',
+            exact: true,
+          })
+          .click();
+        await page
+          .getByLabel(language === 'fr' ? 'Nom du thème' : 'Theme name', { exact: true })
+          .fill(language === 'fr' ? 'Espace personnel' : 'Personal workspace');
+        await page.locator('.theme-editor h3').click();
+        await page
+          .locator('.theme-editor')
+          .evaluate((node) => node.scrollIntoView({ block: 'center' }));
+      },
+    );
+    await page
+      .getByRole('button', {
+        name: language === 'fr' ? 'Fermer l’éditeur' : 'Close editor',
+        exact: true,
+      })
+      .click();
+    await page.setViewportSize({ width: 390, height: 844 });
+    await capture(`settings-${language}-390x844`, '/settings', language);
+    await page.setViewportSize({ width: 1920, height: 1080 });
     await page.goto(`${base}/#/stories`);
     await page.getByRole('button', { name: /Story 01/ }).click();
     await capture(

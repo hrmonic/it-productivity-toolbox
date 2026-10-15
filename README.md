@@ -56,6 +56,18 @@ You can instead create a blank project. Projects are isolated. The demo can be r
 
 [User guide](docs/USER_GUIDE.md) · [Reporting and branding](docs/REPORTING.md) · [Product audit](docs/PRODUCT_AUDIT.md) · [Design system](docs/DESIGN_SYSTEM.md) · [Internationalization](docs/I18N.md) · [Current validation](docs/VALIDATION.md)
 
+## Your workspace, your preferences
+
+<img src="public/brand/toolbox-mark-128.webp" width="80" height="80" alt="Toolbox logo: three connected folded ribbons in indigo and mint" />
+
+Settings includes five color palettes and a custom theme editor for your accent, page, cards and text. Save up to 12 themes, preview their contrast, and export/import your settings. Choose light, dark or device-controlled mode; preferences synchronize between tabs of the same browser.
+
+Adjust text from 100% to 200%, interface font and content density. Accessibility options include high contrast, relaxed text spacing, larger controls, underlined links, stronger keyboard focus and reduced motion. Device reduced-motion preferences remain respected. Project data and document brand profiles stay separate from interface settings.
+
+<img src="docs/assets/screenshots/settings-en-1920x1080.png" width="1000" alt="Personal workspace settings with the generated logo, display modes, five palettes and custom theme creation at 1920 by 1080" />
+
+Settings · English · **1920 × 1080**. See the [personalization guide](docs/PERSONALIZATION.md) and [logo source and generation prompt](docs/BRANDING.md).
+
 ## Run locally
 
 **Requirements:** Node.js 24 and pnpm 10.18.3, as declared in the repository.

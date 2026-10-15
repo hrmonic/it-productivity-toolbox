@@ -2,6 +2,8 @@
 
 The existing neutral/indigo identity and light/dark themes remain the application foundation. `styles.css` defines surface, ink, muted, border, accent, status and shadow tokens. `workspace.css` supplies domain layouts; `studio.css` adds responsive foundations and document previews. Product branding and customer document branding are separate concerns.
 
+`appearance.css` adds the personalization layer: five palettes, validated saved custom themes, relative text sizes, density and accessibility choices. `appearance.ts` derives readable semantic colors; `appearance-store.ts` handles local persistence, legacy migration, cross-tab updates and device preferences. Read [Personalization](PERSONALIZATION.md). The [generated raster application logo](BRANDING.md) replaces the previous SVG mark; the official README hero remains unchanged.
+
 - Reading content uses bounded widths; analytical/studio layouts may expand to 1900 px on large screens. Grid tracks use `minmax(0, ...)` and shrinking children use `min-width: 0`.
 - The sidebar is independently scrollable at `100dvh`, its children cannot shrink out of reach, and its attribution remains keyboard-accessible. Low-height desktop layouts reduce secondary chrome. Mobile replaces the sidebar with an isolated, focus-contained drawer and a backdrop.
 - Existing heading/body hierarchy, spacing, radii and shared `button`, `field`, `panel`, `paper`, `badge`, `notice`, modal and empty-state components are reused. Status color never replaces the text label.

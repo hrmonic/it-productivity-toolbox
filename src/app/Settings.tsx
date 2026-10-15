@@ -6,16 +6,13 @@ import { exportBackup, MAX_IMPORT_BYTES, parseBackup, restoreBackup } from '../s
 import { download, errorMessage } from '../shared/lib/utils';
 import { ErrorNotice, Modal, Notice, PageHeading } from '../shared/ui/primitives';
 import { brand } from './brand';
+import AppearanceSettings from './AppearanceSettings';
 
 export default function Settings({
   projects,
-  theme,
-  onTheme,
   onSelect,
 }: {
   projects: Project[];
-  theme: string;
-  onTheme: (value: string) => void;
   onSelect: (id: string) => void;
 }) {
   const [backup, setBackup] = useState<Backup>(),
@@ -42,29 +39,7 @@ export default function Settings({
         {t('Choose how you work and keep a portable copy of what matters.')}
       </PageHeading>
       <div className="settings-layout">
-        <section className="settings-section">
-          <div className="settings-label">
-            <h2>{t('Appearance')}</h2>
-            <p>{t('Considered in the light. Comfortable in the dark.')}</p>
-          </div>
-          <div className="theme-options">
-            {['light', 'dark', 'system'].map((value) => (
-              <button
-                key={value}
-                className={`theme-option ${theme === value ? 'selected' : ''}`}
-                aria-pressed={theme === value}
-                onClick={() => onTheme(value)}
-              >
-                <span className={`theme-preview ${value}`}>
-                  <i />
-                  <i />
-                  <i />
-                </span>
-                <strong>{t(value[0]!.toUpperCase() + value.slice(1))}</strong>
-              </button>
-            ))}
-          </div>
-        </section>
+        <AppearanceSettings />
         <section className="settings-section">
           <div className="settings-label">
             <h2>{t('Backups & restoration')}</h2>

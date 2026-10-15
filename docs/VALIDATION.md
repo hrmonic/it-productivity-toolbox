@@ -1,4 +1,16 @@
-# Local validation checkpoint — 15 October 2026
+# Validation checkpoints — 15 October 2026
+
+## Current checkpoint: application identity and personalization
+
+Starting from published revision `f9c7b14`, added the [generated raster identity](BRANDING.md), [custom interface themes and accessibility preferences](PERSONALIZATION.md). The original hero remains unchanged. Current execution evidence is in [the personalization receipt](evidence/personalization-acceptance.json); earlier studio results below describe the preceding build.
+
+- Local `pnpm check`: TypeScript, ESLint, formatting, **91 tests in 9 files**, production build passed.
+- Complete Chromium browser suite: **34 passed**, including settings persistence/import/reset/cross-tab behavior, selected automated accessibility checks, device preferences, and text at 200% on desktop/tablet/mobile. The original nine-viewports EN/FR matrix remains covered.
+- **41** current viewport references include regenerated module/overview captures and new settings/theme-editor examples. All nine overview sizes remain displayed in each README; dimensions and SHA-256 values are in [the screenshot manifest](assets/screenshots/manifest.json).
+- Existing fictional export samples remain byte-identical and hash-verified. Earlier native PowerPoint/PDF results below concern these retained sample files; they are not a new native Office run for this UI change.
+- The user authorized pushing this complete change. Check the [GitHub Actions run for its published commit](https://github.com/hrmonic/it-productivity-toolbox/actions/workflows/ci.yml) for remote results. Known manual assistive-technology, real-device and additional-browser boundaries remain.
+
+## Initial studio checkpoint (historical)
 
 This is a local development checkpoint in `F:\APP\it-productivity-toolbox`, starting from `c3aee17`. No push, remote publication, deployment or Git history rewrite was performed. Earlier handoff entries are historical; the results below describe the current implementation.
 

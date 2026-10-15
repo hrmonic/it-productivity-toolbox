@@ -1,6 +1,12 @@
 # Development handoff
 
-**Current resume point:** [local studio validation checkpoint](VALIDATION.md), [user guide](USER_GUIDE.md) and [reporting contract](REPORTING.md). Earlier sections below are historical delivery records; their test counts and English-only export boundary are superseded by the current checkpoint. The user explicitly authorized committing and pushing the complete changes to GitHub on 15 October 2026. Hosting deployment is outside this publication.
+**Current resume point:** [current validation checkpoint](VALIDATION.md), [workspace personalization](PERSONALIZATION.md), [generated logo and prompt](BRANDING.md), [user guide](USER_GUIDE.md) and [reporting contract](REPORTING.md). Earlier sections below are historical delivery records; their test counts and English-only export boundary are superseded by the current checkpoint. The user explicitly authorized committing and pushing the complete changes to GitHub on 15 October 2026. Hosting deployment is outside this publication.
+
+## Personalization and identity — 15 October 2026
+
+Starting revision: `f9c7b14`. The application uses a generated transparent PNG master with optimized WebP and PNG icon derivatives in `public/brand/`; the old mark/favicons are removed and the official README hero remains unchanged. Settings adds five palettes, up to twelve custom themes with validated text contrast, 100–200% text, four font choices, density, spacing, larger controls, high contrast, underlined links, stronger focus and reduced motion. Preferences persist independently of projects, synchronize across tabs and have a strict validated import/export. Reset preserves saved custom themes and project data.
+
+Entry points: `src/app/appearance.ts` (schema and color derivation), `appearance-store.ts` (persistence/device preferences), `AppearanceSettings.tsx`, `src/appearance.css`. Interface font sizes use relative units. Browser checks cover enlarged reading on settings in EN/FR and selected module routes at 1024/390/320 px, plus the existing nine-viewports bilingual matrix. Screenshots are regenerated only after the complete browser suite passes. Read the current receipt in [Validation](VALIDATION.md) for executed results.
 
 ## Current studio handoff — 15 October 2026
 
