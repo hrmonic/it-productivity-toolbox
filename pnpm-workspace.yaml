@@ -1,0 +1,7 @@
+packages:
+  - '.'
+
+strictPeerDependencies: true
+
+onlyBuiltDependencies:
+  - esbuild
