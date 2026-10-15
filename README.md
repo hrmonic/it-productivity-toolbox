@@ -6,6 +6,8 @@ Three connected, independently useful tools for IT Project Managers, Scrum Maste
 
 [Getting started](#run-locally) · [Explore the tools](#three-tools-one-project-memory) · [Architecture](docs/ARCHITECTURE.md) · [Quality checks](docs/TESTING.md) · [Version française](README.fr.md)
 
+The interface uses a neutral/indigo identity with light and dark themes. The project overview surfaces real review items and recent work; contextual actions, searchable dependency checkboxes and story review filters keep routine tasks direct. See the [design review and UX decisions](docs/DESIGN_REVIEW.md).
+
 ![IT Productivity Toolbox overview, captured from the running application with the clearly labelled fictional Atlas project](docs/assets/screenshots/overview.png)
 
 > **Status: functional 0.1 foundation.** DecisionTrace, Scope Radar, StoryGap, project traceability, backups, and English/French interfaces are implemented. This is a browser-local application: there is no cloud synchronization, account service, or public hosted demo announced here. See the [validation record and known boundaries](docs/HANDOFF.md).

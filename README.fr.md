@@ -6,6 +6,8 @@ Trois outils open source pour les chefs de projet IT, Scrum Masters, Product Own
 
 [English README](README.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/TESTING.md) · [Feuille de route](docs/ROADMAP.md)
 
+L’interface associe des surfaces neutres et des accents indigo, en thèmes clair et sombre. L’accueil du projet présente les éléments à examiner et les mises à jour récentes. Actions contextuelles, cases à cocher pour les dépendances et filtres de revue simplifient les parcours. Les choix sont détaillés dans la [revue de conception et d’usage](docs/DESIGN_REVIEW.md) en anglais.
+
 ![Vue réelle de l’application avec le projet fictif Atlas](docs/assets/screenshots/overview-fr.png)
 
 > **État : socle fonctionnel 0.1.** Les trois modules, la traçabilité, les sauvegardes et l’interface anglais/français sont implémentés. Il n’y a pas de synchronisation cloud ni de démonstration hébergée publique annoncée. Consultez les [résultats de validation et limites](docs/HANDOFF.md).

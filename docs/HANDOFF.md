@@ -45,7 +45,7 @@ No secret or remote provider is required. The CI workflow performs checks and re
 
 Run the documented checks on the target platform, then conduct a short usability session with a real IT Project Manager using fictional project content. Record the first confusing step and fix that complete workflow before adding features. A public static demo should be a separately scoped hosting decision.
 
-## Final validation and publication
+## Initial validation and publication
 
 Local validation completed on 15 October 2026:
 
@@ -59,3 +59,18 @@ Local validation completed on 15 October 2026:
 Publication uses descriptive English commits and a normal fast-forward push. Read the latest completed **Quality checks** GitHub Actions run for remote Linux validation; a configured workflow alone is not a passing run. No hosting deployment is part of this delivery.
 
 The first published checkpoint, `ffd5eb3`, passed [Linux validation run 38744932154](https://github.com/hrmonic/it-productivity-toolbox/actions/runs/38744932154), including all 59 unit/component tests and 12 Chromium journeys. Its logs identified two legacy action-runtime warnings; a follow-up updates the pinned pnpm setup and artifact upload actions to official Node.js 24 releases and uses pnpm consistently for the browser preview.
+
+## Design and workflow checkpoint — 15 October 2026
+
+The visual redesign introduces a connected-node mark, neutral/indigo themes, sans-serif hierarchy and a project overview based on real work. Direct creation links, contextual edit actions, filter recovery, searchable dependency checkboxes and story review-state filters address specific task friction. The mobile drawer now supports Escape, focus restoration and a contained keyboard tab sequence; closed navigation is hidden from keyboard access. See [design review](DESIGN_REVIEW.md) for rationale, official reference sources and remaining usability hypotheses.
+
+Current local validation on Windows:
+
+- `pnpm check` passed: typecheck, zero-warning lint, formatting, **60 unit/component/localization tests** and production build.
+- `pnpm test:e2e` passed: **16 Chromium journeys**, including the new overview, dependency selection, review-state and responsive French cases.
+- Automated axe checks reported no violations for selected WCAG A/AA rules on seven principal screens in both themes and the French story workflow. This remains bounded automation, not certification.
+- French layouts on seven screens fit 320, 768 and 1440 px without horizontal document overflow; the separate mobile navigation/theme test uses 390 px. The narrow-layout regression caught and fixed overflowing translated scope actions.
+- A theme transition contrast failure was corrected by switching foreground/background colors together.
+- Ten production-build screenshots were refreshed from an isolated fictional demo; light, dark, story analysis and mobile layouts were visually inspected.
+
+No project schema or storage migration is required. Existing project content and approval rules are preserved. Real-user usability sessions and a comparative usability study remain pending. For remote validation, read the completed Quality checks run for the published redesign commit.

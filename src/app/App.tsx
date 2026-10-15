@@ -14,7 +14,7 @@ import {
   ListFilter,
   Menu,
   Moon,
-  PanelLeftClose,
+  CodeXml,
   ScanText,
   Settings as SettingsIcon,
   ShieldCheck,
@@ -30,6 +30,8 @@ import { Badge, Empty, ErrorNotice } from '../shared/ui/primitives';
 import { WorkspaceProvider } from './workspace';
 import { readPreference, writePreference } from './preferences';
 import { brand } from './brand';
+import { BrandIdentity } from './BrandIdentity';
+import { useSystemTheme } from '../shared/lib/use-system-theme';
 import Home from './Home';
 import Projects, { CreateProject } from './Projects';
 import Settings from './Settings';
@@ -70,6 +72,8 @@ function Shell() {
   }, []);
   const [activeId, setActiveId] = useState(() => readPreference('project'));
   const [theme, setTheme] = useState(() => readPreference('theme', 'system'));
+  const systemDark = useSystemTheme();
+  const resolvedTheme = theme === 'system' ? (systemDark ? 'dark' : 'light') : theme;
   const [mobile, setMobile] = useState(false),
     [creating, setCreating] = useState(false),
     [busy, setBusy] = useState(false),
@@ -82,16 +86,36 @@ function Shell() {
     writePreference('project', id);
   }
   useEffect(() => {
-    const media = matchMedia('(prefers-color-scheme: dark)');
-    const apply = () => {
-      document.documentElement.dataset.theme =
-        theme === 'system' ? (media.matches ? 'dark' : 'light') : theme;
-    };
-    apply();
-    media.addEventListener('change', apply);
+    document.documentElement.dataset.theme = resolvedTheme;
     writePreference('theme', theme);
-    return () => media.removeEventListener('change', apply);
-  }, [theme]);
+  }, [theme, resolvedTheme]);
+  useEffect(() => {
+    if (!mobile) return;
+    const navigation = document.querySelector<HTMLElement>('.sidebar');
+    navigation?.querySelector<HTMLButtonElement>('.mobile-close')?.focus();
+    const close = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobile(false);
+        document.querySelector<HTMLButtonElement>('.mobile-menu')?.focus();
+      }
+      if (event.key === 'Tab') {
+        const controls = navigation?.querySelectorAll<HTMLElement>(
+          'a[href], button:not(:disabled)',
+        );
+        const first = controls?.[0],
+          last = controls?.[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', close);
+    return () => document.removeEventListener('keydown', close);
+  }, [mobile]);
   async function openDemo() {
     const existing = projects.find((p) => p.demo);
     if (existing) {
@@ -214,19 +238,8 @@ function Shell() {
         />
       )}
       <aside className={`sidebar ${mobile ? 'is-open' : ''}`}>
-        <Link className="brand" to="/" onClick={() => setMobile(false)}>
-          <span className="brand-logo">
-            <i />
-            <i />
-            <i />
-          </span>
-          <span>
-            {t('IT Productivity')}
-            <strong>
-              {t('Toolbox')}
-              <span className="brand-dot">.</span>
-            </strong>
-          </span>
+        <Link className="brand" to="/" aria-label={brand.name} onClick={() => setMobile(false)}>
+          <BrandIdentity />
         </Link>
         <button
           className="mobile-close icon-button"
@@ -281,7 +294,6 @@ function Shell() {
           </a>
           <div className="sidebar-footer">
             <span>{t('v0.1.0 / Apache 2.0')}</span>
-            <PanelLeftClose size={15} />
           </div>
         </div>
       </aside>
@@ -291,6 +303,7 @@ function Shell() {
             <button
               className="icon-button mobile-menu"
               aria-label={t('Open navigation')}
+              aria-expanded={mobile}
               onClick={() => setMobile(true)}
             >
               <Menu size={21} />
@@ -320,23 +333,27 @@ function Shell() {
             <button
               className="icon-button"
               aria-label={t('Toggle color theme')}
+              title={
+                resolvedTheme === 'dark' ? t('Switch to light theme') : t('Switch to dark theme')
+              }
               onClick={() =>
                 setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark')
               }
             >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              {resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <Link className="icon-button" aria-label={t('Help and settings')} to="/settings">
               <CircleHelp size={18} />
             </Link>
             <a
-              className="avatar"
-              href="https://github.com/hrmonic"
+              className="icon-button source-link"
+              href={brand.repository}
               target="_blank"
               rel="noreferrer"
-              aria-label={t('Maintainer on GitHub')}
+              aria-label={t('View source on GitHub')}
+              title={t('View source on GitHub')}
             >
-              {t('RT')}
+              <CodeXml size={18} />
             </a>
           </div>
         </header>

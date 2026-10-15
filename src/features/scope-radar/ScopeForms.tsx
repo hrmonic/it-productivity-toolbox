@@ -1,4 +1,5 @@
 import { t } from '../../shared/i18n';
+import { DependencyPicker } from '../../shared/ui/DependencyPicker';
 import { useWorkspace } from '../../app/workspace-context';
 import { options, val } from '../../shared/ui/form-utils';
 import { useState } from 'react';
@@ -164,28 +165,17 @@ export function BaselineForm({
             </button>
           </div>
           {items.length > 1 && (
-            <label className="field small">
-              {t('Dependencies')}
-              <select
-                multiple
-                aria-label={t(`Deliverable ${i + 1} dependencies`)}
-                value={item.dependencies}
-                onChange={(e) =>
-                  update(item.id, {
-                    dependencies: Array.from(e.target.selectedOptions, (o) => o.value),
-                  })
-                }
-              >
-                {items
-                  .filter((r) => r.id !== item.id)
-                  .map((r) => (
-                    <option key={r.id} value={r.id}>
-                      {r.title || t('Untitled deliverable')}
-                    </option>
-                  ))}
-              </select>
-              <small>{t('Use Ctrl / Cmd to select or deselect multiple items.')}</small>
-            </label>
+            <DependencyPicker
+              label={t('Deliverable {number} dependencies', { number: i + 1 })}
+              value={item.dependencies}
+              options={items
+                .filter((other) => other.id !== item.id)
+                .map((other) => ({
+                  value: other.id,
+                  label: other.title || t('Untitled deliverable'),
+                }))}
+              onChange={(dependencies) => update(item.id, { dependencies })}
+            />
           )}
         </fieldset>
       ))}
@@ -344,24 +334,12 @@ export function ChangeForm({
           options={options(['must', 'should', 'could'])}
         />
       </div>
-      <label className="field">
-        {t('Affected dependencies')}
-        <select
-          name="dependencies"
-          multiple
-          defaultValue={change?.dependencies ?? []}
-          aria-label={t('Affected dependencies')}
-        >
-          {targets.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.title}
-            </option>
-          ))}
-        </select>
-        <small>
-          {t('Use Ctrl / Cmd to select or deselect. Links to decisions can be added after saving.')}
-        </small>
-      </label>
+      <DependencyPicker
+        name="dependencies"
+        label={t('Affected dependencies')}
+        defaultValue={change?.dependencies ?? []}
+        options={targets.map((target) => ({ value: target.id, label: target.title }))}
+      />
       <Field name="risks" label={t('Documented risks')} type="textarea" value={change?.risks} />
     </Form>
   );

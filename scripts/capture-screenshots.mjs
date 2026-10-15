@@ -66,16 +66,16 @@ try {
   await page.getByRole('button', { name: 'Toggle color theme' }).click();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${base}/#/scope`);
-  await page.getByRole('heading', { name: 'See the scope shift.' }).waitFor();
+  await page.getByRole('heading', { name: 'Scope overview' }).waitFor();
   await page.screenshot({ path: 'docs/assets/screenshots/scope-mobile.png', fullPage: true });
   await page.setViewportSize({ width: 1440, height: 1050 });
   await page.goto(`${base}/#/settings`);
   await page.getByLabel('Application language', { exact: true }).selectOption('fr');
   await page.goto(base);
-  await page.getByRole('heading', { name: /Moins de contexte perdu/ }).waitFor();
+  await page.getByRole('heading', { name: 'Atlas customer portal' }).waitFor();
   await page.screenshot({ path: 'docs/assets/screenshots/overview-fr.png', fullPage: true });
   await page.goto(`${base}/#/scope`);
-  await page.getByRole('heading', { name: 'Voyez le périmètre évoluer.' }).waitFor();
+  await page.getByRole('heading', { name: 'Vue du périmètre' }).waitFor();
   await page.screenshot({ path: 'docs/assets/screenshots/scope-fr.png', fullPage: true });
   console.log('Captured 10 authentic production-build screenshots from the fictional demo.');
 } finally {

@@ -39,7 +39,7 @@ The script starts a separate production preview on port 4174, loads the fictiona
 ## Limitations and next validation work
 
 - Chromium is the automated browser target. Firefox and WebKit support remain to be exercised.
-- A 390 px mobile viewport, keyboard journey, and selected screens have been checked. A full assistive-technology/user audit is pending.
+- French layouts on seven principal screens are checked at 320, 768 and 1440 px. The mobile navigation/theme journey uses 390 px. A full assistive-technology/user audit is pending.
 - `fake-indexeddb` verifies repository behavior in unit tests; browser tests cover real IndexedDB. Browser eviction and quota exhaustion are not comprehensively simulated.
 - There is no historical application schema to migrate yet; no old-to-new migration coverage is claimed.
 - Rule tests demonstrate implemented heuristics, not semantic completeness or objective story quality.

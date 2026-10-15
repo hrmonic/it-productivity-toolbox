@@ -21,7 +21,9 @@ import { humanDate, label } from '../../shared/lib/format';
 export default function DecisionTrace() {
   const { project, save } = useWorkspace();
   const [params, setParams] = useSearchParams();
-  const [editing, setEditing] = useState<string | null>(null),
+  const [editing, setEditing] = useState<string | null>(() =>
+      params.get('new') === '1' ? 'new' : null,
+    ),
     [query, setQuery] = useState(''),
     [status, setStatus] = useState('all'),
     [owner, setOwner] = useState('all'),
@@ -43,11 +45,25 @@ export default function DecisionTrace() {
     )
     .sort((a, b) => (oldest ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date)));
   const exportItems = selected ? [selected] : visible;
+  const hasFilters = Boolean(
+    query || status !== 'all' || owner !== 'all' || tag !== 'all' || archived,
+  );
+  function clearFilters() {
+    setQuery('');
+    setStatus('all');
+    setOwner('all');
+    setTag('all');
+    setArchived(false);
+  }
+  function closeEditor() {
+    setEditing(null);
+    if (params.has('new')) setParams({});
+  }
   return (
     <>
       <PageHeading
         eyebrow={t('01 / DecisionTrace')}
-        title={selected ? selected.title : t('Keep the why.')}
+        title={selected ? selected.title : t('Decision journal')}
         actions={
           <>
             <button
@@ -60,9 +76,9 @@ export default function DecisionTrace() {
               <ArrowDownToLine size={16} />
               {t('Markdown')}
             </button>
-            <button className="button primary" onClick={() => setEditing('new')}>
-              <Plus size={17} />
-              {t('New decision')}
+            <button className="button primary" onClick={() => setEditing(selected?.id ?? 'new')}>
+              {selected ? <Pencil size={17} /> : <Plus size={17} />}
+              {selected ? t('Edit decision') : t('New decision')}
             </button>
           </>
         }
@@ -86,10 +102,6 @@ export default function DecisionTrace() {
                 {selected.archived && <Badge>{t('Archived')}</Badge>}
               </div>
               <div className="record-actions">
-                <button className="button secondary" onClick={() => setEditing(selected.id)}>
-                  <Pencil size={15} />
-                  {t('Edit decision')}
-                </button>
                 <button
                   className="button quiet"
                   onClick={() =>
@@ -265,6 +277,11 @@ export default function DecisionTrace() {
               {visible.length} {t('decisions')}
             </span>
             <div>
+              {hasFilters && visible.length > 0 && (
+                <button className="text-button filter-reset" onClick={clearFilters}>
+                  {t('Clear filters')}
+                </button>
+              )}
               <label className="checkbox">
                 <input
                   type="checkbox"
@@ -328,8 +345,8 @@ export default function DecisionTrace() {
                   ? t('No matching decisions')
                   : t('The next decision deserves a record.')
               }
-              action={project.decisions.length ? undefined : t('Record a decision')}
-              onAction={() => setEditing('new')}
+              action={project.decisions.length ? t('Clear filters') : t('Record a decision')}
+              onAction={project.decisions.length ? clearFilters : () => setEditing('new')}
             >
               {project.decisions.length
                 ? t('Adjust your search or filters to see more records.')
@@ -348,11 +365,11 @@ export default function DecisionTrace() {
           )}
           open
           wide
-          onClose={() => setEditing(null)}
+          onClose={closeEditor}
         >
           <DecisionForm
             decision={project.decisions.find((d) => d.id === editing)}
-            onCancel={() => setEditing(null)}
+            onCancel={closeEditor}
             onSave={async (content, reason) => {
               const old = project.decisions.find((d) => d.id === editing);
               const record = old ? reviseDecision(old, content, reason) : createDecision(content);

@@ -51,7 +51,7 @@ export default function ScopeRadar() {
     <>
       <PageHeading
         eyebrow={t('02 / Scope Radar')}
-        title={selected ? selected.title : t('See the scope shift.')}
+        title={selected ? selected.title : t('Scope overview')}
         actions={
           baseline && !selected ? (
             <>

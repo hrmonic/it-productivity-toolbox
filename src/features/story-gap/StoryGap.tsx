@@ -214,17 +214,32 @@ function Suggestion({ observation, story }: { observation: Observation; story: S
 export default function StoryGap() {
   const { project, save } = useWorkspace();
   const [params, setParams] = useSearchParams();
-  const [editing, setEditing] = useState<string | null>(null),
+  const [editing, setEditing] = useState<string | null>(() =>
+      params.get('new') === '1' ? 'new' : null,
+    ),
     [category, setCategory] = useState('all'),
+    [reviewFilter, setReviewFilter] = useState('all'),
     [search, setSearch] = useState('');
   const selected = project.stories.find((s) => s.id === params.get('id'));
   const observations = selected ? analyzeStory(selected) : [];
   const pending = observations.filter((o) => !selected?.reviews.some((r) => r.ruleId === o.id));
+  const filteredObservations = observations.filter((observation) => {
+    const state =
+      selected?.reviews.find((review) => review.ruleId === observation.id)?.state ?? 'pending';
+    return (
+      (category === 'all' || category === observation.category) &&
+      (reviewFilter === 'all' || reviewFilter === state)
+    );
+  });
+  function closeEditor() {
+    setEditing(null);
+    if (params.has('new')) setParams({});
+  }
   return (
     <>
       <PageHeading
         eyebrow={t('03 / StoryGap')}
-        title={selected ? selected.title : t('Clarity before code.')}
+        title={selected ? selected.title : t('Story refinement')}
         actions={
           <>
             <button
@@ -237,9 +252,9 @@ export default function StoryGap() {
               <ArrowDownToLine size={16} />
               {t('Export story')}
             </button>
-            <button className="button primary" onClick={() => setEditing('new')}>
-              <Plus size={17} />
-              {t('New story')}
+            <button className="button primary" onClick={() => setEditing(selected?.id ?? 'new')}>
+              {selected ? <Pencil size={17} /> : <Plus size={17} />}
+              {selected ? t('Edit & analyze') : t('New story')}
             </button>
           </>
         }
@@ -265,10 +280,6 @@ export default function StoryGap() {
               <article className="paper">
                 <div className="section-heading">
                   <h2>{t('The story')}</h2>
-                  <button className="button secondary" onClick={() => setEditing(selected.id)}>
-                    <Pencil size={14} />
-                    {t('Edit & analyze')}
-                  </button>
                 </div>
                 <div className="story-statement">
                   {selected.description ||
@@ -373,11 +384,49 @@ export default function StoryGap() {
                   <small>{t('to review')}</small>
                 </span>
               </div>
-              <p className="muted small">
+              <p className="review-guidance">
                 {t(
-                  'These are review prompts, not verified defects. INVEST is a team discussion framework; this analysis cannot establish whether a story is valuable, estimable, or small.',
+                  'Accept notes separately from the source. Change the story only by editing it or explicitly appending criteria.',
                 )}
               </p>
+              <details className="analysis-method">
+                <summary>{t('How this review works')}</summary>
+                <p>
+                  {t(
+                    'These are review prompts, not verified defects. INVEST is a team discussion framework; this analysis cannot establish whether a story is valuable, estimable, or small.',
+                  )}
+                </p>
+              </details>
+              <div className="review-tabs" role="group" aria-label={t('Filter by review state')}>
+                {(
+                  [
+                    ['all', 'All'],
+                    ['pending', 'To review'],
+                    ['accepted', 'Accepted'],
+                    ['ignored', 'Ignored'],
+                  ] as const
+                ).map(([state, title]) => (
+                  <button
+                    key={state}
+                    aria-pressed={reviewFilter === state}
+                    onClick={() => setReviewFilter(state)}
+                  >
+                    {t(title)}
+                    <span>
+                      {state === 'all'
+                        ? observations.length
+                        : state === 'pending'
+                          ? pending.length
+                          : observations.filter((observation) =>
+                              selected.reviews.some(
+                                (review) =>
+                                  review.ruleId === observation.id && review.state === state,
+                              ),
+                            ).length}
+                    </span>
+                  </button>
+                ))}
+              </div>
               <select
                 aria-label={t('Filter observations by category')}
                 value={category}
@@ -390,15 +439,27 @@ export default function StoryGap() {
                   </option>
                 ))}
               </select>
-              {observations
-                .filter((o) => category === 'all' || o.category === category)
-                .map((o) => (
-                  <Suggestion
-                    key={`${selected.id}-${o.id}-${selected.updatedAt}-${t('Language')}`}
-                    observation={o}
-                    story={selected}
-                  />
-                ))}
+              {filteredObservations.map((o) => (
+                <Suggestion
+                  key={`${selected.id}-${o.id}-${selected.updatedAt}-${t('Language')}`}
+                  observation={o}
+                  story={selected}
+                />
+              ))}
+              {observations.length > 0 && !filteredObservations.length && (
+                <div className="notice">
+                  {t('No prompts match these filters.')}
+                  <button
+                    className="text-button"
+                    onClick={() => {
+                      setReviewFilter('all');
+                      setCategory('all');
+                    }}
+                  >
+                    {t('Clear filters')}
+                  </button>
+                </div>
+              )}
               {!observations.length && (
                 <div className="notice">
                   <Check size={18} />
@@ -529,11 +590,11 @@ export default function StoryGap() {
           title={editing === 'new' ? t('Bring a story into focus') : t('Refine the story')}
           open
           wide
-          onClose={() => setEditing(null)}
+          onClose={closeEditor}
         >
           <StoryForm
             story={project.stories.find((s) => s.id === editing)}
-            onCancel={() => setEditing(null)}
+            onCancel={closeEditor}
             onSave={async (content) => {
               const old = project.stories.find((s) => s.id === editing);
               const record = old ? reviseStory(old, content) : createStory(content);

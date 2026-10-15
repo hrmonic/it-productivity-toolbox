@@ -1,4 +1,3 @@
-import { t } from '../shared/i18n';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -12,45 +11,42 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Project } from '../shared/types/models';
-import { Badge, ToolLink } from '../shared/ui/primitives';
-import { entityPath } from '../features/traceability/domain';
+import { Badge } from '../shared/ui/primitives';
+import { entityPath, type EntityRef } from '../features/traceability/domain';
+import { decisionWarnings } from '../features/decision-trace/domain';
+import { latestBaseline } from '../features/scope-radar/domain';
+import { analyzeStory } from '../features/story-gap/domain';
 import { brand } from './brand';
 import { humanDate } from '../shared/lib/format';
+import { t } from '../shared/i18n';
 
 const tools = [
   {
     number: '01',
     name: 'DecisionTrace',
-    line: 'Keep the reasoning within reach.',
-    description:
-      'Capture the context, alternatives, and trade-offs behind the choices that matter.',
+    description: 'Capture a choice and keep its reasoning accessible.',
     to: '/decisions',
     icon: GitBranch,
-    label: 'Open the journal',
-    className: 'decision',
+    action: 'Open the journal',
   },
   {
     number: '02',
     name: 'Scope Radar',
-    line: 'Know what changed. See what follows.',
-    description: 'Compare the agreement with accepted scope, and test proposals before committing.',
+    description: 'Compare the agreement, review changes, and test proposals.',
     to: '/scope',
     icon: ListFilter,
-    label: 'Explore your scope',
-    className: 'scope',
+    action: 'Explore your scope',
   },
   {
     number: '03',
     name: 'StoryGap',
-    line: 'Ask better questions before building.',
-    description:
-      'Turn ambiguous stories into a focused refinement conversation with transparent rules.',
+    description: 'Find unanswered questions before implementation begins.',
     to: '/stories',
     icon: ScanText,
-    label: 'Refine a story',
-    className: 'story',
+    action: 'Refine a story',
   },
 ];
+
 export default function Home({
   project,
   onDemo,
@@ -62,6 +58,42 @@ export default function Home({
   onCreate: () => void;
   busy: boolean;
 }) {
+  const baseline = project ? latestBaseline(project) : undefined;
+  const changes = project?.changes.filter((change) => change.baselineId === baseline?.id) ?? [];
+  const attention: { ref: EntityRef; title: string; reason: string; action: string }[] = [];
+  if (project) {
+    for (const decision of project.decisions.filter(
+      (d) => !d.archived && d.status !== 'superseded' && d.status !== 'rejected',
+    )) {
+      const warning = decisionWarnings(decision)[0];
+      if (warning || decision.status === 'proposed')
+        attention.push({
+          ref: { kind: 'decision', id: decision.id },
+          title: decision.title,
+          reason: warning ? t(warning) : t('Awaiting a decision'),
+          action: t('Review decision'),
+        });
+    }
+    for (const change of changes.filter((c) => c.status === 'proposed'))
+      attention.push({
+        ref: { kind: 'change', id: change.id },
+        title: change.title,
+        reason: t('Proposed change awaiting review'),
+        action: t('Review change'),
+      });
+    for (const story of project.stories) {
+      const count = analyzeStory(story).filter(
+        (o) => !story.reviews.some((r) => r.ruleId === o.id),
+      ).length;
+      if (count)
+        attention.push({
+          ref: { kind: 'story', id: story.id },
+          title: story.title,
+          reason: t('{count} refinement prompts to review', { count }),
+          action: t('Review story'),
+        });
+    }
+  }
   const activity = project
     ? [
         ...project.decisions.map((d) => ({ ...d, kind: 'decision' as const })),
@@ -69,169 +101,230 @@ export default function Home({
         ...project.stories.map((s) => ({ ...s, kind: 'story' as const })),
       ]
         .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
-        .slice(0, 4)
+        .slice(0, 5)
+    : [];
+  const counts = project
+    ? [project.decisions.filter((d) => !d.archived).length, changes.length, project.stories.length]
     : [];
   return (
     <>
-      <div className="home-kicker">
-        <span className="live-dot" />
-        {t('A little structure. A lot more clarity.')}
-        <span className="edition">{t('LOCAL-FIRST / OPEN SOURCE')}</span>
-      </div>
-      <section className="home-hero">
-        <div>
-          <span className="eyebrow">{t('For people who move projects forward')}</span>
-          <h1>
-            {t('Less context lost.')}
-            <br />
-            {t('More')} <em>{t('thoughtful')}</em>
-            <br />
-            {t('delivery')}
-            <span className="accent">.</span>
-          </h1>
-          <p>
-            {t('Keep the why. Understand the change. Clarify the work.')}
-            <br />
-            {t('Three focused tools, one connected project memory.')}
-          </p>
-          <div className="hero-actions">
-            {project ? (
-              <Link to="/decisions" className="button primary">
-                {t('Continue your work')}
-                <ArrowRight size={17} />
+      {project ? (
+        <>
+          <div className="workspace-overview-heading">
+            <div>
+              <div className="eyebrow">{t('Project overview')}</div>
+              <h1>{project.name}</h1>
+              <p>
+                {project.description ||
+                  t('A shared context for your decisions, scope, and requirements.')}
+              </p>
+            </div>
+            <div className="overview-actions">
+              <Link className="button primary" to="/decisions?new=1">
+                <Plus size={17} />
+                {t('New decision')}
               </Link>
-            ) : (
+              <Link className="button secondary" to="/stories?new=1">
+                <Plus size={17} />
+                {t('New story')}
+              </Link>
+            </div>
+          </div>
+          <div className="workspace-context-bar">
+            <span className="context-project-icon">
+              <ShieldCheck size={16} />
+              {t('Local workspace')}
+            </span>
+            {project.demo && <Badge tone="demo">{t('Fictional demo')}</Badge>}
+            <span className="context-baseline">
+              {baseline
+                ? t('Baseline version {version}', { version: baseline.version })
+                : t('No baseline defined')}
+              {baseline && <> · {baseline.frozenAt ? t('Frozen') : t('Draft')}</>}
+            </span>
+            <Link to="/settings">
+              {t('Backups & settings')}
+              <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </>
+      ) : (
+        <section className="welcome-workspace">
+          <div className="welcome-copy">
+            <span className="eyebrow">{t('IT Productivity Toolbox')}</span>
+            <h1>{t('Your delivery workspace.')}</h1>
+            <p>
+              {t(
+                'Keep decisions, scope changes, and requirements connected. Start with a real workflow in minutes.',
+              )}
+            </p>
+            <div className="hero-actions">
               <button className="button primary" onClick={onDemo} disabled={busy}>
                 <Sparkles size={17} />
                 {t('Explore the demo')}
               </button>
-            )}
-            <button className="button secondary" onClick={onCreate}>
-              <Plus size={16} />
-              {t('Create a project')}
-            </button>
+              <button className="button secondary" onClick={onCreate}>
+                <Plus size={17} />
+                {t('Create a project')}
+              </button>
+            </div>
+            <div className="trust-line">
+              <ShieldCheck size={16} />
+              {t('No account. No paid API. Your data stays in this browser.')}
+            </div>
           </div>
-          <div className="trust-line">
-            <ShieldCheck size={15} />
-            {t('No account. No paid API. Your data stays in this browser.')}
-          </div>
-        </div>
-        <div className="hero-notebook">
-          <div className="notebook-top">
-            <span className="eyebrow">{t('The connected workflow')}</span>
-            <span className="notebook-mark">↗</span>
-          </div>
-          <div className="notebook-step">
-            <span className="notebook-node">
-              <GitBranch size={19} />
-            </span>
+          <div className="welcome-workflow" aria-label={t('The connected workflow')}>
             <div>
-              <small>{t('01 / Capture the rationale')}</small>
-              <strong>{t('Why did we decide this?')}</strong>
+              <GitBranch size={20} />
+              <span>
+                <small>{t('DecisionTrace')}</small>
+                <strong>{t('Why did we decide this?')}</strong>
+              </span>
             </div>
-          </div>
-          <div className="notebook-connector">
-            <span />
-            {t('Decision informs change')}
-          </div>
-          <div className="notebook-step">
-            <span className="notebook-node">
-              <ListFilter size={19} />
-            </span>
+            <p>{t('Decision informs change')}</p>
             <div>
-              <small>{t('02 / Understand the impact')}</small>
-              <strong>{t('What changes in our scope?')}</strong>
+              <ListFilter size={20} />
+              <span>
+                <small>{t('Scope Radar')}</small>
+                <strong>{t('What changes in our scope?')}</strong>
+              </span>
             </div>
-          </div>
-          <div className="notebook-connector">
-            <span />
-            {t('Change affects requirements')}
-          </div>
-          <div className="notebook-step">
-            <span className="notebook-node">
-              <ScanText size={19} />
-            </span>
+            <p>{t('Change affects requirements')}</p>
             <div>
-              <small>{t('03 / Clarify the outcome')}</small>
-              <strong>{t('What should we build?')}</strong>
+              <ScanText size={20} />
+              <span>
+                <small>{t('StoryGap')}</small>
+                <strong>{t('What should we build?')}</strong>
+              </span>
             </div>
           </div>
-          <div className="notebook-bottom">
-            {t('Explicit relationships. Shared understanding.')}
-          </div>
-        </div>
-      </section>
-      <div className="section-divider">
-        <span>{t('YOUR WORK, WITH MORE CONTEXT')}</span>
-        <span>{t('THREE TOOLS. NO EXTRA CEREMONY.')}</span>
-      </div>
-      <section className="tool-directory" aria-label={t('Explore the toolbox')}>
-        {tools.map((tool) => (
-          <div className={`tool-entry ${tool.className}`} key={tool.number}>
-            <span className="tool-number">{tool.number}</span>
-            <div className="tool-identity">
-              <tool.icon size={22} />
-              <h2>{tool.name}</h2>
-              <span>{t(tool.line)}</span>
+        </section>
+      )}
+      <section className="workspace-tools" aria-label={t('Explore the toolbox')}>
+        {tools.map((tool, i) => (
+          <Link
+            className={`workspace-tool tool-${tool.number}`}
+            key={tool.number}
+            to={project ? tool.to : '/projects'}
+          >
+            <div className="workspace-tool-top">
+              <span className="tool-symbol">
+                <tool.icon size={21} />
+              </span>
+              {project && (
+                <span className="workspace-tool-count">
+                  {counts[i]} <small>{t(['decisions', 'changes', 'stories'][i]!)}</small>
+                </span>
+              )}
             </div>
+            <h2>{tool.name}</h2>
             <p>{t(tool.description)}</p>
-            <ToolLink to={project ? tool.to : '/projects'}>{t(tool.label)}</ToolLink>
-          </div>
+            <span className="workspace-tool-action">
+              {t(tool.action)}
+              <ArrowRight size={16} />
+            </span>
+          </Link>
         ))}
       </section>
-      <div className="home-bottom">
-        <section>
-          <div className="section-heading">
-            <h2>{project ? t('Your project, in motion') : t('Start with a real conversation')}</h2>
-            {project && (
-              <Badge tone={project.demo ? 'demo' : ''}>
-                {project.demo ? t('Fictional demo') : t('Local project')}
-              </Badge>
-            )}
-          </div>
-          {project ? (
-            <>
-              <p className="muted small">
-                {t('Recently updated records in')} {project.name}.
-              </p>
-              {activity.length ? (
-                <div className="activity-list">
-                  {activity.map((item) => (
-                    <Link key={item.id} to={entityPath(item)}>
-                      <span className="activity-kind">{t(item.kind)}</span>
+      {project ? (
+        <div className="overview-grid">
+          <section className="attention-worklist">
+            <div className="section-heading">
+              <div>
+                <h2>{t('Ready for your review')}</h2>
+                <p>{t('Recorded proposals and rule-based prompts across this project.')}</p>
+              </div>
+              <span className="count">{attention.length}</span>
+            </div>
+            {attention.length ? (
+              <div className="attention-rows">
+                {attention.slice(0, 6).map((item) => (
+                  <Link key={`${item.ref.kind}-${item.ref.id}`} to={entityPath(item.ref)}>
+                    <span className={`attention-kind ${item.ref.kind}`}>
+                      {item.ref.kind === 'decision' ? (
+                        <GitBranch size={17} />
+                      ) : item.ref.kind === 'change' ? (
+                        <ListFilter size={17} />
+                      ) : (
+                        <ScanText size={17} />
+                      )}
+                    </span>
+                    <div>
                       <strong>{item.title}</strong>
-                      <time>{humanDate(item.updatedAt)}</time>
+                      <p>{item.reason}</p>
+                    </div>
+                    <span className="attention-action">
+                      {item.action}
+                      <ArrowUpRight size={15} />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="review-empty">
+                <ShieldCheck size={23} />
+                <strong>{t('Nothing queued for review')}</strong>
+                <p>
+                  {t(
+                    'No pending items were identified by the current rules. Continue reviewing project context with your team.',
+                  )}
+                </p>
+              </div>
+            )}
+            {attention.length > 6 && (
+              <p className="overview-footnote">
+                {t(
+                  'Showing {shown} of {total} items. Open each tool to review the complete project.',
+                  { shown: 6, total: attention.length },
+                )}
+              </p>
+            )}
+          </section>
+          <section className="recent-work">
+            <div className="section-heading">
+              <h2>{t('Recently updated')}</h2>
+              <span className="eyebrow">{t('This project')}</span>
+            </div>
+            {activity.length ? (
+              <div className="recent-work-list">
+                {activity.map((item) => (
+                  <Link key={item.id} to={entityPath(item)}>
+                    <span className="eyebrow">{t(item.kind)}</span>
+                    <strong>{item.title}</strong>
+                    <span className="recent-work-date">
+                      {humanDate(item.updatedAt)}
                       <ArrowUpRight size={14} />
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <p className="inset-empty">{t('Your first record will appear here.')}</p>
-              )}
-            </>
-          ) : (
-            <p className="muted">
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="inset-empty">{t('Your first record will appear here.')}</p>
+            )}
+          </section>
+        </div>
+      ) : (
+        <div className="getting-started-note">
+          <BookOpen size={20} />
+          <div>
+            <strong>{t('Three tools. One traceable workflow.')}</strong>
+            <p>
               {t(
-                'Explore a fictional customer portal project, or create a blank workspace for your next delivery. Nothing is sent to a server.',
+                'The optional Atlas demo contains fictional decisions, changes, and stories you can edit. A blank project starts with your own context.',
               )}
             </p>
-          )}
-        </section>
-        <aside className="field-notes">
-          <span className="eyebrow">{t('Field notes / 001')}</span>
-          <h3>{t('Useful tools should make the work clearer.')}</h3>
-          <p>
-            {t(
-              'Every warning explains its reasoning. Missing estimates stay unknown. Your team stays in control of the decisions.',
-            )}
-          </p>
-          <a href={`${brand.repository}/tree/main/docs`} target="_blank" rel="noreferrer">
-            <BookOpen size={16} />
-            {t('Read the product documentation')}
-            <ArrowUpRight size={14} />
+          </div>
+          <a
+            className="text-link"
+            href={`${brand.repository}/tree/main/docs`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t('Documentation')}
+            <ArrowUpRight size={15} />
           </a>
-        </aside>
-      </div>
+        </div>
+      )}
     </>
   );
 }

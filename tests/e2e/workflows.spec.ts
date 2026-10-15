@@ -227,7 +227,7 @@ test('mobile navigation, responsive layout and themes work without console error
   await demo(page);
   await page.getByRole('button', { name: 'Open navigation' }).click();
   await page.getByRole('link', { name: 'Scope Radar 02' }).click();
-  await expect(page.getByRole('heading', { name: 'See the scope shift.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Scope overview' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
@@ -238,13 +238,52 @@ test('mobile navigation, responsive layout and themes work without console error
   expect(errors).toEqual([]);
   expect(externalRequests).toEqual([]);
 });
+test('French layouts fit small phones, tablets and desktops', async ({ page }) => {
+  await demo(page);
+  await page.goto('/#/settings');
+  await page.getByLabel('Application language', { exact: true }).selectOption('fr');
+  for (const width of [320, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of [
+      '/',
+      '/decisions',
+      '/scope',
+      '/stories',
+      '/traceability',
+      '/projects',
+      '/settings',
+    ]) {
+      await page.goto(`/#${route}`);
+      await expect(page.getByRole('main').getByRole('heading', { level: 1 })).toBeVisible();
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+        `${width}px ${route} must not overflow horizontally`,
+      ).toBe(true);
+    }
+  }
+  await page.setViewportSize({ width: 320, height: 900 });
+  const menu = page.getByRole('button', { name: 'Ouvrir la navigation' });
+  await menu.click();
+  await expect(menu).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('.mobile-close')).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(
+    page.getByRole('link', { name: 'IT Productivity Toolbox', exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(page.getByRole('link', { name: 'Documentation', exact: true })).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(menu).toHaveAttribute('aria-expanded', 'false');
+  await expect(menu).toBeFocused();
+});
+
 test('critical screens pass automated WCAG checks in light and dark themes', async ({ page }) => {
   await demo(page);
   const routes = [
-    ['/', /Less context lost/],
-    ['/decisions', 'Keep the why.'],
-    ['/scope', 'See the scope shift.'],
-    ['/stories', 'Clarity before code.'],
+    ['/', 'Atlas customer portal'],
+    ['/decisions', 'Decision journal'],
+    ['/scope', 'Scope overview'],
+    ['/stories', 'Story refinement'],
     ['/traceability', 'Follow the thread.'],
     ['/projects', 'Give the work a home.'],
     ['/settings', 'Your workspace, your control.'],
@@ -274,7 +313,7 @@ test('French interface and story rules persist without translating project conte
   await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
   await expect(page.getByRole('heading', { name: 'Votre espace, vos choix.' })).toBeVisible();
   await page.getByRole('link', { name: 'DecisionTrace 01' }).click();
-  await expect(page.getByRole('heading', { name: 'Gardez les raisons du choix.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Journal des décisions' })).toBeVisible();
   await expect(
     page.getByRole('heading', { name: 'Make data exports self-service', exact: true }),
   ).toBeVisible();
@@ -313,7 +352,7 @@ test('keyboard skip link and dialog focus do not change the route', async ({ pag
   await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('main')).toBeFocused();
-  await expect(page.getByRole('heading', { name: /Less context lost/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Your delivery workspace.' })).toBeVisible();
   const trigger = page.getByRole('button', { name: 'Create a project', exact: true });
   await trigger.click();
   await expect(page.getByLabel('Project name')).toBeFocused();
@@ -349,4 +388,71 @@ test('an open draft refuses stale writes after another tab saves', async ({ page
   await expect(
     second.getByText('A newer agreement saved in another tab.', { exact: true }),
   ).toBeVisible();
+});
+
+test('project overview links to real review items and opens creation directly', async ({
+  page,
+}) => {
+  await demo(page);
+  await page.getByRole('link', { name: 'Overview', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: 'Atlas customer portal', exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('.attention-rows > a')).toHaveCount(4);
+  await page.getByRole('link', { name: 'New decision', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: 'Record a decision' })).toBeVisible();
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+  expect(page.url()).not.toContain('new=1');
+  await page.getByLabel('Search decisions').fill('nothing matches this query');
+  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await expect(page.getByLabel('Search decisions')).toHaveValue('');
+  await expect(page.locator('.journal-row')).toHaveCount(2);
+  await page.getByRole('link', { name: 'Overview', exact: true }).click();
+  await page.getByRole('link', { name: 'New story', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: 'Bring a story into focus' })).toBeVisible();
+});
+
+test('scope dependencies can be selected with checkboxes and persist in exports', async ({
+  page,
+}) => {
+  await demo(page);
+  await page.getByRole('link', { name: 'Scope Radar 02' }).click();
+  await page.getByRole('button', { name: 'New change', exact: true }).click();
+  await page.getByLabel('Change title').fill('A new connected deliverable');
+  const dependencies = page.getByRole('group', { name: /Affected dependencies/ });
+  await dependencies.getByRole('checkbox', { name: 'Account overview', exact: true }).check();
+  await dependencies.getByRole('checkbox', { name: 'Activity timeline', exact: true }).check();
+  await page.getByRole('button', { name: 'Record change', exact: true }).click();
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export JSON', exact: true }).click();
+  const data = JSON.parse(await readFile((await (await downloadPromise).path())!, 'utf8')) as {
+    dependencies: string[];
+  };
+  expect(data.dependencies).toHaveLength(2);
+  await page.reload();
+  await expect(
+    page.getByText('Account overview, Activity timeline', { exact: true }),
+  ).toBeVisible();
+});
+
+test('story review filters separate accepted and ignored notes without editing the source', async ({
+  page,
+}) => {
+  await demo(page);
+  await page.getByRole('link', { name: 'StoryGap 03' }).click();
+  await page.getByRole('button', { name: /Story 01/ }).click();
+  const original = await page.locator('.story-statement').innerText();
+  await page
+    .locator('.suggestion')
+    .first()
+    .getByRole('button', { name: 'Accept note', exact: true })
+    .click();
+  const filters = page.getByRole('group', { name: 'Filter by review state' });
+  await filters.getByRole('button', { name: /^Accepted/ }).click();
+  await expect(page.locator('.suggestion')).toHaveCount(1);
+  await filters.getByRole('button', { name: /^Ignored/ }).click();
+  await expect(page.getByText('No prompts match these filters.')).toBeVisible();
+  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await expect(page.locator('.suggestion')).toHaveCount(3);
+  await expect(page.locator('.story-statement')).toHaveText(original);
 });
