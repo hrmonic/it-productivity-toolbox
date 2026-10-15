@@ -1,230 +1,147 @@
-<p align="center">
-  <img src="docs/assets/toolbox-hero.svg" alt="IT Productivity Toolbox — DecisionTrace, Scope Radar and StoryGap: connected productivity tools for IT teams" width="100%">
-</p>
+# IT Productivity Toolbox
 
-<h1 align="center">IT Productivity Toolbox</h1>
+**Keep the why. Understand the change. Clarify the work.**
 
-<p align="center">
-  <strong>Open-source productivity tools for IT project managers, Scrum Masters, Product Owners and Product Builders.</strong><br>
-  Preserve project decisions. Understand scope changes. Write clearer user stories.
-</p>
+Three connected, independently useful tools for IT Project Managers, Scrum Masters, Product Owners, and Product Builders. A local-first web application with no mandatory account, backend, or paid API.
 
-<p align="center">
-  <a href="README.fr.md">Lire en français</a> ·
-  <a href="#explore-the-toolbox">Explore the tools</a> ·
-  <a href="#how-the-tools-work-together">Connected workflow</a> ·
-  <a href="#roadmap">Roadmap</a> ·
-  <a href="#frequently-asked-questions">FAQ</a>
-</p>
+[Getting started](#run-locally) · [Explore the tools](#three-tools-one-project-memory) · [Architecture](docs/ARCHITECTURE.md) · [Quality checks](docs/TESTING.md) · [Version française](README.fr.md)
 
-<p align="center">
-  <a href="LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache%202.0-64748b"></a>
-  <img alt="Project stage: design and planning" src="https://img.shields.io/badge/stage-design%20%26%20planning-475569">
-  <img alt="Planned languages: English and French" src="https://img.shields.io/badge/languages-EN%20%2F%20FR-475569">
-</p>
+![IT Productivity Toolbox overview, captured from the running application with the clearly labelled fictional Atlas project](docs/assets/screenshots/overview.png)
 
-> **Project status — October 2026:** IT Productivity Toolbox is in its **design and planning stage**. The three tools below describe the intended product, **not features currently available for use**. This repository currently contains the project presentation and Apache 2.0 license. A runnable application, live demo, installation guide and performance claims will be added only after they can be verified.
+> **Status: functional 0.1 foundation.** DecisionTrace, Scope Radar, StoryGap, project traceability, backups, and English/French interfaces are implemented. This is a browser-local application: there is no cloud synchronization, account service, or public hosted demo announced here. See the [validation record and known boundaries](docs/HANDOFF.md).
 
-## At a glance
+## Three tools, one project memory
 
-**IT Productivity Toolbox** is a planned, lightweight collection of connected yet independently useful web applications for day-to-day IT project management and product delivery. Its first three modules address recurring problems: losing the reasoning behind decisions, losing sight of project scope changes, and starting development with ambiguous user stories.
+| Tool              | The question it helps answer            | What you can do                                                                                                                                                                            |
+| ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **DecisionTrace** | Why did we decide this?                 | Record context, alternatives and rationale; search/filter the journal; revise with a reason; inspect history; archive; export Markdown/JSON                                                |
+| **Scope Radar**   | What changed since we agreed the scope? | Freeze a baseline; record proposed, accepted and rejected changes; compare deliverables and compatible effort estimates; simulate proposals; export reports and registers                  |
+| **StoryGap**      | What still needs to be clarified?       | Analyze English/French stories with local rules; review ambiguity and missing cases; edit, accept or ignore notes; explicitly append confirmed criteria; compare with the original; export |
 
-| | |
-| --- | --- |
-| **For** | IT Project Managers, Scrum Masters, Product Owners, Product Builders and delivery teams |
-| **Purpose** | Improve decision traceability, scope change visibility and user story clarity |
-| **Initial modules** | DecisionTrace, Scope Radar, StoryGap |
-| **Product approach** | Focused tools, explainable results, optional cross-tool traceability |
-| **Planned experience** | Browser-based, local-first, no mandatory account, French and English |
-| **Current availability** | Concept and roadmap; application not released |
-
-### Why build another productivity toolkit?
-
-General-purpose project management platforms are powerful, but small, recurring problems can still be difficult to solve quickly:
-
-- **“Why did we decide this?”** Context and trade-offs disappear across meetings, chat threads and documents.
-- **“What changed since the original agreement?”** New requests accumulate without a clear view of their effect on the project baseline.
-- **“Is this story ready to discuss with the team?”** Vague requirements lead to unresolved questions and untestable acceptance criteria.
-
-The intention is **not to replace Jira, Trello, Notion or an agile planning platform**. It is to provide focused companions that help teams reason about their work and document the answers.
-
-## Explore the toolbox
-
-### 01 / DecisionTrace — Project decision log and rationale
-
-**Capture not just what was decided, but why.**
-
-DecisionTrace is designed to help project managers and Product Owners maintain a searchable record of project and product decisions.
-
-**Planned capabilities**
-
-- Record the decision, its context, owner, stakeholders and date.
-- Document alternatives, trade-offs, assumptions and rationale.
-- Track decision states and meaningful revisions.
-- Connect decisions to scope changes and user stories.
-- Search and filter decision history; export records for documentation.
-
-**Example:** A team chooses a search strategy. Weeks later, DecisionTrace helps explain the original trade-offs before that decision is revisited.
-
-**Best suited to:** IT Project Managers · Product Owners · Technical Leads
-
-### 02 / Scope Radar — Scope creep and change impact tracking
-
-**Know what changed between the agreed baseline and today's scope.**
-
-Scope Radar is designed to make scope evolution visible without pretending that missing estimates are known.
-
-**Planned capabilities**
-
-- Define and version an agreed project baseline.
-- Capture proposed, accepted and rejected change requests.
-- Compare the baseline with the current accepted scope.
-- Highlight affected deliverables, dependencies and known risks.
-- Explore *what-if* scenarios without modifying approved project data.
-- Export structured change registers and scope summaries.
-
-**Important principle:** Effort or schedule impact must be calculated only from supplied, compatible data. Unavailable information must be identified, not invented.
-
-**Best suited to:** IT Project Managers · Product Owners · Delivery Leads
-
-### 03 / StoryGap — User story analysis and acceptance criteria
-
-**Make requirements clearer before implementation starts.**
-
-StoryGap is designed to help Product Owners, Scrum Masters and Product Builders find ambiguity, missing edge cases and acceptance criteria that cannot yet be verified.
-
-**Planned capabilities**
-
-- Enter or paste user stories and their context.
-- Flag unclear language, missing information and open questions.
-- Suggest review points for business rules and edge cases.
-- Help draft testable acceptance scenarios, including Given / When / Then.
-- Let users accept, edit or dismiss each suggestion.
-- Compare revisions and export refined stories.
-
-**Important principle:** StoryGap should ask for missing business rules rather than invent them. Its initial analysis is planned around transparent rules and heuristics, not a simulated or mandatory AI service.
-
-**Best suited to:** Product Owners · Scrum Masters · Product Builders · Developers
-
-## How the tools work together
-
-Each tool is intended to solve a useful problem on its own. A shared **project traceability** layer will also allow teams to connect related information when needed.
+A project decision can **inform** a scope change; that change can **affect** a user story. Typed links are created by the user, shown on both records, and collected in a traceability view. Similar wording never creates an assumed relationship.
 
 ```mermaid
 flowchart LR
-    D["DecisionTrace<br/>Why was it decided?"]
-    S["Scope Radar<br/>What changed?"]
-    G["StoryGap<br/>What should be built?"]
-    D -->|"Decision informs change"| S
-    S -->|"Change affects story"| G
-    G -.->|"Trace the rationale"| D
+  D["DecisionTrace<br/>The rationale"] -->|informs| C["Scope Radar<br/>The change"]
+  C -->|affects| S["StoryGap<br/>The requirement"]
+  S -.->|"Follow links in either direction"| D
 ```
 
-**Example workflow:** A product decision creates a change request. That request affects two user stories. Instead of keeping three isolated records, the planned toolkit will help a team navigate from the decision to the change and the affected requirements.
+The toolbox complements your delivery workflow. It does not try to replace Jira, Trello, Notion, or a full project-management platform.
 
-The traceability model will rely on **explicit, user-validated links**. It will not assume causality from similar wording.
+## Try a complete workflow in a few minutes
 
-## Designed for focused, trustworthy work
+1. Start the application and choose **Explore the demo**. Atlas is a clearly labelled, entirely fictional customer portal project.
+2. Open **DecisionTrace → Make data exports self-service**. Read the alternatives and rationale, then follow its link to the accepted CSV export change.
+3. In **Scope Radar**, compare the 16-person-day fictional baseline with 20 accepted person-days. Select **Saved export presets** in the what-if panel: the simulated total changes, while the official total remains unchanged.
+4. Open the linked export story in **StoryGap**. Review a prompt, edit its note, and accept or ignore it. The original story is retained.
+5. Visit **Settings** to export a full JSON backup. Restoration validates the file and creates separate copies with remapped references.
 
-The product is being planned around the following commitments:
+You can instead create a blank project. Projects are isolated. The demo can be reset or deleted without removing other projects.
 
-| Principle | Intended behavior |
-| --- | --- |
-| **Start quickly** | Explore focused tools without a mandatory account |
-| **Keep control of your data** | Local-first storage, with backup and export planned |
-| **Explain the result** | Show assumptions, calculations and reasons behind warnings |
-| **Respect the source of truth** | Do not silently rewrite approved baselines or decisions |
-| **Support two languages** | English and French interfaces and documentation |
-| **Make tools work together** | Connect decisions, changes and stories without forcing a single workflow |
-| **Build for accessibility** | Responsive layouts, keyboard navigation and accessible feedback |
+## Run locally
 
-These are **product goals**, not claims that the implementation or its security has already been audited.
+**Requirements:** Node.js 24 and pnpm 10.18.3, as declared in the repository.
 
-## Intended architecture
+```sh
+git clone https://github.com/hrmonic/it-productivity-toolbox.git
+cd it-productivity-toolbox
+corepack enable
+pnpm install --frozen-lockfile
+pnpm dev
+```
 
-The initial technical direction is **React, TypeScript and Vite**, with modular feature boundaries and browser-based persistence using **IndexedDB / Dexie**. Other planned components include **Zod** for validation, **react-i18next** for localization, **Vitest** for unit tests and **Playwright** for end-to-end testing.
+Open the URL printed by Vite. No environment variables, API keys, accounts, or server-side database are needed.
 
-These choices are subject to validation during development. No production-ready architecture, CI pipeline, test coverage or deployed instance is claimed at this stage.
+```sh
+pnpm build       # TypeScript check and static production bundle
+pnpm preview     # Inspect that bundle locally
+```
 
-The first version is intended to work without a paid API or mandatory remote AI provider. If AI-assisted analysis is introduced later, sending project content to third parties must require informed user control.
+Static hosting guidance and origin-specific storage caveats are in [Deployment](docs/DEPLOYMENT.md). The CI workflow checks the application; it does not deploy it.
 
-## Roadmap
+## Designed to explain its results
 
-- [ ] **Foundation** — Shared interface, project workspace, persistence and EN/FR localization
-- [ ] **DecisionTrace** — Decisions, alternatives, revision history, search and export
-- [ ] **Scope Radar** — Project baselines, change log, comparisons and what-if analysis
-- [ ] **StoryGap** — Rule-based story analysis, editable suggestions and acceptance criteria
-- [ ] **Cross-tool traceability** — Links among decisions, scope changes and stories
-- [ ] **Quality and release** — Automated tests, accessibility review, documentation and verified demo
+- **Approval stays explicit.** Saving a decision does not accept it. Baselines require a separate freeze action. Accepted/rejected changes are immutable ledger entries.
+- **Unknown stays unknown.** Missing effort is not zero. Each baseline uses a single unit. Percentages are unavailable when the initial estimate is zero or required inputs are missing.
+- **Simulation stays separate.** Selecting proposals derives a potential scope; it does not change accepted project records.
+- **Suggestions stay under your control.** StoryGap provides deterministic review prompts, not AI output or a readiness score. INVEST requires a team conversation.
+- **History stays useful.** Decision revisions retain the previous content and explanation. Story revisions retain the original and earlier content. Baseline revisions preserve earlier agreements.
 
-The roadmap communicates intent rather than delivery dates. Scope and ordering may evolve with user feedback.
+See the [data model and calculation contract](docs/DATA_MODEL.md) for the exact rules and trade-offs.
 
-## Getting started
+## Your data stays in this browser
 
-**The application has not been released yet.** There are no installation commands or public demo to follow at this time.
+Projects are stored in **IndexedDB through Dexie**, scoped to the current browser and origin. There are no analytics, remote analysis calls, runtime font CDNs, or cloud synchronization. Following an external documentation link opens that website.
 
-You can currently:
+**Keep backups.** Clearing site data, browser eviction, or changing the application address can make local records unavailable. IndexedDB and downloaded JSON files are **not encrypted**. Apply your organization's information-handling policy before recording sensitive content.
 
-1. Read the [product overview](#at-a-glance) and [planned modules](#explore-the-toolbox).
-2. Review the [roadmap](#roadmap).
-3. [Open an issue](https://github.com/hrmonic/it-productivity-toolbox/issues) to share a recurring IT workflow problem, feature idea or usability need.
-4. Watch the repository for future implementation updates.
+Full backups include histories, baseline versions, changes, stories and links. Imports are limited to 5 MiB and checked for schema and reference integrity before an atomic restore. Existing projects are preserved. Individual report exports are not full restore files.
 
-Installation and development instructions will be published once working code is available.
+## A deliberately small architecture
 
-## Frequently asked questions
+**React 19 · strict TypeScript · Vite 8 · React Router · Dexie · Zod · Radix Dialog · Lucide**
 
-### What is IT Productivity Toolbox?
+Feature rules, presentation, and storage have separate responsibilities. Native forms and centralized CSS tokens keep the dependency surface focused. Vitest/Testing Library cover domain and component behavior; Playwright/axe exercise real browser journeys and selected accessibility rules.
 
-IT Productivity Toolbox is an open-source project for small, purpose-built tools that support IT project managers, Scrum Masters, Product Owners and Product Builders. Its initial focus is decision documentation, scope change analysis and user story refinement.
+```text
+src/app/                    Application shell, projects, preferences and settings
+src/features/decision-trace/ Decision journal, editor, history and rules
+src/features/scope-radar/    Baselines, change ledger, calculations and simulation
+src/features/story-gap/      Story refinement and deterministic analysis
+src/features/traceability/   Typed links and bidirectional navigation
+src/shared/                 UI primitives, schemas, data boundary and localization
+```
 
-### How can I document technical or product decisions?
+The [architecture document](docs/ARCHITECTURE.md) explains the decisions, alternatives and costs. The [PRD](docs/PRD.md) connects features to user needs, acceptance evidence and delivery risks.
 
-The planned **DecisionTrace** module will help capture decisions together with their context, alternatives, responsible people and downstream links, creating a searchable decision log.
+## Quality you can inspect
 
-### How can I identify project scope creep?
+```sh
+pnpm check
+pnpm exec playwright install chromium
+pnpm test:e2e
+```
 
-The planned **Scope Radar** module will compare an agreed project baseline with accepted changes and surface their effects on deliverables, effort estimates and dependencies when reliable input data is available.
+`pnpm check` runs typechecking, lint, formatting checks, unit/component tests and the production build. Browser tests exercise the critical workflows, persistence, restoration, English/French behavior, keyboard focus, mobile navigation, themes and automated accessibility checks. GitHub Actions runs the required checks without `continue-on-error`.
 
-### How can I improve ambiguous user stories?
+Read [Testing](docs/TESTING.md) and the completed CI runs for actual evidence. No unmeasured coverage percentage, Lighthouse score, complete accessibility certification, or independent security audit is claimed.
 
-The planned **StoryGap** module will review story wording and acceptance criteria, identify unanswered questions and offer suggestions that users can validate or edit.
+<details>
+<summary>More authentic screenshots</summary>
 
-### Does the toolkit require AI, an account or cloud hosting?
+### Scope comparison and what-if analysis
 
-The intended first version is local-first and does not require a paid AI API or mandatory account. This behavior will be verified when the application is implemented.
+![Scope Radar with the fictional accepted baseline and a separate simulation area](docs/assets/screenshots/scope.png)
 
-### Is it available in French?
+### Story refinement
 
-The project is planned to support **English and French**. The French-language project presentation is available in [README.fr.md](README.fr.md).
+![StoryGap source content and calculated review prompts](docs/assets/screenshots/story-analysis.png)
 
-### Is the project ready to use?
+### Dark theme
 
-**Not yet.** This repository currently publishes the product direction and license. Functional releases will be identified explicitly when available.
+![The same toolbox overview in dark mode](docs/assets/screenshots/overview-dark.png)
 
-## Contributing and feedback
+</details>
 
-The most useful early contributions are **concrete examples of frustrating, repetitive tasks in IT delivery**.
+Screenshots come from the production build using the optional fictional dataset. Regenerate them with `pnpm screenshots`.
 
-When proposing an idea through [GitHub Issues](https://github.com/hrmonic/it-productivity-toolbox/issues), it helps to describe:
+## Languages and current limits
 
-- The role and situation in which the problem occurs.
-- What you do today, and where the friction appears.
-- What a successful solution would produce.
-- Any privacy, accessibility or workflow constraints.
+The interface is available in **English and French** through Settings. Story rules recognize selected English and French formulations. Project content is never translated automatically; demo records remain in English. Export field names and report headings stay in English for interoperability.
 
-Code contribution guidance will follow when the first implementation is available.
+The first release has no multi-user collaboration, authentication, encryption, external integrations, schedule predictions, or remote AI. Automated browser validation currently targets Chromium. Draft baselines and proposed changes do not have their own edit histories. Large-workspace performance and a full assistive-technology audit remain future work.
 
-## License
+See the [roadmap](docs/ROADMAP.md) for prioritized next work rather than promised dates.
 
-Licensed under the **[Apache License, Version 2.0](LICENSE)**. The license permits use, modification and distribution under its terms, including commercial use.
+## Contribute or discuss a workflow
 
-## Maintainer
+Concrete examples of lost decision context, hard-to-explain scope changes, or ambiguous requirements are especially useful. Describe the role, situation, current workaround, and desired outcome in a [GitHub issue](https://github.com/hrmonic/it-productivity-toolbox/issues), using fictional or anonymized content.
 
-Created and maintained by **[Réda Touzani (@hrmonic)](https://github.com/hrmonic)** — bridging business needs, product thinking and software engineering.
+[Contribution guide](CONTRIBUTING.md) · [Security policy](SECURITY.md) · [Development handoff](docs/HANDOFF.md)
 
----
+## License and maintainer
 
-**Less context lost. Fewer surprises. Clearer work.**
+Licensed under the **[Apache License, Version 2.0](LICENSE)**.
 
-[Back to top](#it-productivity-toolbox) · [Version française](README.fr.md)
+Created and maintained by **[Réda Touzani (@hrmonic)](https://github.com/hrmonic)** — connecting business needs, product decisions, and maintainable software.
