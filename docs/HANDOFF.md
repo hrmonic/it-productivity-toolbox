@@ -57,3 +57,5 @@ Local validation completed on 15 October 2026:
 - Authentic screenshots were generated from the fictional demo and the light/dark/mobile layouts were visually inspected.
 
 Publication uses descriptive English commits and a normal fast-forward push. Read the latest completed **Quality checks** GitHub Actions run for remote Linux validation; a configured workflow alone is not a passing run. No hosting deployment is part of this delivery.
+
+The first published checkpoint, `ffd5eb3`, passed [Linux validation run 38744932154](https://github.com/hrmonic/it-productivity-toolbox/actions/runs/38744932154), including all 59 unit/component tests and 12 Chromium journeys. Its logs identified two legacy action-runtime warnings; a follow-up updates the pinned pnpm setup and artifact upload actions to official Node.js 24 releases and uses pnpm consistently for the browser preview.
