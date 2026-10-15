@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">IT Productivity Toolbox — tools for clearer decisions, controlled scope and actionable user stories</title>
+  <desc id="desc">Dark editorial banner featuring DecisionTrace, Scope Radar and StoryGap as connected modules.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0C1222"/>
+      <stop offset="0.6" stop-color="#11192A"/>
+      <stop offset="1" stop-color="#0D1522"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#75E4CE"/>
+      <stop offset="1" stop-color="#A3B2FF"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1D2A3E"/>
+      <stop offset="1" stop-color="#131F30"/>
+    </linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#7C8BA6" stroke-width=".55" opacity=".17"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-30%" width="145%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#040810" flood-opacity=".42"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="420" rx="20" fill="url(#background)"/>
+  <rect width="1280" height="420" rx="20" fill="url(#grid)"/>
+  <path d="M0 392H1280" stroke="#8AA0B8" stroke-opacity=".15"/>
+  <circle cx="1134" cy="5" r="255" fill="#5D77AB" opacity=".07"/>
+  <circle cx="759" cy="367" r="194" fill="#49D6B7" opacity=".045"/>
+
+  <rect x="66" y="50" width="182" height="31" rx="15.5" fill="#142F37" stroke="#3F807A" stroke-opacity=".55"/>
+  <circle cx="84" cy="65.5" r="4.5" fill="#72E3C9"/>
+  <text x="99" y="70" fill="#AFE9DF" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.4">BUILT FOR IT TEAMS</text>
+
+  <text x="64" y="154" fill="#F5F7FA" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="64" font-weight="750" letter-spacing="-2.8">IT Productivity</text>
+  <text x="64" y="222" fill="url(#ink)" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="70" font-weight="750" letter-spacing="-3">Toolbox.</text>
+  <text x="67" y="279" fill="#CBD6E6" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22">Keep the context. Control the changes.</text>
+  <text x="67" y="310" fill="#CBD6E6" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22">Build with fewer unknowns.</text>
+  <text x="67" y="368" fill="#8295B1" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" letter-spacing="2">DECISIONS  /  SCOPE  /  USER STORIES</text>
+
+  <path d="M707 124V319" stroke="#667C9B" stroke-width="2" stroke-dasharray="5 7" opacity=".7"/>
+  <circle cx="707" cy="124" r="5" fill="#79E3C9"/>
+  <circle cx="707" cy="220" r="5" fill="#A3B2FF"/>
+  <circle cx="707" cy="319" r="5" fill="#E5BF84"/>
+
+  <g filter="url(#shadow)">
+    <rect x="735" y="52" width="479" height="98" rx="16" fill="url(#panel)" stroke="#436578" stroke-opacity=".8"/>
+    <rect x="753" y="70" width="5" height="62" rx="2.5" fill="#79E3C9"/>
+    <text x="779" y="93" fill="#F2F8FC" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">DecisionTrace</text>
+    <text x="779" y="120" fill="#9EADC1" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15">Make project decisions explainable</text>
+    <circle cx="1170" cy="101" r="18" fill="#153E40"/>
+    <path d="M1160 101l7 7 13-15" fill="none" stroke="#77E2CA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="735" y="162" width="479" height="98" rx="16" fill="url(#panel)" stroke="#4D5B84" stroke-opacity=".8"/>
+    <rect x="753" y="180" width="5" height="62" rx="2.5" fill="#A3B2FF"/>
+    <text x="779" y="203" fill="#F2F8FC" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Scope Radar</text>
+    <text x="779" y="230" fill="#9EADC1" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15">See changes before they become surprises</text>
+    <circle cx="1170" cy="211" r="18" fill="#283255"/>
+    <circle cx="1170" cy="211" r="10" fill="none" stroke="#A3B2FF" stroke-width="2"/>
+    <circle cx="1170" cy="211" r="4" fill="#A3B2FF"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="735" y="272" width="479" height="98" rx="16" fill="url(#panel)" stroke="#74664F" stroke-opacity=".75"/>
+    <rect x="753" y="290" width="5" height="62" rx="2.5" fill="#E5BF84"/>
+    <text x="779" y="313" fill="#F2F8FC" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">StoryGap</text>
+    <text x="779" y="340" fill="#9EADC1" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15">Turn vague user stories into clearer work</text>
+    <rect x="1153" y="304" width="33" height="26" rx="5" fill="#3E3429"/>
+    <path d="M1160 311h19M1160 317h14M1160 323h17" stroke="#E5BF84" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
