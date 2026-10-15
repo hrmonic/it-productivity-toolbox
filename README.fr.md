@@ -110,7 +110,7 @@ StoryGap vise à aider les équipes produit à détecter les formulations ambigu
 
 Chaque outil doit apporter de la valeur indépendamment. Une fonction de **traçabilité projet** permettra également de relier les informations concernées.
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     D["DecisionTrace<br/>Pourquoi cette décision ?"]
     S["Scope Radar<br/>Qu'est-ce qui change ?"]
@@ -118,7 +118,7 @@ flowchart LR
     D -->|"Décision à l'origine du changement"| S
     S -->|"Changement impactant la story"| G
     G -.->|"Retrouver la justification"| D
-\`\`\`
+```
 
 **Exemple :** une décision produit entraîne une demande de changement qui touche deux user stories. Les liens prévus permettront de remonter de la story à la décision initiale, sans gérer trois registres totalement déconnectés.
 
