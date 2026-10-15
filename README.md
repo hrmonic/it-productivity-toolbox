@@ -110,7 +110,7 @@ StoryGap is designed to help Product Owners, Scrum Masters and Product Builders 
 
 Each tool is intended to solve a useful problem on its own. A shared **project traceability** layer will also allow teams to connect related information when needed.
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     D["DecisionTrace<br/>Why was it decided?"]
     S["Scope Radar<br/>What changed?"]
@@ -118,7 +118,7 @@ flowchart LR
     D -->|"Decision informs change"| S
     S -->|"Change affects story"| G
     G -.->|"Trace the rationale"| D
-\`\`\`
+```
 
 **Example workflow:** A product decision creates a change request. That request affects two user stories. Instead of keeping three isolated records, the planned toolkit will help a team navigate from the decision to the change and the affected requirements.
 
