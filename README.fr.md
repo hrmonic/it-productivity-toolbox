@@ -1,3 +1,5 @@
+![IT Productivity Toolbox — bannière officielle présentant DecisionTrace, Scope Radar et StoryGap](docs/assets/toolbox-hero.svg)
+
 # IT Productivity Toolbox
 
 **Conserver les raisons. Comprendre les changements. Préciser le travail.**
@@ -21,6 +23,12 @@ L’interface associe des surfaces neutres et des accents indigo, en thèmes cla
 | **StoryGap**      | Que faut-il encore clarifier ?                   | Analyse locale de formulations anglaises/françaises, questions expliquées, notes modifiables et acceptables/ignorables, critères ajoutés explicitement, comparaison avec l’original, exports |
 
 Les relations sont renseignées par l’utilisateur et navigables dans les deux sens. Une décision peut éclairer un changement, qui peut concerner une story. Une ressemblance de texte ne crée aucun lien automatiquement.
+
+## Des analyses aux documents prêts à présenter
+
+![Schéma : DecisionTrace conserve la raison des décisions, Scope Radar évalue les changements et StoryGap clarifie les besoins. Report Studio et Brand Studio sont prévus pour produire des rapports PDF, présentations PowerPoint et fichiers XLSX personnalisés.](docs/assets/project-workflow-fr.svg)
+
+**Disponible aujourd’hui :** DecisionTrace, Scope Radar, StoryGap et leurs liens de traçabilité. **Évolution prévue :** Report Studio et Brand Studio transformeront les analyses en rapports et présentations aux couleurs de l’entreprise. Les exports PDF, PowerPoint et XLSX représentés dans le schéma figurent sur la feuille de route ; ils **ne sont pas disponibles dans la version 0.1**.
 
 ## Essayer le produit
 

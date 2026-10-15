@@ -1,3 +1,5 @@
+![IT Productivity Toolbox — official project banner featuring DecisionTrace, Scope Radar and StoryGap](docs/assets/toolbox-hero.svg)
+
 # IT Productivity Toolbox
 
 **Keep the why. Understand the change. Clarify the work.**
@@ -30,6 +32,12 @@ flowchart LR
 ```
 
 The toolbox complements your delivery workflow. It does not try to replace Jira, Trello, Notion, or a full project-management platform.
+
+## From project analysis to team-ready deliverables
+
+![Connected workflow diagram: DecisionTrace explains decisions, Scope Radar assesses changes, StoryGap clarifies requirements, and the planned Report Studio and Brand Studio will create company-branded PDF, PowerPoint and XLSX documents.](docs/assets/project-workflow-en.svg)
+
+**Available today:** DecisionTrace, Scope Radar, StoryGap and their project traceability links. **Planned next:** Report Studio and Brand Studio will transform project insights into reports and presentations with a customizable company identity. The PDF, PowerPoint and XLSX deliverables shown in the diagram are on the roadmap; they are **not yet available in version 0.1**.
 
 ## Try a complete workflow in a few minutes
 

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="600" viewBox="0 0 1280 600" role="img" aria-labelledby="title desc">
+<title id="title">IT Productivity Toolbox — des décisions aux documents professionnels</title><desc id="desc">DecisionTrace, Scope Radar et StoryGap alimenteront Report Studio et Brand Studio pour produire des rapports PDF, des présentations PowerPoint et des fichiers XLSX personnalisés.</desc>
+<defs>
+<linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B1018"/><stop offset="1" stop-color="#111A28"/></linearGradient>
+<linearGradient id="summary" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1B293B"/><stop offset="1" stop-color="#172232"/></linearGradient>
+<pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0 H0 V36" stroke="#7A91B0" stroke-width=".6" fill="none" opacity=".12"/></pattern>
+</defs>
+<g font-family="Inter, Segoe UI, Arial, sans-serif">
+<rect x="10" y="10" width="1260" height="580" rx="24" fill="url(#background)" stroke="#374252" stroke-width="1.5"/>
+<rect x="11" y="11" width="1258" height="578" rx="23" fill="url(#grid)"/>
+<text x="640" y="57" text-anchor="middle" fill="#9CAFC7" font-size="14" font-weight="700" letter-spacing="2.6">UN WORKFLOW PROJET COHÉRENT</text>
+<rect x="40" y="89" width="376" height="196" rx="18" fill="#151E2B" stroke="#334257" stroke-width="1.5"/>
+<path d="M64 89 h106" stroke="#7BE2C7" stroke-width="3" stroke-linecap="round"/>
+<text x="228" y="120" text-anchor="middle" fill="#A6B7CA" font-size="13" font-weight="700" letter-spacing="1.6">01 / DÉCISIONS</text>
+<circle cx="228" cy="172" r="34" fill="#7BE2C7" fill-opacity=".095" stroke="#7BE2C7" stroke-opacity=".2"/>
+<g transform="translate(228 172)" fill="none" stroke="#7BE2C7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M-14 -12 V12 M-14 -1 H6 V-12 M-14 12 H12 V3"/><circle cx="-14" cy="-14" r="4" fill="#151E2B"/><circle cx="6" cy="-14" r="4" fill="#151E2B"/><circle cx="12" cy="3" r="4" fill="#151E2B"/><circle cx="-14" cy="15" r="4" fill="#151E2B"/></g>
+<text x="228" y="235" text-anchor="middle" fill="#F8FAFD" font-size="25" font-weight="700">DecisionTrace</text>
+<text x="228" y="263" text-anchor="middle" fill="#C3CFDF" font-size="17">Comprendre les décisions</text>
+<rect x="452" y="89" width="376" height="196" rx="18" fill="#151E2B" stroke="#334257" stroke-width="1.5"/>
+<path d="M476 89 h106" stroke="#9FAFFF" stroke-width="3" stroke-linecap="round"/>
+<text x="640" y="120" text-anchor="middle" fill="#A6B7CA" font-size="13" font-weight="700" letter-spacing="1.6">02 / PÉRIMÈTRE</text>
+<circle cx="640" cy="172" r="34" fill="#9FAFFF" fill-opacity=".095" stroke="#9FAFFF" stroke-opacity=".2"/>
+<g transform="translate(640 172)" fill="none" stroke="#9FAFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle r="18"/><circle r="10"/><circle r="3" fill="#9FAFFF" stroke="none"/><path d="M0 -24 V-17 M0 17 V24 M-24 0 H-17 M17 0 H24 M2 -2 L14 -15"/></g>
+<text x="640" y="235" text-anchor="middle" fill="#F8FAFD" font-size="25" font-weight="700">Scope Radar</text>
+<text x="640" y="263" text-anchor="middle" fill="#C3CFDF" font-size="17">Évaluer les impacts</text>
+<rect x="864" y="89" width="376" height="196" rx="18" fill="#151E2B" stroke="#334257" stroke-width="1.5"/>
+<path d="M888 89 h106" stroke="#E8BE82" stroke-width="3" stroke-linecap="round"/>
+<text x="1052" y="120" text-anchor="middle" fill="#A6B7CA" font-size="13" font-weight="700" letter-spacing="1.6">03 / BESOINS</text>
+<circle cx="1052" cy="172" r="34" fill="#E8BE82" fill-opacity=".095" stroke="#E8BE82" stroke-opacity=".2"/>
+<g transform="translate(1052 172)" fill="none" stroke="#E8BE82" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M-21 -14 L-16 -9 L-9 -19 M-3 -13 H21 M-21 3 L-16 8 L-9 -2 M-3 4 H21 M-21 19 L-16 24 L-9 14 M-3 20 H21"/></g>
+<text x="1052" y="235" text-anchor="middle" fill="#F8FAFD" font-size="25" font-weight="700">StoryGap</text>
+<text x="1052" y="263" text-anchor="middle" fill="#C3CFDF" font-size="17">Clarifier les besoins</text>
+<g fill="none" stroke="#72859F" stroke-width="2.2" stroke-linejoin="round">
+<path d="M228 285 V312 H640"/><path d="M640 285 V341"/><path d="M1052 285 V312 H640"/><path d="M633 331 L640 341 L647 331"/>
+</g>
+<rect x="272" y="360" width="736" height="200" rx="20" fill="url(#summary)" stroke="#516379" stroke-width="1.5"/>
+<text x="640" y="391" text-anchor="middle" fill="#80E1CD" font-size="12.5" font-weight="700" letter-spacing="2">À VENIR · REPORTING</text>
+<text x="640" y="431" text-anchor="middle" fill="#F7F9FC" font-size="29" font-weight="750">Report Studio + Brand Studio</text>
+<text x="640" y="470" text-anchor="middle" fill="#C8D7E7" font-size="17">Transformer les analyses en documents professionnels</text>
+<text x="640" y="492" text-anchor="middle" fill="#C8D7E7" font-size="17">personnalisés aux couleurs de votre entreprise.</text>
+<rect x="462" y="512" width="96" height="31" rx="8" fill="#253144" stroke="#42526A"/><text x="510" y="533" text-anchor="middle" font-size="15" font-weight="600" fill="#E5EBF4">PDF</text><rect x="576" y="512" width="130" height="31" rx="8" fill="#253144" stroke="#42526A"/><text x="641" y="533" text-anchor="middle" font-size="15" font-weight="600" fill="#E5EBF4">PowerPoint</text><rect x="724" y="512" width="96" height="31" rx="8" fill="#253144" stroke="#42526A"/><text x="772" y="533" text-anchor="middle" font-size="15" font-weight="600" fill="#E5EBF4">XLSX</text>
+</g></svg>
