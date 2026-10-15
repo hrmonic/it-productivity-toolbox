@@ -2,3 +2,6 @@
 *.png binary
 *.jpg binary
 *.webp binary
+# Preserve downloaded report sample bytes, including CSV record and field newlines.
+docs/examples/fictional-* -text
+docs/examples/*.csv whitespace=cr-at-eol

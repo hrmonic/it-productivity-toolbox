@@ -5,3 +5,5 @@ coverage
 playwright-report
 test-results
 LICENSE
+# Generated exports stay byte-identical to validated downloads; hashes are verified separately.
+docs/examples/fictional-*

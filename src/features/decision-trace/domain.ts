@@ -1,3 +1,4 @@
+import { t } from '../../shared/i18n';
 import {
   decisionContentSchema,
   type Decision,
@@ -17,6 +18,7 @@ export function emptyDecision(): DecisionContent {
     solution: '',
     rationale: '',
     assumptions: '',
+    assumptionsVerified: false,
     constraints: '',
     risks: '',
     references: [],
@@ -49,6 +51,8 @@ export function decisionWarnings(decision: Decision, date = today()) {
   if (!decision.owner.trim()) warnings.push('No owner recorded. Assign someone to follow up.');
   if (!decision.rationale.trim())
     warnings.push('No rationale recorded. Capture why this approach was chosen.');
+  if (decision.assumptions.trim() && !decision.assumptionsVerified)
+    warnings.push('Recorded assumptions have not been verified.');
   if (
     decision.reviewDate &&
     decision.reviewDate < date &&
@@ -62,9 +66,35 @@ export function decisionWarnings(decision: Decision, date = today()) {
 }
 export function decisionMarkdown(decisions: Decision[]) {
   return decisions
-    .map(
-      (d) =>
-        `# ${d.title}\n\nStatus: ${d.status} | Owner: ${d.owner || 'Not recorded'} | Date: ${d.date}\nID: ${d.id}\n\n## Context\n${d.context}\n\n## Selected solution\n${d.solution}\n\n## Rationale\n${d.rationale}\n\n## Alternatives\n${d.alternatives.map((a) => `### ${a.name}\nPros: ${a.pros}\nCons: ${a.cons}`).join('\n\n')}\n\n## Assumptions\n${d.assumptions}\n\n## Constraints\n${d.constraints}\n\n## Risks\n${d.risks}\n\n## Stakeholders\n${d.stakeholders.join(', ')}\n\n## References\n${d.references.join('\n')}\n\nTags: ${d.tags.join(', ')}\nReview: ${d.reviewDate || 'Not scheduled'}\n\n## Revision history\n${d.history.map((h) => `- ${h.at}: ${h.reason}\n  Previous status: ${h.content.status}; previous rationale: ${h.content.rationale}`).join('\n')}`,
-    )
+    .map((d) => {
+      const sections: [string, string][] = [
+        ['Context', d.context],
+        ['Selected solution', d.solution],
+        ['Rationale', d.rationale],
+        [
+          'Alternatives',
+          d.alternatives
+            .map(
+              (a) => `### ${a.name}\n${t('Advantages')}: ${a.pros}\n${t('Trade-offs')}: ${a.cons}`,
+            )
+            .join('\n\n'),
+        ],
+        ['Assumptions', d.assumptions],
+        ['Constraints', d.constraints],
+        ['Known risks', d.risks],
+        ['Stakeholders', d.stakeholders.join(', ')],
+        ['References', d.references.join('\n')],
+        [
+          'Revision history',
+          d.history
+            .map(
+              (h) =>
+                `- ${h.at}: ${h.reason}\n  ${t('Status')}: ${t(h.content.status)}; ${t('Rationale')}: ${h.content.rationale}`,
+            )
+            .join('\n'),
+        ],
+      ];
+      return `# ${d.title}\n\n${t('Status')}: ${t(d.status)} | ${t('Owner')}: ${d.owner || t('Not recorded')} | ${t('Date')}: ${d.date}\nID: ${d.id}\n\n${sections.map(([name, text]) => `## ${t(name)}\n${text || t('Not recorded')}`).join('\n\n')}\n\n${t('Tags')}: ${d.tags.join(', ')}\n${t('Review')}: ${d.reviewDate || t('Not scheduled')}`;
+    })
     .join('\n\n---\n\n');
 }

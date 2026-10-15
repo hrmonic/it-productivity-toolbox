@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-10-15T15:20:12.4000628Z",
+  "renderer": "Microsoft PowerPoint",
+  "applicationVersion": "16.0",
+  "boundTolerancePoints": 2,
+  "results": [
+    {
+      "file": "atlas.pptx",
+      "slides": 28,
+      "textShapes": 338,
+      "overflow": [],
+      "outOfSlide": [],
+      "inputSha256": "5D029293C4E2BDCE25FFCA703ED7D6DB45A402E17405F09FA3FC7563D1E2A476"
+    },
+    {
+      "file": "atlas-fr.pptx",
+      "slides": 28,
+      "textShapes": 341,
+      "overflow": [],
+      "outOfSlide": [],
+      "inputSha256": "A682E243CDB90BE10978B0C9744B758D59C67A4B6A35F5944980E470E6B177F7"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="600" viewBox="0 0 1280 600" role="img" aria-labelledby="title desc">
-<title id="title">IT Productivity Toolbox — from project analysis to shareable deliverables</title><desc id="desc">DecisionTrace, Scope Radar and StoryGap connect with the planned Report Studio and Brand Studio for company-branded PDF, PowerPoint and XLSX deliverables.</desc>
+<title id="title">IT Productivity Toolbox — from project analysis to shareable deliverables</title><desc id="desc">DecisionTrace, Scope Radar and StoryGap connect with Report Studio and Brand Studio for company-branded PDF, PowerPoint and XLSX deliverables.</desc>
 <defs>
 <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B1018"/><stop offset="1" stop-color="#111A28"/></linearGradient>
 <linearGradient id="summary" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1B293B"/><stop offset="1" stop-color="#172232"/></linearGradient>
@@ -34,7 +34,7 @@
 <path d="M228 285 V312 H640"/><path d="M640 285 V341"/><path d="M1052 285 V312 H640"/><path d="M633 331 L640 341 L647 331"/>
 </g>
 <rect x="272" y="360" width="736" height="200" rx="20" fill="url(#summary)" stroke="#516379" stroke-width="1.5"/>
-<text x="640" y="391" text-anchor="middle" fill="#80E1CD" font-size="12.5" font-weight="700" letter-spacing="2">UP NEXT · REPORTING</text>
+<text x="640" y="391" text-anchor="middle" fill="#80E1CD" font-size="12.5" font-weight="700" letter-spacing="2">LOCAL · REPORTING</text>
 <text x="640" y="431" text-anchor="middle" fill="#F7F9FC" font-size="29" font-weight="750">Report Studio + Brand Studio</text>
 <text x="640" y="470" text-anchor="middle" fill="#C8D7E7" font-size="17">Turn project insights into polished, company-branded</text>
 <text x="640" y="492" text-anchor="middle" fill="#C8D7E7" font-size="17">reports and presentations ready to share.</text>

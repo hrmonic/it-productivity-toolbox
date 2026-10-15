@@ -17,7 +17,7 @@ Help IT Project Managers, Product Owners, Scrum Masters, and Product Builders pr
 | Rationale and requirements are disconnected | Create typed links between existing records and follow them from either endpoint                                                                 | Reference validation tests and bidirectional navigation journey |
 | Browser data needs to be portable           | Export complete backups, preview/validate imports, restore as isolated copies                                                                    | Backup round-trip, atomic failure, and browser restore journey  |
 
-English was implemented first; the French interface was added after the English workflows were exercised. Project content is never automatically translated. Export field names and report headings stay in English for a stable interchange contract.
+English was implemented first; the French interface was added after the English workflows were exercised. Project content is never automatically translated. Structured JSON keys remain stable; human-readable exports and report headings are localized. User content retains its original language.
 
 ## Core user stories
 
@@ -57,3 +57,18 @@ See [testing](TESTING.md) for measured results. Passing automated accessibility 
 ## Non-goals for this release
 
 Accounts, team synchronization, permissions enforcement, Gantt charts, schedule predictions, financial forecasting, Jira integration, automatic semantic reasoning, LLM-generated requirements, and offline installation are not shipped. No public hosting deployment is implied by a successful build.
+
+## Analysis-to-document delivery checkpoint
+
+The project review workflow now spans the three tools and two shared studios. User requirements and acceptance evidence are recorded in [Product audit](PRODUCT_AUDIT.md), [User guide](USER_GUIDE.md), [Reporting and branding](REPORTING.md) and [current validation](VALIDATION.md).
+
+| User problem                                                      | Delivered workflow                                                                                             | Evidence                                                                                     |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| A decision changes and its recorded consequences are hard to find | Interactive status/rationale history, rule-specific health and transitive recorded paths                       | Domain path tests and decision browser journey                                               |
+| Scope changes accumulate or affect dependent work                 | Accepted effective-date timeline, transitive dependency review and separate proposal simulation                | Scope domain tests and browser comparison/simulation                                         |
+| Requirements lack observable acceptance scenarios                 | Explicit requirements, categorized Given/When/Then scenarios, coverage links and subjective-term prompts       | Schema/coverage tests and repeated-entry scenario browser journey                            |
+| Project findings need manual reassembly into slides               | Shared normalized composer, source IDs, audience/detail/period selection, actual PDF preview and local formats | All six formats generated and reopened; French PDF/PPTX and native PowerPoint inspection     |
+| Documents need a company identity                                 | Saved project brand profiles, bounded raster logos, color/contrast/font controls and cover compositions        | Logo rejection, persistence/duplication/deletion, backup restore and branded document checks |
+| Meeting notes are lost before formal entry                        | Retained capture draft and explicit proposed-decision/story creation                                           | Capture reload/duplication browser journey                                                   |
+
+No measured productivity gain, market validation, universal accessibility compliance or external integration is claimed. The usability experiment and unresolved P2 scope remain in the roadmap.

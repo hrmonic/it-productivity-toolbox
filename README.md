@@ -1,4 +1,4 @@
-![IT Productivity Toolbox — official project banner featuring DecisionTrace, Scope Radar and StoryGap](docs/assets/toolbox-hero.svg)
+![IT Productivity Toolbox](docs/assets/toolbox-hero.svg)
 
 # IT Productivity Toolbox
 
@@ -10,9 +10,7 @@ Three connected, independently useful tools for IT Project Managers, Scrum Maste
 
 The interface uses a neutral/indigo identity with light and dark themes. The project overview surfaces real review items and recent work; contextual actions, searchable dependency checkboxes and story review filters keep routine tasks direct. See the [design review and UX decisions](docs/DESIGN_REVIEW.md).
 
-![IT Productivity Toolbox overview, captured from the running application with the clearly labelled fictional Atlas project](docs/assets/screenshots/overview.png)
-
-> **Status: functional 0.1 foundation.** DecisionTrace, Scope Radar, StoryGap, project traceability, backups, and English/French interfaces are implemented. This is a browser-local application: there is no cloud synchronization, account service, or public hosted demo announced here. See the [validation record and known boundaries](docs/HANDOFF.md).
+> **Status: functional local development checkpoint.** DecisionTrace, Scope Radar, StoryGap, Report Studio, Brand Studio, traceability, backups, and English/French interfaces are implemented. This is a browser-local application: there is no cloud synchronization, account service, or public hosted demo announced here. See the [validation record and known boundaries](docs/HANDOFF.md).
 
 ## Three tools, one project memory
 
@@ -35,9 +33,9 @@ The toolbox complements your delivery workflow. It does not try to replace Jira,
 
 ## From project analysis to team-ready deliverables
 
-![Connected workflow diagram: DecisionTrace explains decisions, Scope Radar assesses changes, StoryGap clarifies requirements, and the planned Report Studio and Brand Studio will create company-branded PDF, PowerPoint and XLSX documents.](docs/assets/project-workflow-en.svg)
+![Connected workflow diagram: DecisionTrace explains decisions, Scope Radar assesses changes, StoryGap clarifies requirements, and Report Studio and Brand Studio create company-branded PDF, PowerPoint and XLSX documents.](docs/assets/project-workflow-en.svg)
 
-**Available today:** DecisionTrace, Scope Radar, StoryGap and their project traceability links. **Planned next:** Report Studio and Brand Studio will transform project insights into reports and presentations with a customizable company identity. The PDF, PowerPoint and XLSX deliverables shown in the diagram are on the roadmap; they are **not yet available in version 0.1**.
+**Available today:** DecisionTrace, Scope Radar, StoryGap, Report Studio and Brand Studio. Create local PDF reports, editable PowerPoint presentations and XLSX workbooks from project analyses, with a configurable company identity.
 
 ## Try a complete workflow in a few minutes
 
@@ -45,9 +43,18 @@ The toolbox complements your delivery workflow. It does not try to replace Jira,
 2. Open **DecisionTrace → Make data exports self-service**. Read the alternatives and rationale, then follow its link to the accepted CSV export change.
 3. In **Scope Radar**, compare the 16-person-day fictional baseline with 20 accepted person-days. Select **Saved export presets** in the what-if panel: the simulated total changes, while the official total remains unchanged.
 4. Open the linked export story in **StoryGap**. Review a prompt, edit its note, and accept or ignore it. The original story is retained.
-5. Visit **Settings** to export a full JSON backup. Restoration validates the file and creates separate copies with remapped references.
+5. Open **Report Studio**, choose records, audience, format and brand profile, preview the result, then download PDF, editable PowerPoint, XLSX, Markdown, CSV or report-model JSON. **Brand Studio** saves project-scoped logos, colors and document preferences.
+6. Visit **Settings** to export a full JSON backup. Restoration validates the file and creates separate copies with remapped references.
 
 You can instead create a blank project. Projects are isolated. The demo can be reset or deleted without removing other projects.
+
+## Reports with your company identity
+
+**Report Studio** combines selected decisions, scope changes and story refinement into PDF, editable PowerPoint, XLSX, Markdown, CSV or normalized JSON. Choose the audience, period, content, section order and brand profile, then inspect the actual PDF before sharing. Scope charts reuse the displayed calculations; missing data stay explicit.
+
+**Brand Studio** saves multiple profiles per project: validated raster logo, colors with HEX/native picker/palette, contrast guidance, three font roles, headers/footers and five distinct cover compositions. Profiles, acceptance scenarios and quick-capture drafts travel with version 2 backups; version 1 backups still import.
+
+[User guide](docs/USER_GUIDE.md) · [Reporting and branding](docs/REPORTING.md) · [Product audit](docs/PRODUCT_AUDIT.md) · [Design system](docs/DESIGN_SYSTEM.md) · [Internationalization](docs/I18N.md) · [Current validation](docs/VALIDATION.md)
 
 ## Run locally
 
@@ -86,7 +93,7 @@ Projects are stored in **IndexedDB through Dexie**, scoped to the current browse
 
 **Keep backups.** Clearing site data, browser eviction, or changing the application address can make local records unavailable. IndexedDB and downloaded JSON files are **not encrypted**. Apply your organization's information-handling policy before recording sensitive content.
 
-Full backups include histories, baseline versions, changes, stories and links. Imports are limited to 5 MiB and checked for schema and reference integrity before an atomic restore. Existing projects are preserved. Individual report exports are not full restore files.
+Full version 2 backups include histories, baseline versions, changes, stories, links, capture drafts, explicit scenario coverage and brand profiles. Version 1 backups remain importable. Imports are limited to 5 MiB and checked for schema and reference integrity before an atomic restore. Existing projects are preserved. Individual report exports are not full restore files.
 
 ## A deliberately small architecture
 
@@ -100,6 +107,8 @@ src/features/decision-trace/ Decision journal, editor, history and rules
 src/features/scope-radar/    Baselines, change ledger, calculations and simulation
 src/features/story-gap/      Story refinement and deterministic analysis
 src/features/traceability/   Typed links and bidirectional navigation
+src/features/report-studio/  Shared composition, pagination and local document renderers
+src/features/brand-studio/   Validated profiles, raster logos and live previews
 src/shared/                 UI primitives, schemas, data boundary and localization
 ```
 
@@ -117,28 +126,71 @@ pnpm test:e2e
 
 Read [Testing](docs/TESTING.md) and the completed CI runs for actual evidence. No unmeasured coverage percentage, Lighthouse score, complete accessibility certification, or independent security audit is claimed.
 
+## Application Preview
+
+Authentic Chromium viewport captures from the production build with fictional Atlas data. Pixel dimensions equal the configured CSS viewport at `deviceScaleFactor: 1`; these are not full-page crops. See the [dimension/hash manifest](docs/assets/screenshots/manifest.json).
+
+### Responsive — all 9 viewport resolutions
+
+**Desktop** — project overview · 1920 × 1080.
+
+<img src="docs/assets/screenshots/overview-en-1920x1080.png" width="1100" alt="Project overview at 1920 by 1080 with the complete sidebar, author attribution and links to Report Studio and Brand Studio" />
+
+Project overview · English · **1920 × 1080**.
+
+**Ultrawide** — project overview · 3440 × 1440.
+
+<img src="docs/assets/screenshots/overview-en-3440x1440.png" width="1100" alt="Ultrawide project overview with bounded reading widths at 3440 by 1440" />
+
+**Laptop** — project overview · 1440 × 900.
+
+<img src="docs/assets/screenshots/overview-en-1440x900.png" width="900" alt="Laptop project overview at 1440 by 900" />
+
+**Compact desktop** — project overview · 1366 × 768.
+
+<img src="docs/assets/screenshots/overview-en-1366x768.png" width="900" alt="Compact desktop project overview at 1366 by 768" />
+
+**Tablet** — project overview · 1024 × 768 and 768 × 1024.
+
+<img src="docs/assets/screenshots/overview-en-1024x768.png" width="560" alt="Landscape tablet project overview at 1024 by 768" />
+<img src="docs/assets/screenshots/overview-en-768x1024.png" width="340" alt="Portrait tablet project overview at 768 by 1024" />
+
+**Mobile** — project overview · 390 × 844, 360 × 800 and 430 × 932.
+
+<img src="docs/assets/screenshots/overview-en-390x844.png" width="260" alt="Mobile project overview at 390 by 844 with collapsible navigation" />
+<img src="docs/assets/screenshots/overview-en-360x800.png" width="240" alt="Compact mobile project overview at 360 by 800" />
+<img src="docs/assets/screenshots/overview-en-430x932.png" width="285" alt="Large mobile project overview at 430 by 932" />
+
 <details>
-<summary>More authentic screenshots</summary>
+<summary>DecisionTrace, Scope Radar, StoryGap and the studios</summary>
 
-### Scope comparison and what-if analysis
+Decision journal · English · 1920 × 1080.
 
-![Scope Radar with the fictional accepted baseline and a separate simulation area](docs/assets/screenshots/scope.png)
+<img src="docs/assets/screenshots/decisions-en-1920x1080.png" width="1000" alt="DecisionTrace decision journal with status, owner and search filters" />
 
-### Story refinement
+Scope comparison and simulation · English · 1920 × 1080.
 
-![StoryGap source content and calculated review prompts](docs/assets/screenshots/story-analysis.png)
+<img src="docs/assets/screenshots/scope-en-1920x1080.png" width="1000" alt="Scope Radar baseline comparison and a separate proposal simulation" />
 
-### Dark theme
+Story analysis · English · 1920 × 1080.
 
-![The same toolbox overview in dark mode](docs/assets/screenshots/overview-dark.png)
+<img src="docs/assets/screenshots/story-analysis-en-1920x1080.png" width="1000" alt="StoryGap source story and explained local refinement prompts" />
+
+Report Studio · English · 1920 × 1080.
+
+<img src="docs/assets/screenshots/report-studio-en-1920x1080.png" width="1000" alt="Report Studio content selection and real selected-project document layout preview" />
+
+Brand Studio · English · 1920 × 1080.
+
+<img src="docs/assets/screenshots/brand-studio-en-1920x1080.png" width="1000" alt="Brand Studio company identity controls and representative document previews" />
 
 </details>
 
-Screenshots come from the production build using the optional fictional dataset. Regenerate them with `pnpm screenshots`.
+Run `pnpm test:e2e` successfully before `pnpm screenshots`. Screenshot generation requires matching responsive receipts for the current build.
 
 ## Languages and current limits
 
-The interface is available in **English and French** through Settings. Story rules recognize selected English and French formulations. Project content is never translated automatically; demo records remain in English. Export field names and report headings stay in English for interoperability.
+The interface is available in **English and French** through Settings. Story rules recognize selected English and French formulations. Project content is never translated automatically; demo records remain in English. Structured JSON field names stay stable. Module Markdown/CSV headings follow the interface language; Report Studio has an explicit English/French document language.
 
 The first release has no multi-user collaboration, authentication, encryption, external integrations, schedule predictions, or remote AI. Automated browser validation currently targets Chromium. Draft baselines and proposed changes do not have their own edit histories. Large-workspace performance and a full assistive-technology audit remain future work.
 
@@ -154,4 +206,4 @@ Concrete examples of lost decision context, hard-to-explain scope changes, or am
 
 Licensed under the **[Apache License, Version 2.0](LICENSE)**.
 
-Created and maintained by **[Réda Touzani (@hrmonic)](https://github.com/hrmonic)** — connecting business needs, product decisions, and maintainable software.
+Created and maintained by **[Réda Touzani (@hrmonic)](https://github.com/hrmonic)** · [dev@hrmonic.fr](mailto:dev@hrmonic.fr).

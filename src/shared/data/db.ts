@@ -3,11 +3,28 @@ import type { Project } from '../types/models';
 import { now } from '../lib/utils';
 import { validateProject } from './validation';
 
-export const db = new Dexie('it-productivity-toolbox') as Dexie & {
-  projects: EntityTable<Project, 'id'>;
-};
-// Schema versions are additive. Future upgrades must migrate records explicitly.
-db.version(1).stores({ projects: 'id, name, updatedAt' });
+export function createDatabase(name = 'it-productivity-toolbox') {
+  const database = new Dexie(name) as Dexie & { projects: EntityTable<Project, 'id'> };
+  database.version(1).stores({ projects: 'id, name, updatedAt' });
+  // Version 2 also prevents an older build from silently discarding studio data.
+  database
+    .version(2)
+    .stores({ projects: 'id, name, updatedAt' })
+    .upgrade(async (transaction) => {
+      await transaction
+        .table('projects')
+        .toCollection()
+        .modify((record) => {
+          try {
+            Object.assign(record, validateProject(record));
+          } catch {
+            /* Preserve invalid historical records for the existing recovery workflow. */
+          }
+        });
+    });
+  return database;
+}
+export const db = createDatabase();
 
 export async function insertProject(project: Project) {
   await db.projects.add(validateProject(project));

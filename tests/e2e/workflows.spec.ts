@@ -15,14 +15,14 @@ async function project(page: Page, name: string) {
 }
 test('first use creates an isolated project and persists it on reload', async ({ page }) => {
   await page.goto('/');
-  await project(page, 'Recruiter review');
+  await project(page, 'Delivery review');
   await page.reload();
-  await expect(page.getByLabel('Active project')).toContainText('Recruiter review');
+  await expect(page.getByLabel('Active project')).toContainText('Delivery review');
   await page.getByRole('link', { name: 'DecisionTrace 01' }).click();
   await expect(page.getByText('The next decision deserves a record.')).toBeVisible();
   await page.getByRole('link', { name: 'Overview', exact: true }).click();
   await demo(page);
-  await page.getByLabel('Active project').selectOption({ label: 'Recruiter review' });
+  await page.getByLabel('Active project').selectOption({ label: 'Delivery review' });
   await page.getByRole('link', { name: 'DecisionTrace 01' }).click();
   await expect(page.getByText('The next decision deserves a record.')).toBeVisible();
 });
@@ -49,7 +49,10 @@ test('decision creation, meaningful revision, history, filtering, archive and ex
     .fill('The team validated modular boundaries.');
   await page.getByLabel('Reason for this revision').fill('Architecture review completed');
   await page.getByRole('button', { name: 'Save revision' }).click();
-  await page.getByText('Architecture review completed', { exact: true }).click();
+  await page
+    .locator('.history-section')
+    .getByText('Architecture review completed', { exact: true })
+    .click();
   await expect(page.getByText('Independent, testable modules.', { exact: true })).toBeVisible();
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Markdown', exact: true }).click();
@@ -163,7 +166,10 @@ test('explicit links can be created, followed in both directions, and removed', 
   await page.getByLabel('This item…').selectOption('informs');
   await page.getByLabel('Relationship context').fill('A validated relationship for the review.');
   await page.getByRole('button', { name: 'Create link' }).click();
-  await page.getByRole('link', { name: 'Understand the activity timeline' }).click();
+  await page
+    .locator('.related-section')
+    .getByRole('link', { name: 'Understand the activity timeline' })
+    .click();
   await expect(
     page.getByRole('heading', { name: 'Understand the activity timeline', exact: true }),
   ).toBeVisible();
@@ -271,7 +277,7 @@ test('French layouts fit small phones, tablets and desktops', async ({ page }) =
     page.getByRole('link', { name: 'IT Productivity Toolbox', exact: true }),
   ).toBeFocused();
   await page.keyboard.press('Shift+Tab');
-  await expect(page.getByRole('link', { name: 'Documentation', exact: true })).toBeFocused();
+  await expect(page.getByRole('link', { name: 'Apache License 2.0', exact: true })).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(menu).toHaveAttribute('aria-expanded', 'false');
   await expect(menu).toBeFocused();
@@ -398,7 +404,7 @@ test('project overview links to real review items and opens creation directly', 
   await expect(
     page.getByRole('heading', { name: 'Atlas customer portal', exact: true }),
   ).toBeVisible();
-  await expect(page.locator('.attention-rows > a')).toHaveCount(4);
+  await expect(page.locator('.attention-rows > a')).toHaveCount(5);
   await page.getByRole('link', { name: 'New decision', exact: true }).click();
   await expect(page.getByRole('dialog', { name: 'Record a decision' })).toBeVisible();
   await page.getByRole('button', { name: 'Cancel', exact: true }).click();

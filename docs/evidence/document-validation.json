@@ -1,0 +1,24 @@
+[
+  {
+    "file": "atlas",
+    "pdfPages": 13,
+    "pptxSlides": 28,
+    "pdfImages": 1,
+    "pdfChartPage": 5,
+    "nativeChartSlide": 8,
+    "expectedTextPresent": true,
+    "renderedPdfPages": [1, 2, 5, 13],
+    "renderedSlides": [1, 2, 8, 28]
+  },
+  {
+    "file": "atlas-fr",
+    "pdfPages": 13,
+    "pptxSlides": 28,
+    "pdfImages": 1,
+    "pdfChartPage": 5,
+    "nativeChartSlide": 8,
+    "expectedTextPresent": true,
+    "renderedPdfPages": [1, 2, 5, 13],
+    "renderedSlides": [1, 2, 8, 28]
+  }
+]

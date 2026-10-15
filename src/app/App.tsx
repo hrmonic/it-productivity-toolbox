@@ -26,7 +26,7 @@ import { validateProject } from '../shared/data/validation';
 import { demoProject } from '../shared/data/demo';
 import type { Project } from '../shared/types/models';
 import { errorMessage, download } from '../shared/lib/utils';
-import { Badge, Empty, ErrorNotice } from '../shared/ui/primitives';
+import { Empty, ErrorNotice } from '../shared/ui/primitives';
 import { WorkspaceProvider } from './workspace';
 import { readPreference, writePreference } from './preferences';
 import { brand } from './brand';
@@ -40,12 +40,16 @@ const Decisions = lazy(() => import('../features/decision-trace/DecisionTrace'))
 const Scope = lazy(() => import('../features/scope-radar/ScopeRadar'));
 const Stories = lazy(() => import('../features/story-gap/StoryGap'));
 const Traceability = lazy(() => import('../features/traceability/Traceability'));
+const Reports = lazy(() => import('../features/report-studio/ReportStudio'));
+const Brands = lazy(() => import('../features/brand-studio/BrandStudio'));
 const navigation = [
   { to: '/', label: 'Overview', icon: House },
   { to: '/decisions', label: 'DecisionTrace', icon: GitBranch, number: '01' },
   { to: '/scope', label: 'Scope Radar', icon: ListFilter, number: '02' },
   { to: '/stories', label: 'StoryGap', icon: ScanText, number: '03' },
   { to: '/traceability', label: 'Traceability', icon: Layers },
+  { to: '/reports', label: 'Report Studio', icon: BookOpen },
+  { to: '/brands', label: 'Brand Studio', icon: CodeXml },
 ];
 
 function Shell() {
@@ -79,6 +83,10 @@ function Shell() {
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   const location = useLocation();
+  function closeNavigation() {
+    setMobile(false);
+    requestAnimationFrame(() => document.querySelector<HTMLButtonElement>('.mobile-menu')?.focus());
+  }
   const projects = data?.projects ?? [],
     project = projects.find((p) => p.id === activeId) ?? projects[0];
   function select(id: string) {
@@ -90,13 +98,22 @@ function Shell() {
     writePreference('theme', theme);
   }, [theme, resolvedTheme]);
   useEffect(() => {
+    const media = window.matchMedia('(min-width: 761px)');
+    const resize = () => {
+      if (media.matches) setMobile(false);
+    };
+    media.addEventListener('change', resize);
+    return () => media.removeEventListener('change', resize);
+  }, []);
+  useEffect(() => {
     if (!mobile) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     const navigation = document.querySelector<HTMLElement>('.sidebar');
     navigation?.querySelector<HTMLButtonElement>('.mobile-close')?.focus();
     const close = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        setMobile(false);
-        document.querySelector<HTMLButtonElement>('.mobile-menu')?.focus();
+        closeNavigation();
       }
       if (event.key === 'Tab') {
         const controls = navigation?.querySelectorAll<HTMLElement>(
@@ -114,7 +131,10 @@ function Shell() {
       }
     };
     document.addEventListener('keydown', close);
-    return () => document.removeEventListener('keydown', close);
+    return () => {
+      document.removeEventListener('keydown', close);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [mobile]);
   async function openDemo() {
     const existing = projects.find((p) => p.demo);
@@ -184,6 +204,8 @@ function Shell() {
           ['scope', <Scope key={project?.id} />],
           ['stories', <Stories key={project?.id} />],
           ['traceability', <Traceability key={project?.id} />],
+          ['reports', <Reports key={project?.id} />],
+          ['brands', <Brands key={project?.id} />],
         ].map(([path, element]) => (
           <Route
             key={String(path)}
@@ -233,25 +255,32 @@ function Shell() {
       {mobile && (
         <button
           className="mobile-overlay"
+          tabIndex={-1}
           aria-label={t('Close navigation')}
-          onClick={() => setMobile(false)}
+          onClick={closeNavigation}
         />
       )}
-      <aside className={`sidebar ${mobile ? 'is-open' : ''}`}>
-        <Link className="brand" to="/" aria-label={brand.name} onClick={() => setMobile(false)}>
+      <aside
+        id="workspace-navigation"
+        className={`sidebar ${mobile ? 'is-open' : ''}`}
+        role={mobile ? 'dialog' : undefined}
+        aria-modal={mobile || undefined}
+        aria-label={t('Main navigation')}
+      >
+        <Link className="brand" to="/" aria-label={brand.name} onClick={closeNavigation}>
           <BrandIdentity />
         </Link>
         <button
           className="mobile-close icon-button"
           aria-label={t('Close navigation')}
-          onClick={() => setMobile(false)}
+          onClick={closeNavigation}
         >
           <X size={20} />
         </button>
         <div className="sidebar-section-label">{t('WORKSPACE')}</div>
         <nav aria-label={t('Main navigation')}>
           {navigation.map((n) => (
-            <NavLink key={n.to} to={n.to} end={n.to === '/'} onClick={() => setMobile(false)}>
+            <NavLink key={n.to} to={n.to} end={n.to === '/'} onClick={closeNavigation}>
               <n.icon size={18} />
               <span>{t(n.label)}</span>
               {n.number && <small>{n.number}</small>}
@@ -260,12 +289,12 @@ function Shell() {
         </nav>
         <div className="sidebar-rule" />
         <nav aria-label={t('Workspace management')}>
-          <NavLink to="/projects" onClick={() => setMobile(false)}>
+          <NavLink to="/projects" onClick={closeNavigation}>
             <FolderOpen size={18} />
             <span>{t('Projects')}</span>
             <small>{projects.length}</small>
           </NavLink>
-          <NavLink to="/settings" onClick={() => setMobile(false)}>
+          <NavLink to="/settings" onClick={closeNavigation}>
             <SettingsIcon size={18} />
             <span>{t('Settings')}</span>
           </NavLink>
@@ -293,17 +322,29 @@ function Shell() {
             <ArrowUpRight size={13} />
           </a>
           <div className="sidebar-footer">
-            <span>{t('v0.1.0 / Apache 2.0')}</span>
+            <strong>IT Productivity Toolbox</strong>
+            <span>{t('Created by Réda Touzani')}</span>
+            <div>
+              <a href="https://github.com/hrmonic" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <span aria-hidden="true"> · </span>
+              <a href="mailto:dev@hrmonic.fr">{t('Contact')}</a>
+            </div>
+            <a href={`${brand.repository}/blob/main/LICENSE`} target="_blank" rel="noreferrer">
+              Apache License 2.0
+            </a>
           </div>
         </div>
       </aside>
-      <div className="main-shell">
+      <div className="main-shell" inert={mobile}>
         <header className="app-header">
           <div className="header-left">
             <button
               className="icon-button mobile-menu"
               aria-label={t('Open navigation')}
               aria-expanded={mobile}
+              aria-controls="workspace-navigation"
               onClick={() => setMobile(true)}
             >
               <Menu size={21} />
@@ -329,7 +370,6 @@ function Shell() {
             <span className="header-page">{t(pageName)}</span>
           </div>
           <div className="header-right">
-            {project?.demo && <Badge tone="demo">{t('Demo project')}</Badge>}
             <button
               className="icon-button"
               aria-label={t('Toggle color theme')}

@@ -14,6 +14,7 @@ export function validateProject(input: unknown): Project {
       ...p.stories.map((s) => s.id),
       ...p.baselines.map((b) => b.id),
       ...p.relations.map((r) => r.id),
+      ...p.brands.map((b) => b.id),
     ],
     'record',
   );
@@ -69,5 +70,14 @@ export function validateProject(input: unknown): Project {
       s.reviews.map((r) => r.ruleId),
       'suggestion review',
     );
+  for (const s of p.stories) {
+    unique([...s.requirements.map((r) => r.id), ...s.scenarios.map((r) => r.id)], 'refinement');
+    if (
+      s.scenarios.some((c) =>
+        c.requirementIds.some((id) => !s.requirements.some((r) => r.id === id)),
+      )
+    )
+      throw new Error('Scenario coverage must reference a recorded requirement.');
+  }
   return p;
 }

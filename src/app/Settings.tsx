@@ -159,7 +159,7 @@ export default function Settings({
             </select>
             <small>
               {t(
-                'Exports keep stable English field names for interoperability. Your original content is preserved.',
+                'Structured JSON keeps stable field names. Human-readable reports follow the selected language. Your original content is preserved.',
               )}
             </small>
           </label>

@@ -2,7 +2,7 @@
 
 ## Project aggregate
 
-Every `Project` has a UUID, name, description, demo flag, creation/update timestamps, a monotonic revision, and collections of decisions, baselines, changes, stories, and relations. IndexedDB database `it-productivity-toolbox`, schema version 1, contains a `projects` table indexed by ID, name, and update timestamp.
+Every `Project` has a UUID, name, description, demo flag, creation/update timestamps, a monotonic revision, and collections of decisions, baselines, changes, stories, and relations. IndexedDB database `it-productivity-toolbox`, schema version 2, contains a `projects` table indexed by ID, name, and update timestamp.
 
 | Record            | Important fields and behavior                                                                                                                                     |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -28,7 +28,7 @@ Accepted/rejected changes cannot be edited or removed through the repository. Pr
 ```json
 {
   "format": "it-productivity-toolbox",
-  "version": 1,
+  "version": 2,
   "exportedAt": "2026-10-15T12:00:00.000Z",
   "projects": ["Complete project records, not strings in actual backups"]
 }
@@ -38,7 +38,7 @@ The example illustrates the envelope only. Export a real backup from Settings fo
 
 Imports are limited to **5 MiB** before parsing. Validation checks schemas, bounded text/collections, date formats, unique record IDs, baseline membership, dependencies, and relation endpoints. Unsupported versions and extra envelope fields are rejected. Project structures are parsed into the supported schema; undeclared nested properties are discarded. A second validation occurs at the restore boundary.
 
-Restoration is one transaction. Every restored project gets a new project ID/name suffix, fresh object IDs, remapped links/dependencies, and revision zero. Demo status is cleared so imported modifications are treated as user data. No existing project is overwritten.
+Restoration is one transaction. Every restored project gets a new project ID/name suffix, fresh object IDs, remapped links/dependencies, and revision zero. The resettable-demo identity is cleared, but fictional data provenance is retained explicitly in `dataOrigin`; restoring an example must not make it appear to be real project evidence. No existing project is overwritten.
 
 ## Scope calculation contract
 
@@ -54,6 +54,20 @@ Constraint changes do not invent effort. They produce an explicit warning that t
 
 ## Migrations and limits
 
-Database version 1 is declared explicitly. No earlier application database version exists, so no historical migration is claimed as tested. A future version must add a Dexie upgrade migration, a backup version policy, and fixtures covering old-to-new conversion. Do not simply loosen the schema or reset the database.
+Database versions 1 and 2 are declared explicitly. A version 1 to 2 Dexie upgrade adds brand profiles, a nullable capture draft, explicit scenario/requirement collections and assumption-verification defaults. Invalid historical records are preserved for raw recovery. Tests open an actual version 1 IndexedDB fixture and verify the persisted upgrade. Backup imports accept versions 1 and 2 and normalize to version 2; new exports use version 2 so older readers refuse rather than discard studio data. A future incompatible version must add an explicit migration and fixture. Do not simply loosen the schema or reset the database.
 
 Local storage is scoped to the browser and origin, not a user account. It is not encrypted or synchronized. Records are bounded by the Zod schemas; the 5 MiB import limit is not a guaranteed browser storage quota.
+
+## Studio and refinement additions
+
+Brand profiles are bounded to 30 per project and validated by `brandSchema`. Each has independent identity, company/logo, color tokens, three font roles, cover template and header/footer. Normalized PNG logos are bounded by encoded size and intrinsic dimensions. Restoring a copy remaps profile IDs.
+
+A project can retain one quick-capture draft (kind/title/source text). Creating a record from it clears only that draft and creates an explicitly proposed decision or a story for review.
+
+Stories have up to 200 explicit requirements and 200 scenarios. A scenario has a category, Given/When/Then text and requirement IDs. Validation rejects dangling coverage references; restoration remaps both ends. Source-text revisions preserve scenario text and requirements while clearing coverage links and review states. The legacy original/history story content remains intact.
+
+Decision content adds `assumptionsVerified`, defaulting to false in existing/current history records. Its warnings remain rule-specific and do not create a quality score.
+
+Both backup import and export enforce 5 MiB. An oversized export is refused explicitly rather than producing a file this application cannot restore. See [Reporting](REPORTING.md) for the separate normalized report model, date selection and scope snapshot contract.
+
+`dataOrigin` distinguishes recorded and fictional content independently of the resettable-demo flag. Legacy demo records normalize to fictional; copies retain that origin. Project creation/editing offers an explicit example-data checkbox, and Report Studio carries the disclosure into the output.

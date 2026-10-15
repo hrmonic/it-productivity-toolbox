@@ -26,18 +26,21 @@ import { RelatedItems } from '../traceability/RelatedItems';
 import { Badge, Empty, Field, Form, Modal, Notice, PageHeading } from '../../shared/ui/primitives';
 import { download, now } from '../../shared/lib/utils';
 import { label } from '../../shared/lib/format';
+import AcceptanceStudio from './AcceptanceStudio';
 
 function StoryForm({
   story,
+  initial,
   onSave,
   onCancel,
 }: {
   story?: Story;
+  initial?: StoryContent;
   onSave: (content: StoryContent) => Promise<void>;
   onCancel: () => void;
 }) {
   const { project } = useWorkspace();
-  const s = story ?? emptyStory();
+  const s = story ?? initial ?? emptyStory();
   return (
     <Form
       version={project.revision}
@@ -278,6 +281,9 @@ export default function StoryGap() {
           <div className="story-workspace">
             <div className="story-source">
               <article className="paper">
+                <button className="button quiet" onClick={() => setEditing('duplicate')}>
+                  {t('Duplicate story')}
+                </button>
                 <div className="section-heading">
                   <h2>{t('The story')}</h2>
                 </div>
@@ -369,6 +375,7 @@ export default function StoryGap() {
                 </footer>
               </article>
               <RelatedItems entity={{ kind: 'story', id: selected.id }} />
+              <AcceptanceStudio key={selected.id} story={selected} />
             </div>
             <section className="analysis-column">
               <div className="analysis-heading">
@@ -587,12 +594,26 @@ export default function StoryGap() {
       )}
       {editing && (
         <Modal
-          title={editing === 'new' ? t('Bring a story into focus') : t('Refine the story')}
+          title={
+            editing === 'duplicate'
+              ? t('Duplicate story')
+              : editing === 'new'
+                ? t('Bring a story into focus')
+                : t('Refine the story')
+          }
           open
           wide
           onClose={closeEditor}
         >
           <StoryForm
+            initial={
+              editing === 'duplicate' && selected
+                ? {
+                    ...selected,
+                    title: `${selected.title.slice(0, 160)} (${t('copy')})`,
+                  }
+                : undefined
+            }
             story={project.stories.find((s) => s.id === editing)}
             onCancel={closeEditor}
             onSave={async (content) => {

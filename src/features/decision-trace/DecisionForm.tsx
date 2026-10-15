@@ -9,15 +9,18 @@ import { lines, tags } from '../../shared/lib/utils';
 
 export function DecisionForm({
   decision,
+  initial,
   onSave,
   onCancel,
 }: {
   decision?: Decision;
+  initial?: DecisionContent;
   onSave: (content: DecisionContent, reason: string) => Promise<void>;
   onCancel: () => void;
 }) {
   const { project } = useWorkspace();
-  const d = decision ?? emptyDecision();
+  const d = decision ?? initial ?? emptyDecision();
+  const [assumptionsVerified, setAssumptionsVerified] = useState(d.assumptionsVerified);
   const [alternatives, setAlternatives] = useState(
     d.alternatives.map((a, i) => ({ ...a, key: i })),
   );
@@ -37,6 +40,7 @@ export function DecisionForm({
           solution: val(data, 'solution'),
           rationale: val(data, 'rationale'),
           assumptions: val(data, 'assumptions'),
+          assumptionsVerified: data.get('assumptionsVerified') === 'on',
           constraints: val(data, 'constraints'),
           risks: val(data, 'risks'),
           references: lines(val(data, 'references')),
@@ -141,7 +145,28 @@ export function DecisionForm({
             </button>
           </fieldset>
         ))}
-        <Field name="assumptions" label={t('Assumptions')} type="textarea" value={d.assumptions} />
+        <div
+          onChange={(event) => {
+            if (event.target instanceof HTMLTextAreaElement && event.target.name === 'assumptions')
+              setAssumptionsVerified(false);
+          }}
+        >
+          <Field
+            name="assumptions"
+            label={t('Assumptions')}
+            type="textarea"
+            value={d.assumptions}
+          />
+        </div>
+        <label className="checkbox">
+          <input
+            name="assumptionsVerified"
+            type="checkbox"
+            checked={assumptionsVerified}
+            onChange={(event) => setAssumptionsVerified(event.target.checked)}
+          />
+          {t('The recorded assumptions have been verified')}
+        </label>
         <Field name="constraints" label={t('Constraints')} type="textarea" value={d.constraints} />
         <Field name="risks" label={t('Known risks')} type="textarea" value={d.risks} />
         <Field

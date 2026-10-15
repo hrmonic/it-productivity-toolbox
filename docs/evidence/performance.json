@@ -1,0 +1,223 @@
+{
+  "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33",
+  "measuredAt": "2026-10-15T15:21:17.804Z",
+  "node": "v24.14.0",
+  "platform": "win32",
+  "browser": "156.0.8078.4",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "method": "Local loopback production build. Time includes Playwright orchestration from navigation to visible h1. Five actual overview-to-tool transitions per route with matching destination headings; exports include first-use library/font loading and a download event. Not Web Vitals or an internet/user benchmark.",
+  "firstHeadingMs": 115.04,
+  "routes": [
+    {
+      "route": "/decisions",
+      "medianScriptedNavigationMs": 4.36,
+      "samplesMs": [3.98, 4.05, 4.36, 4.38, 784.46]
+    },
+    {
+      "route": "/scope",
+      "medianScriptedNavigationMs": 6.72,
+      "samplesMs": [5.91, 6.45, 6.72, 6.9, 781.97]
+    },
+    {
+      "route": "/stories",
+      "medianScriptedNavigationMs": 3.87,
+      "samplesMs": [3.55, 3.57, 3.87, 3.99, 779.33]
+    },
+    {
+      "route": "/reports",
+      "medianScriptedNavigationMs": 7.12,
+      "samplesMs": [6.48, 7.02, 7.12, 7.99, 783.91]
+    },
+    {
+      "route": "/brands",
+      "medianScriptedNavigationMs": 5.77,
+      "samplesMs": [4.89, 5.31, 5.77, 6.58, 779.36]
+    }
+  ],
+  "exports": [
+    {
+      "format": "pdf",
+      "scriptedDownloadMs": 1129.01,
+      "bytes": 33423
+    },
+    {
+      "format": "pptx",
+      "scriptedDownloadMs": 249.2,
+      "bytes": 474438
+    },
+    {
+      "format": "xlsx",
+      "scriptedDownloadMs": 194.41,
+      "bytes": 11640
+    }
+  ],
+  "resourcesBeforeExports": [
+    {
+      "url": "index-jrMrerg6.js",
+      "transferSize": 21036
+    },
+    {
+      "url": "rolldown-runtime-pP25SEvz.js",
+      "transferSize": 1289
+    },
+    {
+      "url": "react-vendor-mbdiSYqM.js",
+      "transferSize": 81656
+    },
+    {
+      "url": "brand-StaO7NYe.js",
+      "transferSize": 1234
+    },
+    {
+      "url": "workspace-context-CZWZTLrl.js",
+      "transferSize": 38851
+    },
+    {
+      "url": "data-vendor-DcQfI-lh.js",
+      "transferSize": 55482
+    },
+    {
+      "url": "DecisionTrace-HfSAzmva.js",
+      "transferSize": 5585
+    },
+    {
+      "url": "search-wqYv116E.js",
+      "transferSize": 515
+    },
+    {
+      "url": "RelatedItems-DdA1atO8.js",
+      "transferSize": 2002
+    },
+    {
+      "url": "ScopeRadar-y8s8xip9.js",
+      "transferSize": 7416
+    },
+    {
+      "url": "StoryGap-jnMKs6FD.js",
+      "transferSize": 6097
+    },
+    {
+      "url": "domain-7TMkXDdG.js",
+      "transferSize": 1942
+    },
+    {
+      "url": "ReportStudio-DM1kJw64.js",
+      "transferSize": 10860
+    },
+    {
+      "url": "BrandStudio-DukjUpVy.js",
+      "transferSize": 3471
+    }
+  ],
+  "chunks": [
+    {
+      "file": "exceljs.min-iLYEDaNI.js",
+      "bytes": 929405,
+      "gzipBytes": 255524
+    },
+    {
+      "file": "fontkit.es-C1mX0hVT.js",
+      "bytes": 710751,
+      "gzipBytes": 327565
+    },
+    {
+      "file": "es-DnBQzvu-.js",
+      "bytes": 382423,
+      "gzipBytes": 163367
+    },
+    {
+      "file": "pptxgen.es-C9RB4wvM.js",
+      "bytes": 368452,
+      "gzipBytes": 122900
+    },
+    {
+      "file": "react-vendor-mbdiSYqM.js",
+      "bytes": 258834,
+      "gzipBytes": 81356
+    },
+    {
+      "file": "data-vendor-DcQfI-lh.js",
+      "bytes": 182241,
+      "gzipBytes": 55182
+    },
+    {
+      "file": "workspace-context-CZWZTLrl.js",
+      "bytes": 112771,
+      "gzipBytes": 38551
+    },
+    {
+      "file": "index-jrMrerg6.js",
+      "bytes": 65751,
+      "gzipBytes": 20736
+    },
+    {
+      "file": "pako-Ca9fGe_U.js",
+      "bytes": 45095,
+      "gzipBytes": 14238
+    },
+    {
+      "file": "ReportStudio-DM1kJw64.js",
+      "bytes": 30346,
+      "gzipBytes": 10560
+    },
+    {
+      "file": "ScopeRadar-y8s8xip9.js",
+      "bytes": 24674,
+      "gzipBytes": 7116
+    },
+    {
+      "file": "StoryGap-jnMKs6FD.js",
+      "bytes": 17879,
+      "gzipBytes": 5797
+    },
+    {
+      "file": "DecisionTrace-HfSAzmva.js",
+      "bytes": 16791,
+      "gzipBytes": 5285
+    },
+    {
+      "file": "BrandStudio-DukjUpVy.js",
+      "bytes": 9701,
+      "gzipBytes": 3171
+    },
+    {
+      "file": "RelatedItems-DdA1atO8.js",
+      "bytes": 3745,
+      "gzipBytes": 1702
+    },
+    {
+      "file": "domain-7TMkXDdG.js",
+      "bytes": 3349,
+      "gzipBytes": 1642
+    },
+    {
+      "file": "Traceability-BCOvd16J.js",
+      "bytes": 1651,
+      "gzipBytes": 752
+    },
+    {
+      "file": "rolldown-runtime-pP25SEvz.js",
+      "bytes": 989,
+      "gzipBytes": 568
+    },
+    {
+      "file": "brand-StaO7NYe.js",
+      "bytes": 934,
+      "gzipBytes": 630
+    },
+    {
+      "file": "search-wqYv116E.js",
+      "bytes": 215,
+      "gzipBytes": 195
+    },
+    {
+      "file": "__vite-browser-external-CobD5bNO.js",
+      "bytes": 103,
+      "gzipBytes": 116
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { t } from '../../shared/i18n';
 import { storyContentSchema, type Story, type StoryContent } from '../../shared/types/models';
 import { now, uid } from '../../shared/lib/utils';
 
@@ -33,6 +34,8 @@ export function createStory(content: StoryContent): Story {
     original: valid,
     history: [],
     reviews: [],
+    scenarios: [],
+    requirements: [],
   };
 }
 export function reviseStory(previous: Story, content: StoryContent): Story {
@@ -44,6 +47,7 @@ export function reviseStory(previous: Story, content: StoryContent): Story {
     updatedAt: now(),
     reviews: [],
     history: [...previous.history, { at: now(), content: storyContentSchema.parse(previous) }],
+    scenarios: previous.scenarios.map((s) => ({ ...s, requirementIds: [] })),
   };
 }
 // A provider boundary for future opt-in services. The shipped provider is deterministic and local.
@@ -227,12 +231,36 @@ export function analyzeStory(story: StoryContent): Observation[] {
 }
 export function storyMarkdown(story: Story) {
   const questions = analyzeStory(story).filter(
-    (o) => !story.reviews.some((r) => r.ruleId === o.id && r.state === 'ignored'),
+    (o) => !story.reviews.some((r) => r.ruleId === o.id),
   );
-  return `# ${story.title}\n\nID: ${story.id}\n\n## Context\n${story.context}\n\n## User and need\n${story.persona}\n${story.need}\n\n## Value\n${story.value}\n\n## Description\n${story.description}\n\n## Acceptance criteria\n${story.criteria}\n\n## Business rules\n${story.rules}\n\n## Constraints\n${story.constraints}\n\n## Dependencies\n${story.dependencies}\n\n## Accepted refinement notes\n${story.reviews
-    .filter((r) => r.state === 'accepted')
-    .map((r) => `- ${r.text}`)
-    .join(
-      '\n',
-    )}\n\n## Open questions\n${questions.map((o) => `- ${o.suggestion}`).join('\n')}\n\n## Original description\n${story.original.description}\n\nAnalysis: local-rules-v1. Review prompts are not confirmed requirements; INVEST requires team discussion.\n`;
+  const sections: [string, string][] = [
+    ['Context', story.context],
+    ['User / persona', story.persona],
+    ['Need', story.need],
+    ['User value', story.value],
+    ['Description', story.description],
+    ['Acceptance criteria', story.criteria],
+    ['Business rules', story.rules],
+    ['Constraints', story.constraints],
+    ['Dependencies', story.dependencies],
+    [
+      'Confirmed scenarios',
+      story.scenarios
+        .map(
+          (c) =>
+            `${t(c.kind)}\n${t('Given')}: ${c.given}\n${t('When')}: ${c.when}\n${t('Then')}: ${c.then}`,
+        )
+        .join('\n\n'),
+    ],
+    [
+      'Accepted notes',
+      story.reviews
+        .filter((r) => r.state === 'accepted')
+        .map((r) => `- ${r.text}`)
+        .join('\n'),
+    ],
+    ['Open questions', questions.map((o) => `- ${t(o.suggestion)}`).join('\n')],
+    ['Original story', story.original.description],
+  ];
+  return `# ${story.title}\n\nID: ${story.id}\n\n${sections.map(([name, text]) => `## ${t(name)}\n${text || t('Not recorded')}`).join('\n\n')}\n\n${t('Local analysis · rules v1')}\n${t('Review prompts are not confirmed requirements. INVEST requires team discussion.')}`;
 }

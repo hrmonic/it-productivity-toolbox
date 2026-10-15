@@ -19,6 +19,7 @@ import { analyzeStory } from '../features/story-gap/domain';
 import { brand } from './brand';
 import { humanDate } from '../shared/lib/format';
 import { t } from '../shared/i18n';
+import QuickCapture from './QuickCapture';
 
 const tools = [
   {
@@ -135,7 +136,9 @@ export default function Home({
               <ShieldCheck size={16} />
               {t('Local workspace')}
             </span>
-            {project.demo && <Badge tone="demo">{t('Fictional demo')}</Badge>}
+            {project.dataOrigin === 'fictional' && (
+              <Badge tone="demo">{t('Fictional example data')}</Badge>
+            )}
             <span className="context-baseline">
               {baseline
                 ? t('Baseline version {version}', { version: baseline.version })
@@ -226,6 +229,27 @@ export default function Home({
           </Link>
         ))}
       </section>
+      {project ? (
+        <section className="report-bridge">
+          <div>
+            <h2>{t('Turn your analysis into a shared document.')}</h2>
+            <p>
+              {t(
+                'Bring decisions, scope impacts and refinement questions together. Apply your company identity and export a PDF or editable PowerPoint.',
+              )}
+            </p>
+          </div>
+          <div className="studio-toolbar">
+            <QuickCapture key={project.id} />
+            <Link className="button primary" to="/reports">
+              {t('Open Report Studio')}
+            </Link>
+            <Link className="button secondary" to="/brands">
+              {t('Open Brand Studio')}
+            </Link>
+          </div>
+        </section>
+      ) : null}
       {project ? (
         <div className="overview-grid">
           <section className="attention-worklist">

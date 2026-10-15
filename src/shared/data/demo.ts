@@ -10,6 +10,7 @@ export function createProject(name: string, description = ''): Project {
     name: name.trim(),
     description,
     demo: false,
+    dataOrigin: 'recorded',
     createdAt: now(),
     updatedAt: now(),
     revision: 0,
@@ -18,6 +19,8 @@ export function createProject(name: string, description = ''): Project {
     changes: [],
     stories: [],
     relations: [],
+    brands: [],
+    captureDraft: null,
   };
 }
 export function demoProject(): Project {
@@ -26,6 +29,7 @@ export function demoProject(): Project {
     'A fictional delivery team making a customer portal easier to use. Explore the decisions, changes, and stories behind the work.',
   );
   p.demo = true;
+  p.dataOrigin = 'fictional';
   const d = createDecision({
     title: 'Make data exports self-service',
     context:
@@ -50,6 +54,7 @@ export function demoProject(): Project {
     rationale:
       'A focused self-service flow addresses a recurring request without introducing a reporting platform.',
     assumptions: 'The existing account model defines the accessible record scope.',
+    assumptionsVerified: false,
     constraints: 'No changes to the authorization model in this release.',
     risks: 'Large exports may require a later asynchronous workflow.',
     references: [],

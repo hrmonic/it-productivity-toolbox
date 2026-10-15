@@ -1,0 +1,353 @@
+{
+  "recordedAt": "2026-10-15T15:22:19.181564+00:00",
+  "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33",
+  "checks": [
+    {
+      "command": "pnpm check",
+      "exitCode": 0,
+      "unitTestsObserved": 84,
+      "unitFilesObserved": 8,
+      "includes": ["typecheck", "lint --max-warnings 0", "format:check", "test", "build"],
+      "evidence": "Observed local command completion in this development run."
+    },
+    {
+      "command": "node node_modules/@playwright/test/cli.js test --workers=2",
+      "exitCode": 0
+    }
+  ],
+  "browserStats": {
+    "startTime": "2026-10-15T15:17:54.358Z",
+    "duration": 55044.257999999994,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browserTests": [
+    {
+      "title": "all tools remain usable at 1920x1080 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 5421
+    },
+    {
+      "title": "all tools remain usable at 3440x1440 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 6250
+    },
+    {
+      "title": "all tools remain usable at 1440x900 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 5799
+    },
+    {
+      "title": "all tools remain usable at 1366x768 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 5707
+    },
+    {
+      "title": "all tools remain usable at 1024x768 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 5665
+    },
+    {
+      "title": "all tools remain usable at 768x1024 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 5670
+    },
+    {
+      "title": "all tools remain usable at 390x844 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 5935
+    },
+    {
+      "title": "all tools remain usable at 360x800 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 5957
+    },
+    {
+      "title": "all tools remain usable at 430x932 in EN and FR",
+      "outcome": "expected",
+      "durationMs": 5947
+    },
+    {
+      "title": "brand profiles persist, duplicate, delete, validate logos and survive backup restoration",
+      "outcome": "expected",
+      "durationMs": 2653
+    },
+    {
+      "title": "Report Studio produces real local PDF, editable PPTX, XLSX, Markdown, JSON and CSV",
+      "outcome": "expected",
+      "durationMs": 7494
+    },
+    {
+      "title": "quick capture preserves a draft and duplicates require explicit review",
+      "outcome": "expected",
+      "durationMs": 759
+    },
+    {
+      "title": "explicit acceptance scenarios cover requirements and remain linked after reload",
+      "outcome": "expected",
+      "durationMs": 2409
+    },
+    {
+      "title": "studios pass selected automated WCAG rules in both languages and themes",
+      "outcome": "expected",
+      "durationMs": 5322
+    },
+    {
+      "title": "first use creates an isolated project and persists it on reload",
+      "outcome": "expected",
+      "durationMs": 652
+    },
+    {
+      "title": "decision creation, meaningful revision, history, filtering, archive and export",
+      "outcome": "expected",
+      "durationMs": 1383
+    },
+    {
+      "title": "baseline, accepted change and what-if simulation leave official scope intact",
+      "outcome": "expected",
+      "durationMs": 2216
+    },
+    {
+      "title": "StoryGap analyzes, accepts edited notes, preserves source and exports",
+      "outcome": "expected",
+      "durationMs": 995
+    },
+    {
+      "title": "explicit links can be created, followed in both directions, and removed",
+      "outcome": "expected",
+      "durationMs": 806
+    },
+    {
+      "title": "backup and restoration preserve the complete demo in separate copies",
+      "outcome": "expected",
+      "durationMs": 712
+    },
+    {
+      "title": "invalid imports are rejected without changing the workspace",
+      "outcome": "expected",
+      "durationMs": 377
+    },
+    {
+      "title": "mobile navigation, responsive layout and themes work without console errors",
+      "outcome": "expected",
+      "durationMs": 714
+    },
+    {
+      "title": "French layouts fit small phones, tablets and desktops",
+      "outcome": "expected",
+      "durationMs": 3847
+    },
+    {
+      "title": "critical screens pass automated WCAG checks in light and dark themes",
+      "outcome": "expected",
+      "durationMs": 8003
+    },
+    {
+      "title": "French interface and story rules persist without translating project content",
+      "outcome": "expected",
+      "durationMs": 1703
+    },
+    {
+      "title": "keyboard skip link and dialog focus do not change the route",
+      "outcome": "expected",
+      "durationMs": 283
+    },
+    {
+      "title": "an open draft refuses stale writes after another tab saves",
+      "outcome": "expected",
+      "durationMs": 2481
+    },
+    {
+      "title": "project overview links to real review items and opens creation directly",
+      "outcome": "expected",
+      "durationMs": 643
+    },
+    {
+      "title": "scope dependencies can be selected with checkboxes and persist in exports",
+      "outcome": "expected",
+      "durationMs": 1518
+    },
+    {
+      "title": "story review filters separate accepted and ignored notes without editing the source",
+      "outcome": "expected",
+      "durationMs": 556
+    }
+  ],
+  "responsive": [
+    {
+      "width": 1024,
+      "height": 768,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:16.510Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    },
+    {
+      "width": 1366,
+      "height": 768,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:11.565Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:10.840Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:05.004Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    },
+    {
+      "width": 3440,
+      "height": 1440,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:05.739Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:23.174Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:22.426Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:28.374Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "languages": ["en", "fr"],
+      "routes": [
+        "/",
+        "/decisions",
+        "/scope",
+        "/stories",
+        "/traceability",
+        "/reports",
+        "/brands",
+        "/projects",
+        "/settings"
+      ],
+      "passed": true,
+      "checkedAt": "2026-10-15T15:18:17.243Z",
+      "buildHash": "fabbce69b915c775d27bd4fc1315f9ddb8877118ce2ae78ff0733a90e05f7f33"
+    }
+  ],
+  "remoteCIExecuted": false,
+  "published": false
+}

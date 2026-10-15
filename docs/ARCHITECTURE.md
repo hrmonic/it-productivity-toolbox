@@ -26,6 +26,8 @@ src/
     scope-radar/             Baseline/change editors, comparisons and simulation
     story-gap/               Story editor, local analysis and review workflow
     traceability/            Typed links, related-items navigation and register
+    report-studio/           Validated composer, shared layout and lazy local renderers
+    brand-studio/            Profile editor, raster validation and representative previews
   shared/
     data/                    Database, invariants, backup contract and demo fixtures
     i18n/                    Language preference and French message catalog
@@ -64,3 +66,11 @@ Primary references: [Vite guide](https://vite.dev/guide/), [Dexie React tutorial
 ## Error and recovery behavior
 
 Writes surface errors without silently replacing form input. Stale updates are refused. Invalid stored projects are preserved and can be downloaded as raw, explicitly unvalidated recovery data. A storage failure is handled by the application error boundary; no automatic database reset is performed. Unexpected records should be investigated using a copy of recovery data, never by overwriting the sole original.
+
+## Reporting and data compatibility checkpoint
+
+Report composition and layout are shared across modules; PDF/PPTX/XLSX dependencies load only at export. They are deliberately separate chunks. Large export-library warnings remain visible; [measured sizes and local timings](evidence/performance.json) document the cost rather than claim a generic performance score. No remote font CDN or external document-generation API is used.
+
+The database is now version 2. Its additive upgrade preserves existing project records and leaves invalid historical rows available for recovery. Backup version 2 protects the new fields from older backup readers while the current parser accepts version 1 and 2. The migration is tested using a real version 1 fixture in fake IndexedDB.
+
+The implementation uses pdf-lib/fontkit (embedded Noto fonts), PptxGenJS (native text/shapes) and ExcelJS (native cells). Scoped overrides select patched `exceljs > uuid` 11.1.1 and `pptxgenjs > image-size` 2.0.3 after the dependency audit. Export round-trips and native Office checks validate the chosen versions. See [Reporting](REPORTING.md), [Design system](DESIGN_SYSTEM.md) and [Internationalization](I18N.md).

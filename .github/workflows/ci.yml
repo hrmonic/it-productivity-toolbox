@@ -36,6 +36,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Verify types, lint, formatting, domain tests, and production build
         run: pnpm check
+      - name: Audit production dependencies
+        run: pnpm audit --prod
       - name: Install browser
         run: pnpm exec playwright install --with-deps chromium
       - name: Run critical browser and accessibility checks

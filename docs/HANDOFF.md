@@ -1,5 +1,23 @@
 # Development handoff
 
+**Current resume point:** [local studio validation checkpoint](VALIDATION.md), [user guide](USER_GUIDE.md) and [reporting contract](REPORTING.md). Earlier sections below are historical delivery records; their test counts and English-only export boundary are superseded by the current checkpoint. The user explicitly authorized committing and pushing the complete changes to GitHub on 15 October 2026. Hosting deployment is outside this publication.
+
+## Current studio handoff — 15 October 2026
+
+Workspace: `F:\APP\it-productivity-toolbox`. Starting Git revision: `c3aee17`. Before publication, upstream commit `a2befe1` was integrated by fast-forward; its bilingual workflow diagrams are retained and updated to the implemented studio capabilities. The [current validation receipt](VALIDATION.md) records checks completed before the authorized publication. Both README files display all nine viewport captures in their Responsive section. Downloaded report samples retain their exact bytes through Git checkout.
+
+Completed: responsive/keyboard foundations and attribution; decision timeline/health/recorded paths; scope timeline/dependencies; explicit scenarios and coverage; quick capture/duplication; local Report Studio and Brand Studio; database/backup migration; bilingual exports and exact viewport screenshots. The official hero SHA-256 remains `F8E05C86AA21583E0559691D4258F75AC54822C9C3E496BBFDD34AF24F71C1B7`.
+
+Validation: `pnpm check` passed with 84 tests in eight files; 30 Chromium journeys passed, including all nine viewports in both languages and the retained 320 px case. Audit reports no known advisories. Native PowerPoint opened both 28-slide exports with no detected text-box/out-of-slide overflow; both PDF samples have 13 pages. See [machine receipts](evidence/acceptance.json), [Office checks](evidence/powerpoint-validation.json), [document samples](examples/manifest.json) and [screenshot manifest](assets/screenshots/manifest.json).
+
+New entry points: `src/features/report-studio/{model,layout,renderers}.ts`, `ReportStudio.tsx`, `src/features/brand-studio/`, `src/app/QuickCapture.tsx`, `src/shared/types/brand.ts`, `src/shared/data/db.ts` version 2. Domain additions are in `traceability/impact.ts`, `scope-radar/insights.ts`, `story-gap/coverage.ts` and the corresponding components. [Technical decisions](TECHNICAL_DECISIONS.md) describe the trade-offs.
+
+Reproduce: `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm test:e2e`, `pnpm audit --json`, `pnpm screenshots`, `node scripts/verify-documentation.mjs`. Optional local measurements: `node scripts/measure-performance.mjs`. Windows with installed PowerPoint: `./scripts/verify-office.ps1` after the browser export journey. Tests use isolated contexts; never run reset/delete actions against a user’s sole real project for evidence collection.
+
+Known boundaries: Chromium-focused automated coverage; no complete screen-reader/device audit, tagged PDF or universal font coverage; export libraries remain large but lazy; cover templates share content-page layouts; large/quota-constrained workspace measurements remain pending. Older builds cannot open the upgraded database. Keep backups; no migration deletes invalid recovery rows. Generated example exports are hash-verified and kept byte-identical to downloads.
+
+Next action: read the [Quality checks runs](https://github.com/hrmonic/it-productivity-toolbox/actions/workflows/ci.yml) for the published revision, then one observed steering-review usability session with fictional content, using the bounded protocol in [Product audit](PRODUCT_AUDIT.md). External integrations and further layouts remain prioritized roadmap work.
+
 ## Delivery checkpoint — 15 October 2026
 
 The repository began with an English/French product presentation and Apache 2.0 license. The implementation now contains the three functional tools, project isolation, optional fictional demo, persistent data, explicit relationships, portable backups, two interface languages, themes and automated quality checks. The original license and hero artwork are preserved.

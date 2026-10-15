@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { brandSchema } from './brand';
 
 const text = z.string().max(30_000);
 const title = z.string().trim().min(1).max(180);
@@ -19,6 +20,7 @@ export const decisionContentSchema = z.object({
   solution: text,
   rationale: text,
   assumptions: text,
+  assumptionsVerified: z.boolean().default(false),
   constraints: text,
   risks: text,
   references: z
@@ -101,6 +103,20 @@ export const storySchema = storyContentSchema.extend({
   original: storyContentSchema,
   history: z.array(z.object({ at: timestamp, content: storyContentSchema })).max(500),
   reviews: z.array(suggestionReviewSchema).max(200),
+  scenarios: z
+    .array(
+      z.object({
+        id,
+        kind: z.enum(['nominal', 'error', 'boundary', 'permission', 'constraint']),
+        given: text,
+        when: text,
+        then: text,
+        requirementIds: z.array(id).max(200),
+      }),
+    )
+    .max(200)
+    .default([]),
+  requirements: z.array(z.object({ id, text })).max(200).default([]),
 });
 export type Story = z.infer<typeof storySchema>;
 export type StoryContent = z.infer<typeof storyContentSchema>;
@@ -113,25 +129,38 @@ export const relationSchema = z.object({
   createdAt: timestamp,
 });
 export type Relation = z.infer<typeof relationSchema>;
-export const projectSchema = z.object({
-  id,
-  name: title,
-  description: text,
-  demo: z.boolean(),
-  createdAt: timestamp,
-  updatedAt: timestamp,
-  revision: z.number().int().nonnegative(),
-  decisions: z.array(decisionSchema).max(2000),
-  baselines: z.array(baselineSchema).max(200),
-  changes: z.array(changeSchema).max(5000),
-  stories: z.array(storySchema).max(2000),
-  relations: z.array(relationSchema).max(10_000),
-});
+export const projectSchema = z
+  .object({
+    id,
+    name: title,
+    description: text,
+    demo: z.boolean(),
+    dataOrigin: z.enum(['recorded', 'fictional']).optional(),
+    createdAt: timestamp,
+    updatedAt: timestamp,
+    revision: z.number().int().nonnegative(),
+    decisions: z.array(decisionSchema).max(2000),
+    baselines: z.array(baselineSchema).max(200),
+    changes: z.array(changeSchema).max(5000),
+    stories: z.array(storySchema).max(2000),
+    relations: z.array(relationSchema).max(10_000),
+    brands: z.array(brandSchema).max(30).default([]),
+    captureDraft: z
+      .object({ kind: z.enum(['decision', 'story']), title: z.string().max(180), text })
+      .nullable()
+      .default(null),
+  })
+  .transform((project) => ({
+    ...project,
+    dataOrigin: project.demo
+      ? ('fictional' as const)
+      : (project.dataOrigin ?? ('recorded' as const)),
+  }));
 export type Project = z.infer<typeof projectSchema>;
 export const backupSchema = z
   .object({
     format: z.literal('it-productivity-toolbox'),
-    version: z.literal(1),
+    version: z.union([z.literal(1), z.literal(2)]).transform(() => 2 as const),
     exportedAt: timestamp,
     projects: z.array(projectSchema).min(1).max(100),
   })

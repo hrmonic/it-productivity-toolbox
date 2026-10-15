@@ -16,9 +16,18 @@ import type { Project } from '../shared/types/models';
 import { db, deleteProject, insertProject, saveProject } from '../shared/data/db';
 import { createProject, demoProject } from '../shared/data/demo';
 import { exportBackup } from '../shared/data/backup';
-import { download } from '../shared/lib/utils';
+import { download, errorMessage } from '../shared/lib/utils';
 import { humanDate } from '../shared/lib/format';
-import { Badge, Confirm, Empty, Field, Form, Modal, PageHeading } from '../shared/ui/primitives';
+import {
+  Badge,
+  Confirm,
+  Empty,
+  ErrorNotice,
+  Field,
+  Form,
+  Modal,
+  PageHeading,
+} from '../shared/ui/primitives';
 
 export function CreateProject({
   onClose,
@@ -39,6 +48,7 @@ export function CreateProject({
         onCancel={onClose}
         onSave={async (data) => {
           const p = createProject(val(data, 'name'), val(data, 'description'));
+          p.dataOrigin = data.get('fictional') === 'on' ? 'fictional' : 'recorded';
           await insertProject(p);
           onCreated(p.id);
           onClose();
@@ -56,6 +66,10 @@ export function CreateProject({
           type="textarea"
           placeholder={t('What are you trying to achieve?')}
         />
+        <label className="checkbox">
+          <input name="fictional" type="checkbox" />
+          {t('This project contains fictional example data')}
+        </label>
       </Form>
     </Modal>
   );
@@ -76,6 +90,7 @@ export default function Projects({
   busy: boolean;
 }) {
   const navigate = useNavigate();
+  const [error, setError] = useState('');
   const [deleting, setDeleting] = useState<Project>(),
     [resetting, setResetting] = useState<Project>(),
     [editing, setEditing] = useState<Project>();
@@ -95,6 +110,7 @@ export default function Projects({
           'Separate contexts. Connected thinking. Each project has its own records and relationships.',
         )}
       </PageHeading>
+      {error && <ErrorNotice>{error}</ErrorNotice>}
       {!projects.length ? (
         <Empty
           title={t('Your workspace starts here.')}
@@ -112,7 +128,9 @@ export default function Projects({
                   <FolderOpen size={23} />
                 </span>
                 <div className="inline-actions">
-                  {p.demo && <Badge tone="demo">{t('Fictional demo')}</Badge>}
+                  {p.dataOrigin === 'fictional' && (
+                    <Badge tone="demo">{t('Fictional example data')}</Badge>
+                  )}
                   {p.id === activeId && <Badge tone="accepted">{t('Active')}</Badge>}
                 </div>
               </div>
@@ -153,9 +171,14 @@ export default function Projects({
                   <button
                     className="icon-button"
                     aria-label={t(`Back up ${p.name}`)}
-                    onClick={() =>
-                      download('toolbox-project.json', exportBackup([p]), 'application/json')
-                    }
+                    onClick={() => {
+                      try {
+                        setError('');
+                        download('toolbox-project.json', exportBackup([p]), 'application/json');
+                      } catch (e) {
+                        setError(errorMessage(e));
+                      }
+                    }}
                   >
                     <Download size={16} />
                   </button>
@@ -240,6 +263,8 @@ export default function Projects({
                 ...current,
                 name: val(data, 'name'),
                 description: val(data, 'description'),
+                dataOrigin:
+                  current.demo || data.get('fictional') === 'on' ? 'fictional' : 'recorded',
               });
               setEditing(undefined);
             }}
@@ -251,6 +276,15 @@ export default function Projects({
               type="textarea"
               value={editing.description}
             />
+            <label className="checkbox">
+              <input
+                name="fictional"
+                type="checkbox"
+                defaultChecked={editing.dataOrigin === 'fictional'}
+                disabled={editing.demo}
+              />
+              {t('This project contains fictional example data')}
+            </label>
           </Form>
         </Modal>
       )}

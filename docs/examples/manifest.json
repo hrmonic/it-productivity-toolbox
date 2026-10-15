@@ -1,0 +1,42 @@
+[
+  {
+    "file": "fictional-atlas.pdf",
+    "sha256": "9b41e0e8c250da99fea6245803074c72a3c14951dd22579a303c343ea7f4ad70",
+    "fictional": true
+  },
+  {
+    "file": "fictional-atlas.pptx",
+    "sha256": "5d029293c4e2bdce25ffca703ed7d6db45a402e17405f09fa3fc7563d1e2a476",
+    "fictional": true
+  },
+  {
+    "file": "fictional-atlas.xlsx",
+    "sha256": "15badd9878ea39f62a26ba79fc73d0928b8ab95f3351cf880f3ea517b8dc98d0",
+    "fictional": true
+  },
+  {
+    "file": "fictional-atlas.md",
+    "sha256": "2c8ad878ca7b403ca8880ad208cfe2eb6d10c474a22796c159518bef83116431",
+    "fictional": true
+  },
+  {
+    "file": "fictional-atlas.json",
+    "sha256": "8ab5dd9bc914af209e4386aef4d6cb9a26889ccfa3b686ec3ab8bd93b54a9dfd",
+    "fictional": true
+  },
+  {
+    "file": "fictional-atlas.csv",
+    "sha256": "e51263758d6b64aef16035ed57637a2ee45aa2278246d23b974638f9c2a1d955",
+    "fictional": true
+  },
+  {
+    "file": "fictional-atlas-fr.pdf",
+    "sha256": "a069bb02144a92bf314950a9ab65d6a579d6b111aff5930337bfab1691023623",
+    "fictional": true
+  },
+  {
+    "file": "fictional-atlas-fr.pptx",
+    "sha256": "a682e243cdb90be10978b0c9744b758d59c67a4b6a35f5944980e470e6b177f7",
+    "fictional": true
+  }
+]

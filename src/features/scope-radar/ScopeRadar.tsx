@@ -1,4 +1,4 @@
-import { t } from '../../shared/i18n';
+import { getLanguage, t } from '../../shared/i18n';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
@@ -25,6 +25,7 @@ import {
 import { RelatedItems } from '../traceability/RelatedItems';
 import { download, now } from '../../shared/lib/utils';
 import { humanDate, label } from '../../shared/lib/format';
+import ScopeInsights from './ScopeInsights';
 
 export default function ScopeRadar() {
   const { project, save } = useWorkspace();
@@ -46,7 +47,7 @@ export default function ScopeRadar() {
   const metric = (value: number | null | undefined, signed = false) =>
     value === null || value === undefined
       ? t('Unavailable')
-      : `${signed && value > 0 ? '+' : ''}${Number(value.toFixed(2))}`;
+      : `${signed && value > 0 ? '+' : ''}${new Intl.NumberFormat(getLanguage(), { maximumFractionDigits: 2 }).format(value)}`;
   return (
     <>
       <PageHeading
@@ -433,6 +434,7 @@ export default function ScopeRadar() {
               )}
             </section>
           </div>
+          <ScopeInsights baseline={baseline} changes={changes} simulation={simulation} />
           {result.alerts.length > 0 && (
             <section className="attention-panel">
               <div className="section-heading">

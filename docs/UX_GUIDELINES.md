@@ -2,7 +2,7 @@
 
 ## Identity and hierarchy
 
-The toolbox uses neutral surfaces, an indigo action/selection accent, and system sans-serif type throughout. The light theme has a pale workspace sidebar; the dark theme uses charcoal surfaces and a lighter indigo accent. Readable record text takes priority over decorative typography. All fonts are local system fallbacks; the application makes no font-provider requests. Brand identity is centralized in `src/app/brand.ts` and `BrandIdentity.tsx`. The favicon and brand mark use three connected nodes to represent the tools and their traceable relationships.
+The toolbox uses neutral surfaces, an indigo action/selection accent, and system sans-serif type throughout. The light theme has a pale workspace sidebar; the dark theme uses charcoal surfaces and a lighter indigo accent. Readable record text takes priority over decorative typography. The interface uses system font fallbacks; PDF exports load bundled OFL-licensed Noto fonts. No external font-provider request is made. Brand identity is centralized in `src/app/brand.ts` and `BrandIdentity.tsx`. The favicon and brand mark use three connected nodes to represent the tools and their traceable relationships.
 
 CSS variables in `src/styles.css` define background, surfaces, text, borders, accents, and semantic tones for light and dark themes. `src/workspace.css` contains the workspace overview, brand, review controls, and responsive refinements. Indigo identifies actions and selection; blue, amber, and red support labelled status and review context. Keep both themes equivalent in function and readable contrast. Switch theme colors together: interpolating backgrounds while text changes immediately can briefly destroy contrast. Do not add decorative dashboards, unsupported metrics, or status colors without text labels.
 
@@ -18,9 +18,9 @@ The [design review](DESIGN_REVIEW.md) records observed friction, reference sourc
 
 ## Writing and localization
 
-Use concise, actionable English source messages. Add a French catalog entry for each message. The catalog coverage test checks static translation calls and extracted messages. Names, project descriptions, original stories, recorded risks, and other user content remain untouched. Stable export field names and report headings remain in English.
+Use concise, actionable English source messages. Add a French catalog entry for each message. The catalog coverage test checks static translation calls and extracted messages. Names, project descriptions, original stories, recorded risks, and other user content remain untouched. Structured JSON keys remain stable; human-readable module/report headings follow the selected language.
 
-Do not call suggestions “AI” or a “quality score.” Use “review question,” “rule,” “unknown,” and “estimate” precisely. Status reflects the recorded value; storage does not imply approval. Fictional demo context stays visible in the project selector and header.
+Do not call suggestions “AI” or a “quality score.” Use “review question,” “rule,” “unknown,” and “estimate” precisely. Status reflects the recorded value; storage does not imply approval. Fictional context stays visible in the project selector/content and report output, including after restoration. The upper-right demo-project badge is removed.
 
 ## Interaction and accessibility
 
@@ -38,3 +38,5 @@ Automated axe checks cover selected WCAG 2.0/2.1/2.2 A/AA rules on the tested sc
 ## Empty, failure and recovery states
 
 No project: offer a blank project or optional demo. No record: explain the next useful action. No search result: suggest changing filters. Unknown estimate: identify missing inputs. Storage error: preserve data and show the error. Invalid stored record: offer explicitly unvalidated recovery export, never automatic deletion.
+
+For the current studio components and responsive foundations, see [Design system](DESIGN_SYSTEM.md) and [Reporting](REPORTING.md).

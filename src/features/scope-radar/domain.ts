@@ -1,3 +1,4 @@
+import { getLanguage, t } from '../../shared/i18n';
 import type { Baseline, Change, Deliverable, Project } from '../../shared/types/models';
 import { csv } from '../../shared/lib/utils';
 
@@ -104,16 +105,38 @@ export function calculateScope(
 export function scopeMarkdown(baseline: Baseline, changes: Change[]) {
   const r = calculateScope(baseline, changes);
   const value = (n: number | null) =>
-    n === null ? 'Estimate unavailable' : `${n} ${baseline.unit}`;
-  return `# Scope report\n\nBaseline v${baseline.version} · ${baseline.date}\nObjective: ${baseline.objective}\nStatus: ${baseline.frozenAt ? 'Frozen' : 'Draft'}\n\nInitial effort: ${value(r.initial)}\nCurrent effort: ${value(r.current)}\nDelta: ${value(r.delta)}\nChange: ${r.percent === null ? 'Unavailable (missing estimate or zero baseline)' : `${r.percent.toFixed(1)}%`}\n\n## Current deliverables\n${r.items.map((i) => `- ${i.title}: ${value(i.estimate)} (${i.priority})`).join('\n')}\n\n## Change register\n${changes
-    .filter((c) => c.baselineId === baseline.id)
-    .map(
-      (c) =>
-        `- ${c.date} | ${c.status} | ${c.type} | ${c.title}\n  Why: ${c.justification}\n  Author: ${c.author}\n  Risks: ${c.risks || 'Not recorded'}`,
-    )
-    .join(
-      '\n',
-    )}\n\n## Attention points (rule-based)\n${r.alerts.map((a) => `- ${a}`).join('\n') || 'None identified by the implemented rules.'}\n\n## Missing estimates\n${r.missing.join('\n') || 'None.'}\n`;
+    n === null
+      ? t('Unavailable')
+      : `${new Intl.NumberFormat(getLanguage(), { maximumFractionDigits: 2 }).format(n)} ${t(baseline.unit === 'days' ? 'person-days' : 'story points')}`;
+  const sections: [string, string][] = [
+    ['Objective', baseline.objective],
+    ['Assumptions', baseline.assumptions],
+    ['Constraints', baseline.constraints],
+    ['Initial effort · estimate', value(r.initial)],
+    ['Current effort · estimate', value(r.current)],
+    ['Effort change · estimate', value(r.delta)],
+    [
+      'Current deliverables',
+      r.items.map((i) => `- ${i.title}: ${value(i.estimate)} (${t(i.priority)})`).join('\n'),
+    ],
+    [
+      'Change register',
+      changes
+        .filter((c) => c.baselineId === baseline.id)
+        .map(
+          (c) =>
+            `- ${c.date} | ${t(c.status)} | ${t(c.type)} | ${c.title}\n  ${t('Justification')}: ${c.justification}\n  ${t('Author')}: ${c.author}\n  ${t('Known risks')}: ${c.risks || t('Not recorded')}`,
+        )
+        .join('\n'),
+    ],
+    [
+      'Attention points',
+      r.alerts.map((a) => `- ${t(a)}`).join('\n') ||
+        t('No attention points identified by the implemented rules.'),
+    ],
+    ['Missing estimates', r.missing.map((m) => t(m)).join('\n') || t('None')],
+  ];
+  return `# ${t('Scope Impact Report')}\n\n${t('Baseline')} v${baseline.version} · ${baseline.date}\n${t('Status')}: ${t(baseline.frozenAt ? 'Frozen' : 'Draft')}\n\n${sections.map(([name, text]) => `## ${t(name)}\n${text || t('Not recorded')}`).join('\n\n')}`;
 }
 export function changesCsv(changes: Change[]) {
   return csv([
@@ -132,14 +155,14 @@ export function changesCsv(changes: Change[]) {
       'Priority',
       'Dependencies',
       'Risks',
-    ],
+    ].map((heading) => t(heading)),
     ...changes.map((c) => [
       c.id,
       c.baselineId,
       c.date,
       c.title,
-      c.type,
-      c.status,
+      t(c.type),
+      t(c.status),
       c.author,
       c.description,
       c.justification,

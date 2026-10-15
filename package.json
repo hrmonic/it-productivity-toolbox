@@ -29,10 +29,14 @@
     "screenshots": "pnpm build && node scripts/capture-screenshots.mjs"
   },
   "dependencies": {
+    "@pdf-lib/fontkit": "1.1.1",
     "@radix-ui/react-dialog": "1.3.1",
     "dexie": "4.4.6",
     "dexie-react-hooks": "4.4.0",
+    "exceljs": "4.4.0",
     "lucide-react": "1.57.0",
+    "pdf-lib": "1.17.1",
+    "pptxgenjs": "4.0.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-router-dom": "7.18.4",
@@ -56,6 +60,7 @@
     "fake-indexeddb": "6.2.5",
     "globals": "17.13.0",
     "jsdom": "27.4.0",
+    "jszip": "3.10.2",
     "prettier": "3.9.10",
     "typescript": "5.9.3",
     "typescript-eslint": "8.71.2",

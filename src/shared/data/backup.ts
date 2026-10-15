@@ -7,11 +7,14 @@ export const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
 export function exportBackup(projects: Project[]): string {
   const backup: Backup = {
     format: 'it-productivity-toolbox',
-    version: 1,
+    version: 2,
     exportedAt: now(),
     projects: projects.map(validateProject),
   };
-  return JSON.stringify(backupSchema.parse(backup), null, 2);
+  const content = JSON.stringify(backupSchema.parse(backup), null, 2);
+  if (new TextEncoder().encode(content).byteLength > MAX_IMPORT_BYTES)
+    throw new Error('The backup exceeds the 5 MiB import limit.');
+  return content;
 }
 export function parseBackup(content: string): Backup {
   if (new TextEncoder().encode(content).byteLength > MAX_IMPORT_BYTES)
@@ -24,7 +27,9 @@ export function parseBackup(content: string): Backup {
   }
   const result = backupSchema.safeParse(input);
   if (!result.success)
-    throw new Error('Unsupported or invalid backup. Expected Toolbox backup format version 1.');
+    throw new Error(
+      'Unsupported or invalid backup. Expected Toolbox backup format version 1 or 2.',
+    );
   result.data.projects.forEach(validateProject);
   if (new Set(result.data.projects.map((p) => p.id)).size !== result.data.projects.length)
     throw new Error('Duplicate project identifiers in backup.');
@@ -53,6 +58,14 @@ export function copyProject(project: Project): Project {
   }
   for (const d of copy.decisions) d.id = remap(d.id);
   for (const s of copy.stories) s.id = remap(s.id);
+  for (const b of copy.brands) b.id = remap(b.id);
+  for (const s of copy.stories) {
+    for (const r of s.requirements) r.id = remap(r.id);
+    for (const scenario of s.scenarios) {
+      scenario.id = remap(scenario.id);
+      scenario.requirementIds = scenario.requirementIds.map(remap);
+    }
+  }
   for (const c of copy.changes) {
     c.id = remap(c.id);
     c.baselineId = remap(c.baselineId);

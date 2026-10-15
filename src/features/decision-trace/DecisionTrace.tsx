@@ -17,6 +17,7 @@ import {
 } from '../../shared/ui/primitives';
 import { download } from '../../shared/lib/utils';
 import { humanDate, label } from '../../shared/lib/format';
+import { DecisionInsights } from './DecisionInsights';
 
 export default function DecisionTrace() {
   const { project, save } = useWorkspace();
@@ -102,6 +103,9 @@ export default function DecisionTrace() {
                 {selected.archived && <Badge>{t('Archived')}</Badge>}
               </div>
               <div className="record-actions">
+                <button className="button quiet" onClick={() => setEditing('duplicate')}>
+                  {t('Duplicate as proposal')}
+                </button>
                 <button
                   className="button quiet"
                   onClick={() =>
@@ -222,6 +226,7 @@ export default function DecisionTrace() {
             </article>
             <aside>
               <RelatedItems entity={{ kind: 'decision', id: selected.id }} />
+              <DecisionInsights decision={selected} />
             </aside>
           </div>
         </>
@@ -359,7 +364,13 @@ export default function DecisionTrace() {
       )}
       {editing && (
         <Modal
-          title={editing === 'new' ? t('Record a decision') : t('Revise decision')}
+          title={
+            editing === 'duplicate'
+              ? t('Duplicate as proposal')
+              : editing === 'new'
+                ? t('Record a decision')
+                : t('Revise decision')
+          }
           description={t(
             'Status is always explicit. Saving a proposed decision does not approve it.',
           )}
@@ -368,6 +379,15 @@ export default function DecisionTrace() {
           onClose={closeEditor}
         >
           <DecisionForm
+            initial={
+              editing === 'duplicate' && selected
+                ? {
+                    ...selected,
+                    title: `${selected.title.slice(0, 160)} (${t('copy')})`,
+                    status: 'proposed',
+                  }
+                : undefined
+            }
             decision={project.decisions.find((d) => d.id === editing)}
             onCancel={closeEditor}
             onSave={async (content, reason) => {

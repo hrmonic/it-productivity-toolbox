@@ -34,7 +34,7 @@
 <path d="M228 285 V312 H640"/><path d="M640 285 V341"/><path d="M1052 285 V312 H640"/><path d="M633 331 L640 341 L647 331"/>
 </g>
 <rect x="272" y="360" width="736" height="200" rx="20" fill="url(#summary)" stroke="#516379" stroke-width="1.5"/>
-<text x="640" y="391" text-anchor="middle" fill="#80E1CD" font-size="12.5" font-weight="700" letter-spacing="2">À VENIR · REPORTING</text>
+<text x="640" y="391" text-anchor="middle" fill="#80E1CD" font-size="12.5" font-weight="700" letter-spacing="2">REPORTING LOCAL</text>
 <text x="640" y="431" text-anchor="middle" fill="#F7F9FC" font-size="29" font-weight="750">Report Studio + Brand Studio</text>
 <text x="640" y="470" text-anchor="middle" fill="#C8D7E7" font-size="17">Transformer les analyses en documents professionnels</text>
 <text x="640" y="492" text-anchor="middle" fill="#C8D7E7" font-size="17">personnalisés aux couleurs de votre entreprise.</text>
