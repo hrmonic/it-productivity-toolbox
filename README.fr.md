@@ -22,6 +22,10 @@ L’interface associe des surfaces neutres et des accents indigo, en thèmes cla
 
 Les relations sont renseignées par l’utilisateur et navigables dans les deux sens. Une décision peut éclairer un changement, qui peut concerner une story. Une ressemblance de texte ne crée aucun lien automatiquement.
 
+### Guide pratique : contrôler les comptes rendus préparés par une IA
+
+Pour transformer un brouillon de réunion en décisions réellement traçables, consultez [la méthode de vérification en cinq étapes](docs/AI_MEETING_DECISIONS.fr.md) : scénario fictif, grille de contrôle, prompt et passage de la décision au changement de périmètre. Le guide renvoie à une [fiche pratique d’IA du Jour](https://iadujour.fr/cas/compte-rendu-reunion-plan-actions.html). Il s’agit d’une ressource pédagogique complémentaire, et non d’une intégration d’IA à l’application.
+
 ## Des analyses aux documents prêts à présenter
 
 ![Schéma : DecisionTrace conserve la raison des décisions, Scope Radar évalue les changements et StoryGap clarifie les besoins. Report Studio et Brand Studio produisent des rapports PDF, présentations PowerPoint et fichiers XLSX personnalisés.](docs/assets/project-workflow-fr.svg)
