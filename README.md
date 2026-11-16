@@ -31,6 +31,10 @@ flowchart LR
 
 The toolbox complements your delivery workflow. It does not try to replace Jira, Trello, Notion, or a full project-management platform.
 
+### Companion field guide: review AI-generated meeting notes
+
+If you use an AI assistant to draft meeting minutes, [this practical checklist](docs/AI_MEETING_DECISIONS.md) explains how to keep confirmed decisions separate from proposals, scope changes and missing acceptance criteria. It includes a fictional example, a review grid and a reusable prompt, with an independently published [IA du Jour](https://iadujour.fr/en/) reference. This is reading material, not an AI integration in the application.
+
 ## From project analysis to team-ready deliverables
 
 ![Connected workflow diagram: DecisionTrace explains decisions, Scope Radar assesses changes, StoryGap clarifies requirements, and Report Studio and Brand Studio create company-branded PDF, PowerPoint and XLSX documents.](docs/assets/project-workflow-en.svg)
