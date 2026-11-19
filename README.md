@@ -31,6 +31,9 @@ flowchart LR
 
 The toolbox complements your delivery workflow. It does not try to replace Jira, Trello, Notion, or a full project-management platform.
 
+For French-speaking project teams: the [French reference guide to Agent Skills and review prompts](docs/AGENT_SKILLS_ET_PROMPTS_FR.md) includes source links, a pre-installation checklist and original human-review prompts. It is documentation, not a built-in AI feature.
+
+
 ### Companion field guide: review AI-generated meeting notes
 
 If you use an AI assistant to draft meeting minutes, [this practical checklist](docs/AI_MEETING_DECISIONS.md) explains how to keep confirmed decisions separate from proposals, scope changes and missing acceptance criteria. It includes a fictional example, a review grid and a reusable prompt, with an independently published [IA du Jour](https://iadujour.fr/en/) reference. This is reading material, not an AI integration in the application.
