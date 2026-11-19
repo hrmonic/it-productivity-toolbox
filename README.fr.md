@@ -22,8 +22,7 @@ L’interface associe des surfaces neutres et des accents indigo, en thèmes cla
 
 Les relations sont renseignées par l’utilisateur et navigables dans les deux sens. Une décision peut éclairer un changement, qui peut concerner une story. Une ressemblance de texte ne crée aucun lien automatiquement.
 
-Pour sélectionner des consignes réutilisables sans confondre brouillon et action autorisée, voir le [guide francophone des Agent Skills et prompts pour projets IT](docs/AGENT_SKILLS_ET_PROMPTS_FR.md) : sources officielles, grille d’audit avant installation et trois prompts de revue humaine. Ce document est une ressource indépendante de l’application, pas une intégration d’IA.
-
+Pour sélectionner des consignes réutilisables et vérifier leurs résultats, voir le [guide francophone des Agent Skills et prompts pour projets IT](docs/AGENT_SKILLS_ET_PROMPTS_FR.md) : huit skills, sources et versions documentées, quatre prompts de revue humaine et leurs cas d’essai fictifs. Cette ressource complète la documentation de l’application.
 
 ### Guide pratique : contrôler les comptes rendus préparés par une IA
 

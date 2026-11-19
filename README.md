@@ -31,8 +31,7 @@ flowchart LR
 
 The toolbox complements your delivery workflow. It does not try to replace Jira, Trello, Notion, or a full project-management platform.
 
-For French-speaking project teams: the [French reference guide to Agent Skills and review prompts](docs/AGENT_SKILLS_ET_PROMPTS_FR.md) includes source links, a pre-installation checklist and original human-review prompts. It is documentation, not a built-in AI feature.
-
+For French-speaking project teams: the [French reference guide to Agent Skills and review prompts](docs/AGENT_SKILLS_ET_PROMPTS_FR.md) covers eight skills, documented sources and revisions, and four human-review prompts with fictional evaluation cases. This resource complements the application documentation.
 
 ### Companion field guide: review AI-generated meeting notes
 
