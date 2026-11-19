@@ -22,6 +22,9 @@ L’interface associe des surfaces neutres et des accents indigo, en thèmes cla
 
 Les relations sont renseignées par l’utilisateur et navigables dans les deux sens. Une décision peut éclairer un changement, qui peut concerner une story. Une ressemblance de texte ne crée aucun lien automatiquement.
 
+Pour sélectionner des consignes réutilisables sans confondre brouillon et action autorisée, voir le [guide francophone des Agent Skills et prompts pour projets IT](docs/AGENT_SKILLS_ET_PROMPTS_FR.md) : sources officielles, grille d’audit avant installation et trois prompts de revue humaine. Ce document est une ressource indépendante de l’application, pas une intégration d’IA.
+
+
 ### Guide pratique : contrôler les comptes rendus préparés par une IA
 
 Pour transformer un brouillon de réunion en décisions réellement traçables, consultez [la méthode de vérification en cinq étapes](docs/AI_MEETING_DECISIONS.fr.md) : scénario fictif, grille de contrôle, prompt et passage de la décision au changement de périmètre. Le guide renvoie à une [fiche pratique d’IA du Jour](https://iadujour.fr/cas/compte-rendu-reunion-plan-actions.html). Il s’agit d’une ressource pédagogique complémentaire, et non d’une intégration d’IA à l’application.
